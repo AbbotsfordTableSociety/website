@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <defs>
+    <!-- Arched Text Paths -->
+    <!-- Top Arch for ABBOTSFORD TABLE -->
+    <path id="topArch" d="M 48,150 A 102,102 0 1,1 252,150" fill="none"/>
+    <!-- Bottom Arch for SOCIETY -->
+    <path id="bottomArch" d="M 60,150 A 90,90 0 0,0 240,150" fill="none"/>
+    
+    <!-- Soft shadow -->
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#shadow)">
+    <!-- Outer Ring -->
+    <circle cx="150" cy="150" r="142" fill="#FAF8F5" stroke="#231F20" stroke-width="4" />
+    
+    <!-- Gold/Cream Inner Ring Border -->
+    <circle cx="150" cy="150" r="136" fill="none" stroke="#D5C4A1" stroke-width="6" />
+    <circle cx="150" cy="150" r="130" fill="none" stroke="#231F20" stroke-width="2" />
+
+    <!-- Bottom Green Half Circle -->
+    <path d="M 20,150 A 130,130 0 0,0 280,150 Z" fill="#2E441B" />
+    
+    <!-- Middle Horizontal Divider Line -->
+    <line x1="20" y1="150" x2="280" y2="150" stroke="#231F20" stroke-width="2.5" />
+
+    <!-- Inner Circle Border (Separating Text from Center) -->
+    <circle cx="150" cy="150" r="92" fill="none" stroke="#D5C4A1" stroke-width="2" />
+
+    <!-- Top Arched Text: ABBOTSFORD TABLE -->
+    <text font-family="'Plus Jakarta Sans', 'Inter', sans-serif" font-size="20" font-weight="800" fill="#B48332" letter-spacing="4.5">
+      <textPath href="#topArch" startOffset="50%" text-anchor="middle">
+        ABBOTSFORD TABLE
+      </textPath>
+    </text>
+
+    <!-- Bottom Arched Text: SOCIETY -->
+    <text font-family="'Plus Jakarta Sans', 'Inter', sans-serif" font-size="22" font-weight="800" fill="#FFFFFF" letter-spacing="6">
+      <textPath href="#bottomArch" startOffset="50%" text-anchor="middle">
+        SOCIETY
+      </textPath>
+    </text>
+
+    <!-- Small Side Dots in Green Half -->
+    <circle cx="65" cy="172" r="4.5" fill="#FAF8F5" />
+    <circle cx="235" cy="172" r="4.5" fill="#FAF8F5" />
+
+    <!-- Center Leaves / Branch (Olive / Grey) -->
+    <g transform="translate(150, 112)">
+      <!-- Central stem -->
+      <path d="M 0,38 Q 2,15 0,-32" fill="none" stroke="#687364" stroke-width="2.5" stroke-linecap="round" />
+      
+      <!-- Leaf Pairs -->
+      <!-- Bottom Left Leaf -->
+      <path d="M 0,26 C -12,22 -14,10 -6,4 C -2,10 -2,20 0,26 Z" fill="#939D8F" />
+      <!-- Bottom Right Leaf -->
+      <path d="M 0,20 C 12,16 14,4 6,-2 C 2,4 2,14 0,20 Z" fill="#758171" />
+      <!-- Middle Left Leaf -->
+      <path d="M 0,10 C -14,6 -16,-6 -8,-12 C -4,-6 -2,4 0,10 Z" fill="#758171" />
+      <!-- Middle Right Leaf -->
+      <path d="M 0,4 C 14,0 16,-12 8,-18 C 4,-12 2,-2 0,4 Z" fill="#939D8F" />
+      <!-- Top Left Leaf -->
+      <path d="M 0,-10 C -10,-14 -12,-24 -6,-28 C -2,-24 0,-16 0,-10 Z" fill="#939D8F" />
+      <!-- Top Right Leaf -->
+      <path d="M 0,-14 C 10,-18 12,-28 6,-32 C 2,-28 0,-20 0,-14 Z" fill="#758171" />
+      <!-- Top Tip Leaf -->
+      <path d="M 0,-30 C -4,-38 0,-44 0,-44 C 0,-44 4,-38 0,-30 Z" fill="#586354" />
+    </g>
+
+    <!-- Table Graphic in Center (Positioned at Baseline y=150) -->
+    <g transform="translate(150, 150)">
+      <!-- 4 Table Legs -->
+      <line x1="-38" y1="4" x2="-54" y2="34" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"/>
+      <line x1="-18" y1="4" x2="-26" y2="34" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"/>
+      <line x1="18" y1="4" x2="26" y2="34" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"/>
+      <line x1="38" y1="4" x2="54" y2="34" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"/>
+      
+      <!-- Table Legs Outline for contrast -->
+      <line x1="-38" y1="4" x2="-54" y2="34" stroke="#231F20" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="-18" y1="4" x2="-26" y2="34" stroke="#231F20" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="18" y1="4" x2="26" y2="34" stroke="#231F20" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="38" y1="4" x2="54" y2="34" stroke="#231F20" stroke-width="1.5" stroke-linecap="round"/>
+
+      <!-- Table Top Oval -->
+      <ellipse cx="0" cy="0" rx="60" ry="10" fill="#FAF8F5" stroke="#231F20" stroke-width="3" />
+    </g>
+
+  </g>
+</svg>
