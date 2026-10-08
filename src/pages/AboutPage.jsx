@@ -57,7 +57,7 @@ export default function AboutPage({ onNavigate }) {
               rel="noopener noreferrer"
               className="btn btn-gold text-sm px-6 py-3 text-decoration-none"
             >
-              <Heart className="w-4 h-4" /> Partner via GiveWise
+              <Heart className="w-4 h-4" /> Give via GiveWise
             </a>
           </div>
         </div>

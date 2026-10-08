@@ -33,13 +33,13 @@ export default function Footer({ onOpenRespond, onOpenSubmitNeed, onOpenChurchEn
             
             <div className="lg:col-span-6 space-y-2">
               <span className="text-xs font-bold uppercase tracking-widest text-gold-200">
-                Stay Connected with Abbotsford CarePortal
+                Stay Connected with Abbotsford Table Society
               </span>
               <h3 className="text-2xl md:text-3xl font-serif font-extrabold text-white">
-                Receive Weekly Urgent Need Briefings
+                Subscribe to Our Community Newsletter
               </h3>
               <p className="text-emerald-100 text-sm">
-                Get a clean, weekly digest of vetted local family needs in your neighborhood.
+                Get periodic updates on local family support, stories of impact, and upcoming community initiatives across Abbotsford.
               </p>
             </div>
 
@@ -47,7 +47,7 @@ export default function Footer({ onOpenRespond, onOpenSubmitNeed, onOpenChurchEn
               {subscribed ? (
                 <div className="bg-white/10 border border-white/20 text-white p-4 rounded-xl flex items-center gap-3">
                   <CheckCircle className="w-5 h-5 text-gold-200 flex-shrink-0" />
-                  <span className="text-sm font-semibold">Thank you! You've been subscribed to weekly Abbotsford updates.</span>
+                  <span className="text-sm font-semibold">Thank you! You've been subscribed to the Abbotsford Table Society newsletter.</span>
                 </div>
               ) : (
                 <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3">
@@ -103,7 +103,7 @@ export default function Footer({ onOpenRespond, onOpenSubmitNeed, onOpenChurchEn
             <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Pages</h4>
             <ul className="space-y-2 text-xs text-slate-700 font-semibold">
               <li><a href="/" onClick={(e) => handleNav(e, '/')} className="hover:text-forest-700 transition">Home Page</a></li>
-              <li><a href="/about" onClick={(e) => handleNav(e, '/about')} className="hover:text-forest-700 transition">About Our Story</a></li>
+              <li><a href="/about" onClick={(e) => handleNav(e, '/about')} className="hover:text-forest-700 transition">About Us</a></li>
               <li><a href="/how-it-works" onClick={(e) => handleNav(e, '/how-it-works')} className="hover:text-forest-700 transition">How CarePortal Works</a></li>
               <li><a href="/governance" onClick={(e) => handleNav(e, '/governance')} className="hover:text-forest-700 transition">Governance & Board</a></li>
             </ul>

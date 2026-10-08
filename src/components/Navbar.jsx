@@ -35,7 +35,7 @@ export default function Navbar({ onOpenRespond, onOpenChurchEnroll, currentPath,
           <AbbyTableLogo isDark={false} className="h-14 md:h-16" />
         </a>
 
-        {/* Desktop Nav Links - Multi-Page Routing */}
+        {/* Desktop Nav Links - Clean & Natural */}
         <nav className="hidden lg:flex items-center gap-6 xl:gap-8 text-xs xl:text-sm font-bold tracking-wide text-slate-800">
           <a 
             href="/" 
@@ -50,7 +50,7 @@ export default function Navbar({ onOpenRespond, onOpenChurchEnroll, currentPath,
             onClick={(e) => handleNavClick(e, '/about')}
             className={`transition-colors whitespace-nowrap ${currentPath === '/about' ? 'text-forest-700 font-extrabold border-b-2 border-forest-700 pb-0.5' : 'hover:text-forest-700'}`}
           >
-            About Our Story
+            About
           </a>
 
           <a 
@@ -117,7 +117,7 @@ export default function Navbar({ onOpenRespond, onOpenChurchEnroll, currentPath,
               onClick={(e) => handleNavClick(e, '/about')}
               className="py-2 border-b border-[#E5DEC9]"
             >
-              About Our Story
+              About Us
             </a>
             <a 
               href="/how-it-works" 

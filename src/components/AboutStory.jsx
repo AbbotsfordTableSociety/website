@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heart, Sparkles, Target, ArrowRight, ShieldCheck, Users, Globe } from 'lucide-react';
+import { Heart, Sparkles, Target, ArrowRight } from 'lucide-react';
 
 export default function AboutStory() {
   const givewiseUrl = "https://fund.givewise.ca/gift/charity/NQD00331";
@@ -42,7 +42,7 @@ export default function AboutStory() {
 
             <div className="pt-6 border-t border-[#E5DEC9] mt-6">
               <a 
-                href="#how-it-works"
+                href="/how-it-works"
                 className="inline-flex items-center gap-2 text-sm font-bold text-forest-700 hover:text-forest-800 transition"
               >
                 <span>Read More About Our Mission & Three Pillars</span>
@@ -75,7 +75,7 @@ export default function AboutStory() {
                 rel="noopener noreferrer"
                 className="btn btn-gold text-xs px-4 py-2 text-decoration-none"
               >
-                Partner With Us
+                <Heart className="w-3.5 h-3.5" /> Give via GiveWise
               </a>
             </div>
           </div>
