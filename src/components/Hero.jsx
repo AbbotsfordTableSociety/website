@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, ShieldCheck, HeartHandshake, MapPin, Sparkles, AlertCircle, Building2 } from 'lucide-react';
+import { ArrowRight, ShieldCheck, HeartHandshake, MapPin, Sparkles, Building2 } from 'lucide-react';
 
 export default function Hero({ onOpenRespond, onOpenSubmitNeed, onOpenChurchEnroll }) {
   return (
@@ -63,63 +63,21 @@ export default function Hero({ onOpenRespond, onOpenSubmitNeed, onOpenChurchEnro
 
           </div>
 
-          {/* Right Column: Featured Photography Card + Live Request Simulation */}
-          <div className="lg:col-span-5 space-y-6">
-            
-            {/* High Impact Community Photography Banner */}
-            <div className="relative rounded-2xl overflow-hidden shadow-md border-2 border-[#E5DEC9] group">
+          {/* Right Column: Full-Height Featured Photography Card */}
+          <div className="lg:col-span-5 h-full">
+            <div className="relative rounded-2xl overflow-hidden shadow-lg border-2 border-[#E5DEC9] group h-full min-h-[380px] lg:min-h-[460px] flex flex-col justify-end">
               <img 
                 src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=1000&q=80" 
                 alt="Abbotsford Community Gathering around Table" 
-                className="w-full h-56 object-cover group-hover:scale-105 transition duration-500"
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-transparent p-5 flex flex-col justify-end">
+              <div className="relative z-10 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent p-6 sm:p-8 pt-20">
                 <span className="text-xs font-bold uppercase tracking-widest text-gold-300">A Shared Dream for Abbotsford</span>
-                <p className="text-sm font-serif italic text-white mt-1">
+                <p className="text-base sm:text-lg font-serif italic text-white mt-2 leading-relaxed">
                   "Where the vulnerable are seen, and hope flows through Jesus."
                 </p>
               </div>
             </div>
-
-            {/* Live Request Preview Card */}
-            <div className="bg-[#FCFBF8] border-2 border-[#E5DEC9] rounded-2xl p-6 shadow-md">
-              
-              <div className="flex items-center justify-between pb-4 border-b border-[#E5DEC9]">
-                <div className="flex items-center gap-2">
-                  <span className="badge badge-urgent">
-                    <AlertCircle className="w-3.5 h-3.5" />
-                    Urgent Family Need
-                  </span>
-                  <span className="text-xs font-semibold text-slate-500">Posted 14m ago</span>
-                </div>
-                <span className="text-xs font-bold text-forest-700 bg-forest-50 px-2.5 py-1 rounded border border-forest-100">
-                  Clearbrook, Abbotsford
-                </span>
-              </div>
-
-              <div className="py-4 space-y-2">
-                <h3 className="text-lg font-serif font-bold text-slate-900 leading-snug">
-                  Safety & Bedding for Single Mother & 2 Toddlers
-                </h3>
-                <p className="text-xs text-slate-700 leading-relaxed">
-                  A local agency partner requested a twin mattress, car seats, and groceries to prevent child apprehension and ensure safe reunification.
-                </p>
-              </div>
-
-              <div className="pt-4 border-t border-[#E5DEC9] flex items-center justify-between">
-                <div className="text-[11px] text-slate-600">
-                  <span className="font-bold text-slate-900">Vetted by:</span> MCFD Abbotsford
-                </div>
-                <button 
-                  onClick={onOpenRespond}
-                  className="btn btn-primary text-xs px-4 py-2"
-                >
-                  I Can Help
-                </button>
-              </div>
-
-            </div>
-
           </div>
 
         </div>
