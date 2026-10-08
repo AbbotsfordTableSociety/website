@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MapPin, Tag, ShieldCheck, Heart, Filter, CheckCircle2, AlertTriangle, Sparkles, Building2, Gift, RefreshCw, ExternalLink } from 'lucide-react';
+import { MapPin, Tag, ShieldCheck, Filter, CheckCircle2, AlertTriangle, Sparkles, Building2, RefreshCw, ExternalLink, Package, CircleDollarSign } from 'lucide-react';
 import { fetchCarePortalNeeds, DEFAULT_RSS_URL } from '../utils/carePortalRss';
 
 export default function CarePortalBoard({ onSelectNeed, onOpenGiveNeed, onOpenSubmitNeed }) {
@@ -356,23 +356,23 @@ export default function CarePortalBoard({ onSelectNeed, onOpenGiveNeed, onOpenSu
                     </div>
                   </div>
 
-                  {/* Action Buttons: 1 for Volunteer/Respond, 1 for Give */}
+                  {/* Action Buttons: Package for physical items, CircleDollarSign for money */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
                     <button 
                       onClick={() => onSelectNeed(need)}
-                      className="btn bg-forest-700 hover:bg-forest-800 text-white w-full py-2.5 text-xs font-bold justify-center rounded-xl shadow-sm transition"
+                      className="btn bg-forest-700 hover:bg-forest-800 text-white w-full py-2.5 text-xs font-bold justify-center rounded-xl shadow-sm transition gap-1.5"
                       title="Provide physical items or volunteer"
                     >
-                      <Heart className="w-3.5 h-3.5" />
+                      <Package className="w-4 h-4" />
                       Provide Items
                     </button>
 
                     <button 
                       onClick={() => onOpenGiveNeed && onOpenGiveNeed(need)}
-                      className="btn bg-gold-700 hover:bg-gold-800 text-white w-full py-2.5 text-xs font-bold justify-center rounded-xl shadow-sm transition"
+                      className="btn bg-gold-700 hover:bg-gold-800 text-white w-full py-2.5 text-xs font-bold justify-center rounded-xl shadow-sm transition gap-1.5"
                       title="Give financial support via GiveWise"
                     >
-                      <Gift className="w-3.5 h-3.5" />
+                      <CircleDollarSign className="w-4 h-4" />
                       Give
                     </button>
                   </div>
