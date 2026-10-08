@@ -36,7 +36,7 @@ export default function Navbar({ onOpenRespond, onOpenChurchEnroll, currentPath,
         </a>
 
         {/* Desktop Nav Links - Clean & Natural */}
-        <nav className="hidden lg:flex items-center gap-6 xl:gap-8 text-xs xl:text-sm font-bold tracking-wide text-slate-800">
+        <nav className="hidden lg:flex items-center gap-5 xl:gap-7 text-xs xl:text-sm font-bold tracking-wide text-slate-800">
           <a 
             href="/" 
             onClick={(e) => handleNavClick(e, '/')}
@@ -54,9 +54,17 @@ export default function Navbar({ onOpenRespond, onOpenChurchEnroll, currentPath,
           </a>
 
           <a 
+            href="/our-mission" 
+            onClick={(e) => handleNavClick(e, '/our-mission')}
+            className={`transition-colors whitespace-nowrap ${currentPath === '/our-mission' ? 'text-forest-700 font-extrabold border-b-2 border-forest-700 pb-0.5' : 'hover:text-forest-700'}`}
+          >
+            Our Mission
+          </a>
+
+          <a 
             href="/how-it-works" 
             onClick={(e) => handleNavClick(e, '/how-it-works')}
-            className={`transition-colors whitespace-nowrap ${(currentPath === '/how-it-works' || currentPath === '/our-mission') ? 'text-forest-700 font-extrabold border-b-2 border-forest-700 pb-0.5' : 'hover:text-forest-700'}`}
+            className={`transition-colors whitespace-nowrap ${currentPath === '/how-it-works' ? 'text-forest-700 font-extrabold border-b-2 border-forest-700 pb-0.5' : 'hover:text-forest-700'}`}
           >
             How CarePortal Works
           </a>
@@ -67,7 +75,7 @@ export default function Navbar({ onOpenRespond, onOpenChurchEnroll, currentPath,
             className={`transition-colors whitespace-nowrap flex items-center gap-1 ${currentPath === '/governance' ? 'text-forest-700 font-extrabold border-b-2 border-forest-700 pb-0.5' : 'hover:text-forest-700'}`}
           >
             <Shield className="w-3.5 h-3.5 text-gold-700" />
-            Governance & Board
+            Governance
           </a>
         </nav>
 
@@ -118,6 +126,13 @@ export default function Navbar({ onOpenRespond, onOpenChurchEnroll, currentPath,
               className="py-2 border-b border-[#E5DEC9]"
             >
               About Us
+            </a>
+            <a 
+              href="/our-mission" 
+              onClick={(e) => handleNavClick(e, '/our-mission')}
+              className="py-2 border-b border-[#E5DEC9]"
+            >
+              Our Mission & Three Pillars
             </a>
             <a 
               href="/how-it-works" 

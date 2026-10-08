@@ -104,6 +104,7 @@ export default function Footer({ onOpenRespond, onOpenSubmitNeed, onOpenChurchEn
             <ul className="space-y-2 text-xs text-slate-700 font-semibold">
               <li><a href="/" onClick={(e) => handleNav(e, '/')} className="hover:text-forest-700 transition">Home Page</a></li>
               <li><a href="/about" onClick={(e) => handleNav(e, '/about')} className="hover:text-forest-700 transition">About Us</a></li>
+              <li><a href="/our-mission" onClick={(e) => handleNav(e, '/our-mission')} className="hover:text-forest-700 transition">Our Mission & Pillars</a></li>
               <li><a href="/how-it-works" onClick={(e) => handleNav(e, '/how-it-works')} className="hover:text-forest-700 transition">How CarePortal Works</a></li>
               <li><a href="/governance" onClick={(e) => handleNav(e, '/governance')} className="hover:text-forest-700 transition">Governance & Board</a></li>
             </ul>

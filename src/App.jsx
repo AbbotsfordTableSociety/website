@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 // Dedicated Multi-Page Views
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
+import OurMissionPage from './pages/OurMissionPage';
 import HowItWorksPage from './pages/HowItWorksPage';
 import GovernancePage from './pages/GovernancePage';
 
@@ -64,7 +65,9 @@ export default function App() {
       <main className="flex-grow">
         {currentPath === '/about' ? (
           <AboutPage onNavigate={handleNavigate} />
-        ) : (currentPath === '/how-it-works' || currentPath === '/our-mission') ? (
+        ) : currentPath === '/our-mission' ? (
+          <OurMissionPage onNavigate={handleNavigate} />
+        ) : currentPath === '/how-it-works' ? (
           <HowItWorksPage 
             onOpenChurchEnroll={() => setActiveModal('church')}
             onOpenSubmitNeed={() => setActiveModal('submit')}
