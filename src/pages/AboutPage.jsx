@@ -13,7 +13,7 @@ export default function AboutPage({ onNavigate }) {
     <div className="pt-24 bg-[#FAF8F5] min-h-screen">
       
       {/* Page Header Banner */}
-      <div className="bg-[#FAF8F5] border-b border-[#E5DEC9] py-16">
+      <div className="bg-[#FAF8F5] border-b border-[#E5DEC9] py-14">
         <div className="container text-center max-w-4xl mx-auto space-y-4">
           <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded bg-forest-50 text-forest-700 border border-forest-100 text-xs font-bold uppercase tracking-wider">
             <Sparkles className="w-3.5 h-3.5 text-gold-700" />
@@ -27,6 +27,24 @@ export default function AboutPage({ onNavigate }) {
           <p className="text-slate-700 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
             Uniting churches, non-profits, government agencies, and local leaders across Abbotsford to serve our most vulnerable families with dignity and hope.
           </p>
+        </div>
+      </div>
+
+      {/* Sub-Navigation Tabs under About */}
+      <div className="bg-[#FCFBF8] border-b border-[#E5DEC9] py-3.5">
+        <div className="container max-w-4xl mx-auto flex items-center justify-center gap-3">
+          <button 
+            onClick={() => onNavigate && onNavigate('/about')}
+            className="px-5 py-2.5 rounded-lg text-xs md:text-sm font-bold bg-forest-700 text-white shadow-sm"
+          >
+            Our Story & Purpose
+          </button>
+          <button 
+            onClick={() => onNavigate && onNavigate('/our-mission')}
+            className="px-5 py-2.5 rounded-lg text-xs md:text-sm font-bold bg-forest-50 text-forest-800 border border-forest-100 hover:bg-forest-100 transition"
+          >
+            Our Mission & Three Pillars
+          </button>
         </div>
       </div>
 

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Heart, Menu, X, Shield, Sparkles } from 'lucide-react';
+import { Heart, Menu, X, Shield, Sparkles, ChevronDown } from 'lucide-react';
 import AbbyTableLogo from './AbbyTableLogo';
 
 export default function Navbar({ onOpenRespond, onOpenChurchEnroll, currentPath, onNavigate }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
 
   const givewiseUrl = "https://fund.givewise.ca/gift/charity/NQD00331";
 
@@ -19,6 +20,7 @@ export default function Navbar({ onOpenRespond, onOpenChurchEnroll, currentPath,
   const handleNavClick = (e, path) => {
     e.preventDefault();
     setMobileMenuOpen(false);
+    setAboutDropdownOpen(false);
     onNavigate(path);
   };
 
@@ -45,21 +47,40 @@ export default function Navbar({ onOpenRespond, onOpenChurchEnroll, currentPath,
             Home
           </a>
 
-          <a 
-            href="/about" 
-            onClick={(e) => handleNavClick(e, '/about')}
-            className={`transition-colors whitespace-nowrap ${currentPath === '/about' ? 'text-forest-700 font-extrabold border-b-2 border-forest-700 pb-0.5' : 'hover:text-forest-700'}`}
+          {/* About Dropdown */}
+          <div 
+            className="relative group"
+            onMouseEnter={() => setAboutDropdownOpen(true)}
+            onMouseLeave={() => setAboutDropdownOpen(false)}
           >
-            About
-          </a>
+            <button 
+              onClick={(e) => handleNavClick(e, '/about')}
+              className={`transition-colors whitespace-nowrap flex items-center gap-1.5 py-1 ${ (currentPath === '/about' || currentPath === '/our-mission') ? 'text-forest-700 font-extrabold border-b-2 border-forest-700 pb-0.5' : 'hover:text-forest-700'}`}
+            >
+              <span>About</span>
+              <ChevronDown className="w-3.5 h-3.5 text-slate-500 group-hover:text-forest-700 transition" />
+            </button>
 
-          <a 
-            href="/our-mission" 
-            onClick={(e) => handleNavClick(e, '/our-mission')}
-            className={`transition-colors whitespace-nowrap ${currentPath === '/our-mission' ? 'text-forest-700 font-extrabold border-b-2 border-forest-700 pb-0.5' : 'hover:text-forest-700'}`}
-          >
-            Our Mission
-          </a>
+            {/* Dropdown Menu */}
+            {aboutDropdownOpen && (
+              <div className="absolute top-full left-0 mt-1 w-56 bg-[#FCFBF8] border-2 border-[#E5DEC9] rounded-xl shadow-xl py-2 z-50 animate-fadeIn">
+                <a 
+                  href="/about" 
+                  onClick={(e) => handleNavClick(e, '/about')}
+                  className={`block px-4 py-2.5 text-xs font-bold transition hover:bg-forest-50 hover:text-forest-800 ${currentPath === '/about' ? 'text-forest-700 bg-forest-50 font-extrabold' : 'text-slate-800'}`}
+                >
+                  Our Story & Objectives
+                </a>
+                <a 
+                  href="/our-mission" 
+                  onClick={(e) => handleNavClick(e, '/our-mission')}
+                  className={`block px-4 py-2.5 text-xs font-bold transition hover:bg-forest-50 hover:text-forest-800 ${currentPath === '/our-mission' ? 'text-forest-700 bg-forest-50 font-extrabold' : 'text-slate-800'}`}
+                >
+                  Our Mission & Three Pillars
+                </a>
+              </div>
+            )}
+          </div>
 
           <a 
             href="/how-it-works" 
