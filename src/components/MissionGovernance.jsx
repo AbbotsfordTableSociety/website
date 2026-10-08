@@ -1,7 +1,9 @@
 import React from 'react';
-import { ShieldCheck, Heart, Users, Sparkles, FileText, CheckCircle2, Globe, Lock } from 'lucide-react';
+import { ShieldCheck, Users, FileText, CheckCircle2, Lock } from 'lucide-react';
 
-export default function MissionGovernance({ onOpenGive }) {
+export default function MissionGovernance() {
+  const givewiseUrl = "https://fund.givewise.ca/gift/charity/NQD00331";
+
   return (
     <section id="mission" className="py-24 bg-[#FAF8F5] text-slate-900 border-t border-[#E5DEC9] relative overflow-hidden">
       
@@ -118,12 +120,14 @@ export default function MissionGovernance({ onOpenGive }) {
               </ul>
 
               <div className="pt-4 border-t border-[#E5DEC9]">
-                <button 
-                  onClick={onOpenGive}
-                  className="btn btn-gold w-full py-2.5 text-xs font-bold justify-center"
+                <a 
+                  href={givewiseUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-gold w-full py-2.5 text-xs font-bold justify-center text-decoration-none"
                 >
                   Partner With Us via GiveWise
-                </button>
+                </a>
               </div>
             </div>
 

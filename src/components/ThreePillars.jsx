@@ -1,7 +1,9 @@
 import React from 'react';
-import { Church, Building2, HeartHandshake, ArrowRight, ShieldCheck, CheckCircle, Users } from 'lucide-react';
+import { Church, Building2, HeartHandshake, ArrowRight, CheckCircle } from 'lucide-react';
 
-export default function ThreePillars({ onOpenChurchEnroll, onOpenSubmitNeed, onOpenGive }) {
+export default function ThreePillars({ onOpenChurchEnroll, onOpenSubmitNeed }) {
+  const givewiseUrl = "https://fund.givewise.ca/gift/charity/NQD00331";
+
   const pillars = [
     {
       id: "churches",
@@ -17,6 +19,7 @@ export default function ThreePillars({ onOpenChurchEnroll, onOpenSubmitNeed, onO
       ],
       ctaText: "Enroll Your Church Team",
       ctaAction: onOpenChurchEnroll,
+      isLink: false,
       badgeColor: "bg-forest-50 text-forest-700 border-forest-100",
       btnClass: "btn-primary"
     },
@@ -34,6 +37,7 @@ export default function ThreePillars({ onOpenChurchEnroll, onOpenSubmitNeed, onO
       ],
       ctaText: "Submit a Family Need",
       ctaAction: onOpenSubmitNeed,
+      isLink: false,
       badgeColor: "bg-gold-50 text-gold-700 border-gold-200",
       btnClass: "btn-gold"
     },
@@ -50,7 +54,8 @@ export default function ThreePillars({ onOpenChurchEnroll, onOpenSubmitNeed, onO
         "Receive transparent impact updates on lives transformed"
       ],
       ctaText: "Give Online via GiveWise",
-      ctaAction: onOpenGive,
+      isLink: true,
+      linkUrl: givewiseUrl,
       badgeColor: "bg-rose-50 text-rose-700 border-rose-100",
       btnClass: "btn-outline"
     }
@@ -115,14 +120,26 @@ export default function ThreePillars({ onOpenChurchEnroll, onOpenSubmitNeed, onO
                   </ul>
                 </div>
 
-                {/* CTA Button */}
-                <button 
-                  onClick={pillar.ctaAction}
-                  className={`btn ${pillar.btnClass} w-full py-3 text-sm justify-center font-bold`}
-                >
-                  <span>{pillar.ctaText}</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
+                {/* CTA Button or Direct Link */}
+                {pillar.isLink ? (
+                  <a 
+                    href={pillar.linkUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`btn ${pillar.btnClass} w-full py-3 text-sm justify-center font-bold text-decoration-none`}
+                  >
+                    <span>{pillar.ctaText}</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                ) : (
+                  <button 
+                    onClick={pillar.ctaAction}
+                    className={`btn ${pillar.btnClass} w-full py-3 text-sm justify-center font-bold`}
+                  >
+                    <span>{pillar.ctaText}</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                )}
 
               </div>
             );
