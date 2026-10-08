@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Heart, Users, Menu, X, Shield, Sparkles } from 'lucide-react';
+import { Heart, Menu, X, Shield, Sparkles } from 'lucide-react';
 import AbbyTableLogo from './AbbyTableLogo';
 
-export default function Navbar({ onOpenRespond, onOpenGive, onOpenChurchEnroll }) {
+export default function Navbar({ onOpenRespond, onOpenChurchEnroll }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const givewiseUrl = "https://fund.givewise.ca/gift/charity/NQD00331";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,13 +53,15 @@ export default function Navbar({ onOpenRespond, onOpenGive, onOpenChurchEnroll }
             Respond to Need
           </button>
           
-          <button 
-            onClick={onOpenGive}
-            className="btn btn-gold text-sm px-4 py-2"
+          <a 
+            href={givewiseUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-gold text-sm px-4 py-2 text-decoration-none"
           >
             <Heart className="w-4 h-4" />
             Give Online
-          </button>
+          </a>
         </div>
 
         {/* Mobile Toggle Button */}
@@ -113,13 +117,16 @@ export default function Navbar({ onOpenRespond, onOpenGive, onOpenChurchEnroll }
                 Respond to Need
               </button>
               
-              <button 
-                onClick={() => { setMobileMenuOpen(false); onOpenGive(); }}
-                className="btn btn-gold w-full py-3"
+              <a 
+                href={givewiseUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileMenuOpen(false)}
+                className="btn btn-gold w-full py-3 justify-center text-decoration-none"
               >
                 <Heart className="w-4 h-4" />
                 Give Online
-              </button>
+              </a>
 
               <button 
                 onClick={() => { setMobileMenuOpen(false); onOpenChurchEnroll(); }}

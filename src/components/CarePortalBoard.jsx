@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { MapPin, Tag, ShieldCheck, Filter, CheckCircle2, AlertTriangle, Sparkles, Building2, RefreshCw, ExternalLink, Package, CircleDollarSign } from 'lucide-react';
 import { fetchCarePortalNeeds, DEFAULT_RSS_URL } from '../utils/carePortalRss';
 
-export default function CarePortalBoard({ onSelectNeed, onOpenGiveNeed, onOpenSubmitNeed }) {
+export default function CarePortalBoard({ onSelectNeed, onOpenSubmitNeed }) {
   const [selectedArea, setSelectedArea] = useState('All');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
@@ -12,6 +12,9 @@ export default function CarePortalBoard({ onSelectNeed, onOpenGiveNeed, onOpenSu
   const [needs, setNeeds] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isLiveFeed, setIsLiveFeed] = useState(false);
+
+  // Base GiveWise Charity URL
+  const givewiseBaseUrl = "https://fund.givewise.ca/gift/charity/NQD00331";
 
   // Default Abbotsford sample fallback data
   const fallbackNeedsData = [
@@ -356,7 +359,7 @@ export default function CarePortalBoard({ onSelectNeed, onOpenGiveNeed, onOpenSu
                     </div>
                   </div>
 
-                  {/* Action Buttons: Package for physical items, CircleDollarSign for money */}
+                  {/* Action Buttons */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
                     <button 
                       onClick={() => onSelectNeed(need)}
@@ -367,14 +370,17 @@ export default function CarePortalBoard({ onSelectNeed, onOpenGiveNeed, onOpenSu
                       Provide Items
                     </button>
 
-                    <button 
-                      onClick={() => onOpenGiveNeed && onOpenGiveNeed(need)}
-                      className="btn bg-gold-700 hover:bg-gold-800 text-white w-full py-2.5 text-xs font-bold justify-center rounded-xl shadow-sm transition gap-1.5 whitespace-nowrap"
-                      title="Give financial support via GiveWise"
+                    {/* Direct link to GiveWise charity page */}
+                    <a 
+                      href={`${givewiseBaseUrl}?memo=${encodeURIComponent(`CarePortal Need: ${need.title} (${need.id})`)}`}
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="btn bg-gold-700 hover:bg-gold-800 text-white w-full py-2.5 text-xs font-bold justify-center rounded-xl shadow-sm transition gap-1.5 whitespace-nowrap text-decoration-none"
+                      title="Donate directly via GiveWise"
                     >
                       <CircleDollarSign className="w-4 h-4" />
                       Give (GiveWise)
-                    </button>
+                    </a>
                   </div>
 
                 </div>
