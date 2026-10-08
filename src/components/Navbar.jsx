@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Heart, Menu, X, Shield, Sparkles } from 'lucide-react';
 import AbbyTableLogo from './AbbyTableLogo';
 
-export default function Navbar({ onOpenRespond, onOpenChurchEnroll }) {
+export default function Navbar({ onOpenRespond, onOpenChurchEnroll, currentPath, onNavigate }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -16,30 +16,58 @@ export default function Navbar({ onOpenRespond, onOpenChurchEnroll }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleNavClick = (e, path) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+    onNavigate(path);
+  };
+
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[#FAF8F5] shadow-sm border-b border-[#E5DEC9] py-2' : 'bg-[#FAF8F5]/95 border-b border-[#E5DEC9]/80 py-3 backdrop-blur-md'}`}>
       <div className="container max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between gap-4">
         
         {/* Official Brand Logo */}
-        <a href="#" className="flex items-center group text-decoration-none py-1 flex-shrink-0 pr-4">
+        <a 
+          href="/" 
+          onClick={(e) => handleNavClick(e, '/')}
+          className="flex items-center group text-decoration-none py-1 flex-shrink-0 pr-4"
+        >
           <AbbyTableLogo isDark={false} className="h-14 md:h-16" />
         </a>
 
-        {/* Desktop Nav Links - Clean & Well Spaced */}
+        {/* Desktop Nav Links - Multi-Page Routing */}
         <nav className="hidden lg:flex items-center gap-6 xl:gap-8 text-xs xl:text-sm font-bold tracking-wide text-slate-800">
-          <a href="#about" className="hover:text-forest-700 transition-colors whitespace-nowrap">
-            About
+          <a 
+            href="/" 
+            onClick={(e) => handleNavClick(e, '/')}
+            className={`transition-colors whitespace-nowrap ${currentPath === '/' ? 'text-forest-700 font-extrabold border-b-2 border-forest-700 pb-0.5' : 'hover:text-forest-700'}`}
+          >
+            Home
           </a>
-          <a href="#care-portal" className="hover:text-forest-700 transition-colors flex items-center gap-1.5 whitespace-nowrap">
-            <span className="w-2 h-2 rounded-full bg-rose-600"></span>
-            Live Needs
+
+          <a 
+            href="/about" 
+            onClick={(e) => handleNavClick(e, '/about')}
+            className={`transition-colors whitespace-nowrap ${currentPath === '/about' ? 'text-forest-700 font-extrabold border-b-2 border-forest-700 pb-0.5' : 'hover:text-forest-700'}`}
+          >
+            About Our Story
           </a>
-          <a href="#how-it-works" className="hover:text-forest-700 transition-colors whitespace-nowrap">
-            How It Works
+
+          <a 
+            href="/how-it-works" 
+            onClick={(e) => handleNavClick(e, '/how-it-works')}
+            className={`transition-colors whitespace-nowrap ${currentPath === '/how-it-works' ? 'text-forest-700 font-extrabold border-b-2 border-forest-700 pb-0.5' : 'hover:text-forest-700'}`}
+          >
+            How CarePortal Works
           </a>
-          <a href="#governance" className="hover:text-forest-700 transition-colors flex items-center gap-1 whitespace-nowrap">
+
+          <a 
+            href="/governance" 
+            onClick={(e) => handleNavClick(e, '/governance')}
+            className={`transition-colors whitespace-nowrap flex items-center gap-1 ${currentPath === '/governance' ? 'text-forest-700 font-extrabold border-b-2 border-forest-700 pb-0.5' : 'hover:text-forest-700'}`}
+          >
             <Shield className="w-3.5 h-3.5 text-gold-700" />
-            Governance
+            Governance & Board
           </a>
         </nav>
 
@@ -78,30 +106,29 @@ export default function Navbar({ onOpenRespond, onOpenChurchEnroll }) {
         <div className="lg:hidden bg-[#FCFBF8] text-slate-800 p-6 border-b border-[#E5DEC9] shadow-xl animate-fadeIn">
           <div className="flex flex-col gap-4 text-base font-bold">
             <a 
-              href="#about" 
-              onClick={() => setMobileMenuOpen(false)}
+              href="/" 
+              onClick={(e) => handleNavClick(e, '/')}
               className="py-2 border-b border-[#E5DEC9]"
             >
-              About
+              Home Page
             </a>
             <a 
-              href="#care-portal" 
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-2 border-b border-[#E5DEC9] flex items-center gap-2"
-            >
-              <span className="w-2 h-2 rounded-full bg-rose-600"></span>
-              Live Needs Feed
-            </a>
-            <a 
-              href="#how-it-works" 
-              onClick={() => setMobileMenuOpen(false)}
+              href="/about" 
+              onClick={(e) => handleNavClick(e, '/about')}
               className="py-2 border-b border-[#E5DEC9]"
             >
-              How It Works
+              About Our Story
             </a>
             <a 
-              href="#governance" 
-              onClick={() => setMobileMenuOpen(false)}
+              href="/how-it-works" 
+              onClick={(e) => handleNavClick(e, '/how-it-works')}
+              className="py-2 border-b border-[#E5DEC9]"
+            >
+              How CarePortal Works
+            </a>
+            <a 
+              href="/governance" 
+              onClick={(e) => handleNavClick(e, '/governance')}
               className="py-2 border-b border-[#E5DEC9] flex items-center gap-2"
             >
               <Shield className="w-4 h-4 text-gold-700" />

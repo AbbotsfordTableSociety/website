@@ -1,16 +1,25 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Heart, Shield, ArrowRight, ExternalLink, CheckCircle } from 'lucide-react';
+import { Mail, MapPin, Shield, ExternalLink, CheckCircle } from 'lucide-react';
 import AbbyTableLogo from './AbbyTableLogo';
 
-export default function Footer({ onOpenGive, onOpenRespond, onOpenSubmitNeed, onOpenChurchEnroll }) {
+export default function Footer({ onOpenRespond, onOpenSubmitNeed, onOpenChurchEnroll, onNavigate }) {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+
+  const givewiseUrl = "https://fund.givewise.ca/gift/charity/NQD00331";
 
   const handleSubscribe = (e) => {
     e.preventDefault();
     if (email) {
       setSubscribed(true);
       setEmail('');
+    }
+  };
+
+  const handleNav = (e, path) => {
+    if (onNavigate) {
+      e.preventDefault();
+      onNavigate(path);
     }
   };
 
@@ -89,14 +98,14 @@ export default function Footer({ onOpenGive, onOpenRespond, onOpenSubmitNeed, on
             </div>
           </div>
 
-          {/* Quick Nav */}
+          {/* Quick Nav Pages */}
           <div className="space-y-3">
-            <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Navigation</h4>
+            <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Pages</h4>
             <ul className="space-y-2 text-xs text-slate-700 font-semibold">
-              <li><a href="#care-portal" className="hover:text-forest-700 transition">Live Needs Feed</a></li>
-              <li><a href="#how-it-works" className="hover:text-forest-700 transition">How CarePortal Works</a></li>
-              <li><a href="#mission" className="hover:text-forest-700 transition">Mission & Strategy</a></li>
-              <li><a href="#governance" className="hover:text-forest-700 transition">Governance & Board</a></li>
+              <li><a href="/" onClick={(e) => handleNav(e, '/')} className="hover:text-forest-700 transition">Home Page</a></li>
+              <li><a href="/about" onClick={(e) => handleNav(e, '/about')} className="hover:text-forest-700 transition">About Our Story</a></li>
+              <li><a href="/how-it-works" onClick={(e) => handleNav(e, '/how-it-works')} className="hover:text-forest-700 transition">How CarePortal Works</a></li>
+              <li><a href="/governance" onClick={(e) => handleNav(e, '/governance')} className="hover:text-forest-700 transition">Governance & Board</a></li>
             </ul>
           </div>
 
@@ -107,7 +116,7 @@ export default function Footer({ onOpenGive, onOpenRespond, onOpenSubmitNeed, on
               <li><button onClick={onOpenRespond} className="hover:text-forest-700 transition text-left">Respond to a Need</button></li>
               <li><button onClick={onOpenChurchEnroll} className="hover:text-forest-700 transition text-left">Enroll Your Church</button></li>
               <li><button onClick={onOpenSubmitNeed} className="hover:text-forest-700 transition text-left">Agency Request Portal</button></li>
-              <li><button onClick={onOpenGive} className="hover:text-forest-700 transition text-left">Give via GiveWise</button></li>
+              <li><a href={givewiseUrl} target="_blank" rel="noopener noreferrer" className="hover:text-forest-700 transition text-left block">Give via GiveWise</a></li>
             </ul>
           </div>
 
@@ -122,8 +131,8 @@ export default function Footer({ onOpenGive, onOpenRespond, onOpenSubmitNeed, on
                 </a>
               </li>
               <li>
-                <a href="https://fund.givewise.ca/gift/charity/NQD00331" target="_blank" rel="noopener noreferrer" className="hover:text-gold-700 transition flex items-center gap-1">
-                  <span>GiveWise Charity Profile</span>
+                <a href={givewiseUrl} target="_blank" rel="noopener noreferrer" className="hover:text-gold-700 transition flex items-center gap-1">
+                  <span>GiveWise Profile</span>
                   <ExternalLink className="w-3 h-3 text-slate-500" />
                 </a>
               </li>

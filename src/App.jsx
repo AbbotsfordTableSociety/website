@@ -1,22 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import ImpactStats from './components/ImpactStats';
-import AboutStory from './components/AboutStory';
-import CarePortalBoard from './components/CarePortalBoard';
-import ThreePillars from './components/ThreePillars';
-import MissionGovernance from './components/MissionGovernance';
-import Testimonials from './components/Testimonials';
 import Footer from './components/Footer';
 
+// Dedicated Multi-Page Views
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import HowItWorksPage from './pages/HowItWorksPage';
+import GovernancePage from './pages/GovernancePage';
+
+// Interactive Modals
 import RespondModal from './components/RespondModal';
 import SubmitNeedModal from './components/SubmitNeedModal';
 import ChurchEnrollModal from './components/ChurchEnrollModal';
 import GiveModal from './components/GiveModal';
 
 export default function App() {
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
   const [activeModal, setActiveModal] = useState(null); // 'respond', 'submit', 'church', 'give'
   const [selectedNeed, setSelectedNeed] = useState(null);
+
+  // Sync browser back/forward buttons
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPath(window.location.pathname);
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  const handleNavigate = (path) => {
+    window.history.pushState({}, '', path);
+    setCurrentPath(path);
+    window.scrollTo(0, 0);
+  };
 
   const handleOpenRespond = (need = null) => {
     setSelectedNeed(need);
@@ -38,49 +54,37 @@ export default function App() {
       
       {/* Sticky Glass Navbar */}
       <Navbar 
+        currentPath={currentPath}
+        onNavigate={handleNavigate}
         onOpenRespond={() => handleOpenRespond(null)}
         onOpenChurchEnroll={() => setActiveModal('church')}
       />
 
-      {/* Main Content Sections */}
+      {/* Multi-Page Route Renderer */}
       <main className="flex-grow">
-        
-        {/* Hero Section */}
-        <Hero 
-          onOpenRespond={() => handleOpenRespond(null)}
-          onOpenSubmitNeed={() => setActiveModal('submit')}
-          onOpenChurchEnroll={() => setActiveModal('church')}
-        />
-
-        {/* Live Impact Ticker */}
-        <ImpactStats />
-
-        {/* About & Story Section (A Shared Dream for Abbotsford) */}
-        <AboutStory />
-
-        {/* Core CarePortal Live Needs Feed */}
-        <CarePortalBoard 
-          onSelectNeed={(need) => handleOpenRespond(need)}
-          onOpenGiveNeed={(need) => handleOpenGive(need)}
-          onOpenSubmitNeed={() => setActiveModal('submit')}
-        />
-
-        {/* How It Works (3 Pillars) */}
-        <ThreePillars 
-          onOpenChurchEnroll={() => setActiveModal('church')}
-          onOpenSubmitNeed={() => setActiveModal('submit')}
-        />
-
-        {/* Mission & Governance */}
-        <MissionGovernance />
-
-        {/* Testimonials */}
-        <Testimonials />
-
+        {currentPath === '/about' ? (
+          <AboutPage onNavigate={handleNavigate} />
+        ) : currentPath === '/how-it-works' ? (
+          <HowItWorksPage 
+            onOpenChurchEnroll={() => setActiveModal('church')}
+            onOpenSubmitNeed={() => setActiveModal('submit')}
+          />
+        ) : currentPath === '/governance' ? (
+          <GovernancePage />
+        ) : (
+          <HomePage 
+            onOpenRespond={handleOpenRespond}
+            onOpenGiveNeed={handleOpenGive}
+            onOpenSubmitNeed={() => setActiveModal('submit')}
+            onOpenChurchEnroll={() => setActiveModal('church')}
+            onNavigate={handleNavigate}
+          />
+        )}
       </main>
 
       {/* Footer */}
       <Footer 
+        onNavigate={handleNavigate}
         onOpenRespond={() => handleOpenRespond(null)}
         onOpenSubmitNeed={() => setActiveModal('submit')}
         onOpenChurchEnroll={() => setActiveModal('church')}
