@@ -15,15 +15,20 @@ export const DEFAULT_RSS_URL = "https://system.careportal.org/rss?status%5B0%5D=
  */
 export async function fetchCarePortalNeeds(feedUrl = DEFAULT_RSS_URL) {
   try {
-    // Note: CarePortal RSS returns XML directly
     const response = await fetch(feedUrl);
     if (!response.ok) {
       throw new Error(`HTTP error ${response.status} fetching CarePortal RSS`);
     }
     const xmlText = await response.text();
-    return parseCarePortalXml(xmlText);
+    const needs = parseCarePortalXml(xmlText);
+    
+    // If national feed returns no Abbotsford/BC items yet, return null to trigger Abbotsford fallback data
+    if (!needs || needs.length === 0) {
+      return null;
+    }
+    return needs;
   } catch (err) {
-    console.warn("Direct CarePortal RSS fetch failed (may be CORS/network), trying CORS proxy or fallback:", err);
+    console.warn("Direct CarePortal RSS fetch failed (may be CORS/network), trying CORS proxy:", err);
     
     // Try reliable CORS proxy if direct fetch hits CORS policy in browser
     try {
@@ -31,13 +36,15 @@ export async function fetchCarePortalNeeds(feedUrl = DEFAULT_RSS_URL) {
       const proxyResp = await fetch(proxyUrl);
       if (proxyResp.ok) {
         const xmlText = await proxyResp.text();
-        return parseCarePortalXml(xmlText);
+        const needs = parseCarePortalXml(xmlText);
+        if (!needs || needs.length === 0) return null;
+        return needs;
       }
     } catch (proxyErr) {
       console.error("CORS proxy fetch also failed:", proxyErr);
     }
     
-    return null; // Return null so component can fallback gracefully
+    return null; // Return null so component can fallback gracefully to Abbotsford needs
   }
 }
 
@@ -58,7 +65,6 @@ export function parseCarePortalXml(xmlText) {
     };
 
     const getCarePortalTagText = (tagName) => {
-      // CarePortal XML uses careportal: prefix (namespace)
       let el = item.getElementsByTagName(`careportal:${tagName}`)[0];
       if (!el) {
         el = item.getElementsByTagName(tagName)[0];
@@ -80,9 +86,23 @@ export function parseCarePortalXml(xmlText) {
     const respondersCount = parseInt(getCarePortalTagText("responseCount")) || 0;
     
     const state = getCarePortalTagText("state") || "";
-    const county = getCarePortalTagText("county") || "Abbotsford";
+    const county = getCarePortalTagText("county") || "";
     const zipCode = getCarePortalTagText("zip_code") || "";
     const agencyName = getCarePortalTagText("agency_name") || "Verified Caseworker Agency";
+
+    // Strictly filter location to Abbotsford, BC, or Canadian postal codes V2S/V2T/V3G/V4X
+    const isAbbotsfordOrBC = 
+      state.toLowerCase().includes("british columbia") || 
+      state.toLowerCase() === "bc" || 
+      county.toLowerCase().includes("abbotsford") || 
+      rawTitle.toLowerCase().includes("abbotsford") || 
+      description.toLowerCase().includes("abbotsford") || 
+      zipCode.toUpperCase().startsWith("V");
+
+    // If national feed contains non-BC / US items (like Fresno/WA/VA), skip them unless filtered feed URL
+    if (!isAbbotsfordOrBC) {
+      return; // Skip US items
+    }
 
     // Extract requested items list if available
     const itemsNeeded = [];
@@ -96,22 +116,18 @@ export function parseCarePortalXml(xmlText) {
       }
     }
 
-    // Determine neighborhood / location string
-    let neighborhood = county;
+    let neighborhood = county || "Abbotsford";
     if (zipCode) {
       neighborhood += ` (${zipCode})`;
     }
 
-    // Clean up title (remove #ID prefix if present)
     const title = rawTitle.replace(/^#\d+\s*/, '').split(' - ')[0] || rawTitle;
 
-    // Calculate pledged percentage based on remaining amount vs total amount
     let pledgedPercent = 0;
     if (amount > 0) {
       pledgedPercent = Math.round(((amount - amountRemaining) / amount) * 100);
     }
 
-    // Format badge urgency
     let urgencyBadge = "badge-teal";
     if (urgency.toLowerCase().includes("urgent")) {
       urgencyBadge = "badge-urgent";
