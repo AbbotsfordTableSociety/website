@@ -63,61 +63,63 @@ export default function Hero({ onOpenRespond, onOpenSubmitNeed, onOpenChurchEnro
 
           </div>
 
-          {/* Right Live Request Card Simulation */}
-          <div className="lg:col-span-5">
-            <div className="relative mx-auto max-w-md lg:max-w-none">
+          {/* Right Column: Featured Photography Card + Live Request Simulation */}
+          <div className="lg:col-span-5 space-y-6">
+            
+            {/* High Impact Community Photography Banner */}
+            <div className="relative rounded-2xl overflow-hidden shadow-md border-2 border-[#E5DEC9] group">
+              <img 
+                src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=1000&q=80" 
+                alt="Abbotsford Community Gathering around Table" 
+                className="w-full h-56 object-cover group-hover:scale-105 transition duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-transparent p-5 flex flex-col justify-end">
+                <span className="text-xs font-bold uppercase tracking-widest text-gold-300">A Shared Dream for Abbotsford</span>
+                <p className="text-sm font-serif italic text-white mt-1">
+                  "Where the vulnerable are seen, and hope flows through Jesus."
+                </p>
+              </div>
+            </div>
+
+            {/* Live Request Preview Card */}
+            <div className="bg-[#FCFBF8] border-2 border-[#E5DEC9] rounded-2xl p-6 shadow-md">
               
-              {/* Main Traditional Card */}
-              <div className="bg-[#FCFBF8] border-2 border-[#E5DEC9] rounded-2xl p-6 shadow-md">
-                
-                <div className="flex items-center justify-between pb-4 border-b border-[#E5DEC9]">
-                  <div className="flex items-center gap-2">
-                    <span className="badge badge-urgent">
-                      <AlertCircle className="w-3.5 h-3.5" />
-                      Urgent Family Need
-                    </span>
-                    <span className="text-xs font-semibold text-slate-500">Posted 14m ago</span>
-                  </div>
-                  <span className="text-xs font-bold text-forest-700 bg-forest-50 px-2.5 py-1 rounded border border-forest-100">
-                    Clearbrook, Abbotsford
+              <div className="flex items-center justify-between pb-4 border-b border-[#E5DEC9]">
+                <div className="flex items-center gap-2">
+                  <span className="badge badge-urgent">
+                    <AlertCircle className="w-3.5 h-3.5" />
+                    Urgent Family Need
                   </span>
+                  <span className="text-xs font-semibold text-slate-500">Posted 14m ago</span>
                 </div>
+                <span className="text-xs font-bold text-forest-700 bg-forest-50 px-2.5 py-1 rounded border border-forest-100">
+                  Clearbrook, Abbotsford
+                </span>
+              </div>
 
-                <div className="py-5 space-y-3">
-                  <h3 className="text-xl font-serif font-bold text-slate-900 leading-snug">
-                    Safety & Bedding for Single Mother & 2 Toddlers
-                  </h3>
-                  <p className="text-sm text-slate-700 leading-relaxed">
-                    A local agency partner requested a twin mattress, car seats, and groceries to prevent child apprehension and ensure safe reunification.
-                  </p>
-                  
-                  {/* Progress bar */}
-                  <div className="space-y-1.5 pt-2">
-                    <div className="flex justify-between text-xs font-bold">
-                      <span className="text-gold-700">Needs 1 Response</span>
-                      <span className="text-slate-600">Goal: $450 or Physical Items</span>
-                    </div>
-                    <div className="w-full h-2.5 rounded-full bg-[#E5DEC9]/50 overflow-hidden">
-                      <div className="h-full bg-forest-700 rounded-full w-2/3"></div>
-                    </div>
-                  </div>
+              <div className="py-4 space-y-2">
+                <h3 className="text-lg font-serif font-bold text-slate-900 leading-snug">
+                  Safety & Bedding for Single Mother & 2 Toddlers
+                </h3>
+                <p className="text-xs text-slate-700 leading-relaxed">
+                  A local agency partner requested a twin mattress, car seats, and groceries to prevent child apprehension and ensure safe reunification.
+                </p>
+              </div>
+
+              <div className="pt-4 border-t border-[#E5DEC9] flex items-center justify-between">
+                <div className="text-[11px] text-slate-600">
+                  <span className="font-bold text-slate-900">Vetted by:</span> MCFD Abbotsford
                 </div>
-
-                <div className="pt-4 border-t border-[#E5DEC9] flex items-center justify-between">
-                  <div className="text-xs text-slate-600">
-                    <span className="font-bold text-slate-900">Vetted by:</span> Ministry of Children & Family Development
-                  </div>
-                  <button 
-                    onClick={onOpenRespond}
-                    className="btn btn-primary text-xs px-4 py-2"
-                  >
-                    I Can Help
-                  </button>
-                </div>
-
+                <button 
+                  onClick={onOpenRespond}
+                  className="btn btn-primary text-xs px-4 py-2"
+                >
+                  I Can Help
+                </button>
               </div>
 
             </div>
+
           </div>
 
         </div>

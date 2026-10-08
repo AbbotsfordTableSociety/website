@@ -24,6 +24,35 @@ export default function AboutStory() {
           </p>
         </div>
 
+        {/* Feature Photography Banner */}
+        <div className="grid md:grid-cols-2 gap-6 mb-16">
+          <div className="relative rounded-2xl overflow-hidden shadow-md border-2 border-[#E5DEC9] h-64 group">
+            <img 
+              src="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=1000&q=80" 
+              alt="Abbotsford Volunteers and Church Responders" 
+              className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-forest-900/90 via-forest-900/40 to-transparent p-6 flex flex-col justify-end text-white">
+              <span className="text-xs font-bold uppercase tracking-widest text-gold-200">Church & Agency Collaboration</span>
+              <h4 className="text-xl font-serif font-bold text-white mt-1">Uniting Community Responders</h4>
+              <p className="text-xs text-slate-200 mt-1">Connecting churches, schools, and social workers for tangible local impact.</p>
+            </div>
+          </div>
+
+          <div className="relative rounded-2xl overflow-hidden shadow-md border-2 border-[#E5DEC9] h-64 group">
+            <img 
+              src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1000&q=80" 
+              alt="Warm Community Gathering around Table" 
+              className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-gold-900/90 via-gold-900/40 to-transparent p-6 flex flex-col justify-end text-white">
+              <span className="text-xs font-bold uppercase tracking-widest text-gold-200">Relational Wholeness</span>
+              <h4 className="text-xl font-serif font-bold text-white mt-1">Dignified, Lasting Care</h4>
+              <p className="text-xs text-slate-200 mt-1">Meeting crisis needs with long-term neighborhood friendship.</p>
+            </div>
+          </div>
+        </div>
+
         {/* Story & Foundation Grid */}
         <div className="grid lg:grid-cols-12 gap-8 items-stretch mb-16">
           
