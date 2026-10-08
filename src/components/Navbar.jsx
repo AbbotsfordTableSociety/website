@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Heart, Menu, X, Shield, Sparkles } from 'lucide-react';
+import { Heart, Menu, X, Shield, Sparkles, Info } from 'lucide-react';
 import AbbyTableLogo from './AbbyTableLogo';
 
 export default function Navbar({ onOpenRespond, onOpenChurchEnroll }) {
@@ -26,16 +26,16 @@ export default function Navbar({ onOpenRespond, onOpenChurchEnroll }) {
         </a>
 
         {/* Desktop Nav Links */}
-        <nav className="hidden lg:flex items-center gap-8 text-sm font-bold tracking-wide text-slate-800">
+        <nav className="hidden lg:flex items-center gap-7 text-sm font-bold tracking-wide text-slate-800">
+          <a href="#about" className="hover:text-forest-700 transition-colors">
+            About Our Story
+          </a>
           <a href="#care-portal" className="hover:text-forest-700 transition-colors flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-rose-600"></span>
             Live Needs Feed
           </a>
           <a href="#how-it-works" className="hover:text-forest-700 transition-colors">
-            How CarePortal Works
-          </a>
-          <a href="#mission" className="hover:text-forest-700 transition-colors">
-            Our Mission
+            How It Works
           </a>
           <a href="#governance" className="hover:text-forest-700 transition-colors flex items-center gap-1">
             <Shield className="w-4 h-4 text-gold-700" />
@@ -78,6 +78,13 @@ export default function Navbar({ onOpenRespond, onOpenChurchEnroll }) {
         <div className="lg:hidden bg-[#FCFBF8] text-slate-800 p-6 border-b border-[#E5DEC9] shadow-xl animate-fadeIn">
           <div className="flex flex-col gap-4 text-base font-bold">
             <a 
+              href="#about" 
+              onClick={() => setMobileMenuOpen(false)}
+              className="py-2 border-b border-[#E5DEC9]"
+            >
+              About Our Story
+            </a>
+            <a 
               href="#care-portal" 
               onClick={() => setMobileMenuOpen(false)}
               className="py-2 border-b border-[#E5DEC9] flex items-center gap-2"
@@ -91,13 +98,6 @@ export default function Navbar({ onOpenRespond, onOpenChurchEnroll }) {
               className="py-2 border-b border-[#E5DEC9]"
             >
               How CarePortal Works
-            </a>
-            <a 
-              href="#mission" 
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-2 border-b border-[#E5DEC9]"
-            >
-              Mission & Strategy
             </a>
             <a 
               href="#governance" 
