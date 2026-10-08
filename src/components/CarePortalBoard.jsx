@@ -369,11 +369,11 @@ export default function CarePortalBoard({ onSelectNeed, onOpenGiveNeed, onOpenSu
 
                     <button 
                       onClick={() => onOpenGiveNeed && onOpenGiveNeed(need)}
-                      className="btn bg-gold-700 hover:bg-gold-800 text-white w-full py-2.5 text-xs font-bold justify-center rounded-xl shadow-sm transition gap-1.5"
+                      className="btn bg-gold-700 hover:bg-gold-800 text-white w-full py-2.5 text-xs font-bold justify-center rounded-xl shadow-sm transition gap-1.5 whitespace-nowrap"
                       title="Give financial support via GiveWise"
                     >
                       <CircleDollarSign className="w-4 h-4" />
-                      Give
+                      Give (GiveWise)
                     </button>
                   </div>
 
