@@ -155,7 +155,7 @@ export default function CarePortalBoard({ onSelectNeed, onOpenGiveNeed, onOpenSu
                   Live CarePortal Sync
                 </span>
               ) : (
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold border border-amber-200">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gold-100 text-gold-800 text-xs font-bold border border-gold-200">
                   Abbotsford Curated Feed
                 </span>
               )}
@@ -165,7 +165,7 @@ export default function CarePortalBoard({ onSelectNeed, onOpenGiveNeed, onOpenSu
               Real-Time Needs from Abbotsford Caseworkers
             </h2>
             <p className="text-slate-700 text-base leading-relaxed">
-              Every need below is 100% verified by local government agencies, public schools, or non-profit case managers working directly with families in crisis.
+              Every need below is 100% verified by local government agencies, public schools, or non-profit case managers working directly with families in crisis. You have the ability to provide items directly, or give financially through GiveWise.
             </p>
           </div>
 
@@ -356,11 +356,11 @@ export default function CarePortalBoard({ onSelectNeed, onOpenGiveNeed, onOpenSu
                     </div>
                   </div>
 
-                  {/* Action Buttons: 1 for Volunteer/Respond, 1 for GiveWise */}
+                  {/* Action Buttons: 1 for Volunteer/Respond, 1 for Give */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
                     <button 
                       onClick={() => onSelectNeed(need)}
-                      className="btn btn-primary w-full py-2.5 text-xs font-bold justify-center"
+                      className="btn bg-forest-700 hover:bg-forest-800 text-white w-full py-2.5 text-xs font-bold justify-center rounded-xl shadow-sm transition"
                       title="Provide physical items or volunteer"
                     >
                       <Heart className="w-3.5 h-3.5" />
@@ -369,11 +369,11 @@ export default function CarePortalBoard({ onSelectNeed, onOpenGiveNeed, onOpenSu
 
                     <button 
                       onClick={() => onOpenGiveNeed && onOpenGiveNeed(need)}
-                      className="btn bg-amber-600 hover:bg-amber-700 text-white w-full py-2.5 text-xs font-bold justify-center rounded-xl transition"
+                      className="btn bg-gold-700 hover:bg-gold-800 text-white w-full py-2.5 text-xs font-bold justify-center rounded-xl shadow-sm transition"
                       title="Give financial support via GiveWise"
                     >
                       <Gift className="w-3.5 h-3.5" />
-                      Give (GiveWise)
+                      Give
                     </button>
                   </div>
 

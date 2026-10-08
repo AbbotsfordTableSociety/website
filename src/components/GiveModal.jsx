@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Heart, ExternalLink, ShieldCheck, CheckCircle2, Lock, Gift, Building2 } from 'lucide-react';
+import { X, ExternalLink, ShieldCheck, Lock, Gift, Heart } from 'lucide-react';
 
 export default function GiveModal({ need, onClose }) {
   // Base GiveWise organization URL
@@ -15,19 +15,19 @@ export default function GiveModal({ need, onClose }) {
       <div className="modal-content">
         
         {/* Header */}
-        <div className="bg-gradient-to-r from-amber-600 to-amber-700 text-white p-6 flex items-center justify-between">
+        <div className="bg-forest-900 text-white p-6 flex items-center justify-between border-b border-gold-600">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white font-bold">
+            <div className="w-10 h-10 rounded-xl bg-gold-700 flex items-center justify-center text-white font-bold shadow-sm">
               <Gift className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-lg font-bold">
+              <h3 className="text-lg font-serif font-bold text-white">
                 {need ? `Give Toward Need: ${need.id}` : "Partner & Give Online"}
               </h3>
-              <p className="text-xs text-amber-100">Abbotsford Table Society Charitable Giving via GiveWise</p>
+              <p className="text-xs text-gold-200">Abbotsford Table Society Charitable Support via GiveWise</p>
             </div>
           </div>
-          <button onClick={onClose} className="p-1 rounded-lg text-amber-200 hover:text-white hover:bg-amber-800">
+          <button onClick={onClose} className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-forest-800 transition">
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -36,8 +36,8 @@ export default function GiveModal({ need, onClose }) {
           
           {/* Need Specific Summary Banner if triggered from a need card */}
           {need ? (
-            <div className="bg-amber-50 border-2 border-amber-300 rounded-2xl p-5 space-y-3">
-              <div className="flex items-center justify-between text-xs font-bold text-amber-800 uppercase tracking-wider">
+            <div className="bg-gold-50 border-2 border-gold-200 rounded-2xl p-5 space-y-3">
+              <div className="flex items-center justify-between text-xs font-bold text-gold-900 uppercase tracking-wider">
                 <span>CarePortal Need Reference</span>
                 <span>Est. ${need.valueEst || need.amountRemaining}</span>
               </div>
@@ -55,9 +55,9 @@ export default function GiveModal({ need, onClose }) {
               )}
             </div>
           ) : (
-            <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 space-y-3">
-              <div className="flex items-center gap-2 text-amber-900 font-bold text-base">
-                <Gift className="w-5 h-5 text-amber-600" />
+            <div className="bg-gold-50 border border-gold-200 rounded-2xl p-5 space-y-3">
+              <div className="flex items-center gap-2 text-gold-900 font-bold text-base">
+                <Gift className="w-5 h-5 text-gold-700" />
                 Empower Families in Abbotsford
               </div>
               <p className="text-xs text-slate-700 leading-relaxed">
@@ -76,14 +76,14 @@ export default function GiveModal({ need, onClose }) {
               href={givewiseUrl} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="block bg-slate-900 text-white rounded-2xl p-5 hover:bg-slate-800 transition shadow-md group text-decoration-none border-2 border-amber-400"
+              className="block bg-forest-900 hover:bg-forest-800 text-white rounded-2xl p-5 transition shadow-md group text-decoration-none border-2 border-gold-600"
             >
               <div className="flex items-center justify-between mb-2">
-                <span className="font-bold text-base text-amber-400 flex items-center gap-2">
-                  <Lock className="w-4 h-4" />
+                <span className="font-bold text-base text-gold-200 flex items-center gap-2">
+                  <Lock className="w-4 h-4 text-gold-400" />
                   {need ? `Give Online for ${need.id} via GiveWise` : "Give Online via GiveWise"}
                 </span>
-                <ExternalLink className="w-5 h-5 text-slate-400 group-hover:text-white transition" />
+                <ExternalLink className="w-5 h-5 text-gold-400 group-hover:text-white transition" />
               </div>
               <p className="text-xs text-slate-300">
                 Official Canadian tax receipts issued automatically. Process credit card, debit, or recurring monthly gifts.
