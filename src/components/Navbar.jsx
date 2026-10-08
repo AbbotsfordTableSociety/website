@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Heart, Menu, X, Shield, Sparkles, Info } from 'lucide-react';
+import { Heart, Menu, X, Shield, Sparkles } from 'lucide-react';
 import AbbyTableLogo from './AbbyTableLogo';
 
 export default function Navbar({ onOpenRespond, onOpenChurchEnroll }) {
@@ -17,39 +17,39 @@ export default function Navbar({ onOpenRespond, onOpenChurchEnroll }) {
   }, []);
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[#FAF8F5] shadow-sm border-b border-[#E5DEC9] py-2.5' : 'bg-[#FAF8F5]/95 border-b border-[#E5DEC9]/80 py-3.5 backdrop-blur-md'}`}>
-      <div className="container flex items-center justify-between">
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[#FAF8F5] shadow-sm border-b border-[#E5DEC9] py-2' : 'bg-[#FAF8F5]/95 border-b border-[#E5DEC9]/80 py-3 backdrop-blur-md'}`}>
+      <div className="container max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between gap-4">
         
         {/* Official Brand Logo */}
-        <a href="#" className="flex items-center group text-decoration-none py-1">
-          <AbbyTableLogo isDark={false} className="h-16 md:h-18" />
+        <a href="#" className="flex items-center group text-decoration-none py-1 flex-shrink-0 pr-4">
+          <AbbyTableLogo isDark={false} className="h-14 md:h-16" />
         </a>
 
-        {/* Desktop Nav Links */}
-        <nav className="hidden lg:flex items-center gap-7 text-sm font-bold tracking-wide text-slate-800">
-          <a href="#about" className="hover:text-forest-700 transition-colors">
-            About Our Story
+        {/* Desktop Nav Links - Clean & Well Spaced */}
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-8 text-xs xl:text-sm font-bold tracking-wide text-slate-800">
+          <a href="#about" className="hover:text-forest-700 transition-colors whitespace-nowrap">
+            About
           </a>
-          <a href="#care-portal" className="hover:text-forest-700 transition-colors flex items-center gap-1.5">
+          <a href="#care-portal" className="hover:text-forest-700 transition-colors flex items-center gap-1.5 whitespace-nowrap">
             <span className="w-2 h-2 rounded-full bg-rose-600"></span>
-            Live Needs Feed
+            Live Needs
           </a>
-          <a href="#how-it-works" className="hover:text-forest-700 transition-colors">
+          <a href="#how-it-works" className="hover:text-forest-700 transition-colors whitespace-nowrap">
             How It Works
           </a>
-          <a href="#governance" className="hover:text-forest-700 transition-colors flex items-center gap-1">
-            <Shield className="w-4 h-4 text-gold-700" />
-            Governance & Board
+          <a href="#governance" className="hover:text-forest-700 transition-colors flex items-center gap-1 whitespace-nowrap">
+            <Shield className="w-3.5 h-3.5 text-gold-700" />
+            Governance
           </a>
         </nav>
 
         {/* Action Buttons */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden md:flex items-center gap-3 flex-shrink-0 pl-4">
           <button 
             onClick={onOpenRespond}
-            className="btn btn-primary text-sm px-4 py-2"
+            className="btn btn-primary text-xs xl:text-sm px-3.5 xl:px-4 py-2"
           >
-            <Sparkles className="w-4 h-4" />
+            <Sparkles className="w-3.5 h-3.5" />
             Respond to Need
           </button>
           
@@ -57,9 +57,9 @@ export default function Navbar({ onOpenRespond, onOpenChurchEnroll }) {
             href={givewiseUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-gold text-sm px-4 py-2 text-decoration-none"
+            className="btn btn-gold text-xs xl:text-sm px-3.5 xl:px-4 py-2 text-decoration-none"
           >
-            <Heart className="w-4 h-4" />
+            <Heart className="w-3.5 h-3.5" />
             Give Online
           </a>
         </div>
@@ -82,7 +82,7 @@ export default function Navbar({ onOpenRespond, onOpenChurchEnroll }) {
               onClick={() => setMobileMenuOpen(false)}
               className="py-2 border-b border-[#E5DEC9]"
             >
-              About Our Story
+              About
             </a>
             <a 
               href="#care-portal" 
@@ -97,7 +97,7 @@ export default function Navbar({ onOpenRespond, onOpenChurchEnroll }) {
               onClick={() => setMobileMenuOpen(false)}
               className="py-2 border-b border-[#E5DEC9]"
             >
-              How CarePortal Works
+              How It Works
             </a>
             <a 
               href="#governance" 
