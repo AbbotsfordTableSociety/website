@@ -22,6 +22,11 @@ export default function App() {
     setActiveModal('respond');
   };
 
+  const handleOpenGive = (need = null) => {
+    setSelectedNeed(need);
+    setActiveModal('give');
+  };
+
   const handleCloseModal = () => {
     setActiveModal(null);
     setSelectedNeed(null);
@@ -33,7 +38,7 @@ export default function App() {
       {/* Sticky Glass Navbar */}
       <Navbar 
         onOpenRespond={() => handleOpenRespond(null)}
-        onOpenGive={() => setActiveModal('give')}
+        onOpenGive={() => handleOpenGive(null)}
         onOpenChurchEnroll={() => setActiveModal('church')}
       />
 
@@ -53,6 +58,7 @@ export default function App() {
         {/* Core CarePortal Live Needs Feed */}
         <CarePortalBoard 
           onSelectNeed={(need) => handleOpenRespond(need)}
+          onOpenGiveNeed={(need) => handleOpenGive(need)}
           onOpenSubmitNeed={() => setActiveModal('submit')}
         />
 
@@ -60,12 +66,12 @@ export default function App() {
         <ThreePillars 
           onOpenChurchEnroll={() => setActiveModal('church')}
           onOpenSubmitNeed={() => setActiveModal('submit')}
-          onOpenGive={() => setActiveModal('give')}
+          onOpenGive={() => handleOpenGive(null)}
         />
 
         {/* Mission & Governance */}
         <MissionGovernance 
-          onOpenGive={() => setActiveModal('give')}
+          onOpenGive={() => handleOpenGive(null)}
         />
 
         {/* Testimonials */}
@@ -75,7 +81,7 @@ export default function App() {
 
       {/* Footer */}
       <Footer 
-        onOpenGive={() => setActiveModal('give')}
+        onOpenGive={() => handleOpenGive(null)}
         onOpenRespond={() => handleOpenRespond(null)}
         onOpenSubmitNeed={() => setActiveModal('submit')}
         onOpenChurchEnroll={() => setActiveModal('church')}
@@ -103,6 +109,7 @@ export default function App() {
 
       {activeModal === 'give' && (
         <GiveModal 
+          need={selectedNeed}
           onClose={handleCloseModal} 
         />
       )}

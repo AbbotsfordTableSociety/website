@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
-import { MapPin, Tag, ShieldCheck, Clock, Heart, Filter, ChevronRight, CheckCircle2, AlertTriangle, Sparkles, Building2 } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { MapPin, Tag, ShieldCheck, Heart, Filter, CheckCircle2, AlertTriangle, Sparkles, Building2, Gift, RefreshCw, ExternalLink } from 'lucide-react';
+import { fetchCarePortalNeeds, DEFAULT_RSS_URL } from '../utils/carePortalRss';
 
-export default function CarePortalBoard({ onSelectNeed, onOpenSubmitNeed }) {
+export default function CarePortalBoard({ onSelectNeed, onOpenGiveNeed, onOpenSubmitNeed }) {
   const [selectedArea, setSelectedArea] = useState('All');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
+  
+  // RSS Feed state
+  const [rssUrl, setRssUrl] = useState(DEFAULT_RSS_URL);
+  const [needs, setNeeds] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isLiveFeed, setIsLiveFeed] = useState(false);
 
-  const needsData = [
+  // Default Abbotsford sample fallback data
+  const fallbackNeedsData = [
     {
       id: "NEED-ABBY-101",
+      cpId: "101",
       title: "Twin Bed Frame & Clean Mattress for 7-Year-Old Boy",
       neighborhood: "Clearbrook",
       category: "Furniture & Beds",
@@ -21,10 +30,12 @@ export default function CarePortalBoard({ onSelectNeed, onOpenSubmitNeed }) {
       itemsNeeded: ["Twin Mattress", "Twin Bed Frame", "Boys Bedding Set"],
       valueEst: 350,
       pledgedPercent: 40,
-      respondersCount: 1
+      respondersCount: 1,
+      carePortalLink: "https://system.careportal.org/requests/101"
     },
     {
       id: "NEED-ABBY-102",
+      cpId: "102",
       title: "Convertible Car Seat & Infant Supplies for Newborn",
       neighborhood: "East Abbotsford",
       category: "Baby & Toddler",
@@ -37,10 +48,12 @@ export default function CarePortalBoard({ onSelectNeed, onOpenSubmitNeed }) {
       itemsNeeded: ["Rear-facing Car Seat", "Newborn Diapers", "Stroller"],
       valueEst: 280,
       pledgedPercent: 65,
-      respondersCount: 2
+      respondersCount: 2,
+      carePortalLink: "https://system.careportal.org/requests/102"
     },
     {
       id: "NEED-ABBY-103",
+      cpId: "103",
       title: "Hydro Utility Payment Relief to Prevent Disconnection",
       neighborhood: "Townline / West Abbotsford",
       category: "Household & Emergency Aid",
@@ -53,10 +66,12 @@ export default function CarePortalBoard({ onSelectNeed, onOpenSubmitNeed }) {
       itemsNeeded: ["Emergency Utility Support ($240)"],
       valueEst: 240,
       pledgedPercent: 20,
-      respondersCount: 1
+      respondersCount: 1,
+      carePortalLink: "https://system.careportal.org/requests/103"
     },
     {
       id: "NEED-ABBY-104",
+      cpId: "104",
       title: "Father Mentorship & Employment Transportation Assistance",
       neighborhood: "Mill Lake & Central",
       category: "Relational Support",
@@ -69,10 +84,12 @@ export default function CarePortalBoard({ onSelectNeed, onOpenSubmitNeed }) {
       itemsNeeded: ["Adult Bicycle", "Bus Pass / Commute Support", "Weekly Mentor"],
       valueEst: 180,
       pledgedPercent: 80,
-      respondersCount: 3
+      respondersCount: 3,
+      carePortalLink: "https://system.careportal.org/requests/104"
     },
     {
       id: "NEED-ABBY-105",
+      cpId: "105",
       title: "Dining Room Table & 4 Chairs for Reunified Family",
       neighborhood: "Matsqui / Rural",
       category: "Furniture & Beds",
@@ -85,15 +102,34 @@ export default function CarePortalBoard({ onSelectNeed, onOpenSubmitNeed }) {
       itemsNeeded: ["Dining Table", "4 Chairs"],
       valueEst: 320,
       pledgedPercent: 50,
-      respondersCount: 2
+      respondersCount: 2,
+      carePortalLink: "https://system.careportal.org/requests/105"
     }
   ];
+
+  // Load feed on mount or URL change
+  const loadFeed = async () => {
+    setIsLoading(true);
+    const liveData = await fetchCarePortalNeeds(rssUrl);
+    if (liveData && liveData.length > 0) {
+      setNeeds(liveData);
+      setIsLiveFeed(true);
+    } else {
+      setNeeds(fallbackNeedsData);
+      setIsLiveFeed(false);
+    }
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    loadFeed();
+  }, [rssUrl]);
 
   const neighborhoods = ["All", "Clearbrook", "East Abbotsford", "Mill Lake & Central", "Townline / West Abbotsford", "Matsqui / Rural"];
   const categories = ["All", "Furniture & Beds", "Baby & Toddler", "Household & Emergency Aid", "Relational Support"];
 
-  const filteredNeeds = needsData.filter(item => {
-    const matchesArea = selectedArea === 'All' || item.neighborhood === selectedArea;
+  const filteredNeeds = needs.filter(item => {
+    const matchesArea = selectedArea === 'All' || item.neighborhood.toLowerCase().includes(selectedArea.toLowerCase());
     const matchesCategory = selectedCategory === 'All' || item.category === selectedCategory;
     const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
                           item.description.toLowerCase().includes(searchQuery.toLowerCase());
@@ -107,10 +143,24 @@ export default function CarePortalBoard({ onSelectNeed, onOpenSubmitNeed }) {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div className="space-y-3 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded bg-forest-50 text-forest-700 text-xs font-bold uppercase tracking-wider border border-forest-100">
-              <Sparkles className="w-3.5 h-3.5 text-gold-700" />
-              CarePortal Live Needs Feed • Abbotsford, BC
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded bg-forest-50 text-forest-700 text-xs font-bold uppercase tracking-wider border border-forest-100">
+                <Sparkles className="w-3.5 h-3.5 text-gold-700" />
+                CarePortal Live Needs Feed • Abbotsford, BC
+              </span>
+
+              {isLiveFeed ? (
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold border border-emerald-200">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                  Live CarePortal Sync
+                </span>
+              ) : (
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold border border-amber-200">
+                  Abbotsford Curated Feed
+                </span>
+              )}
             </div>
+
             <h2 className="text-3xl md:text-4xl font-serif font-extrabold text-slate-900 tracking-tight">
               Real-Time Needs from Abbotsford Caseworkers
             </h2>
@@ -119,13 +169,25 @@ export default function CarePortalBoard({ onSelectNeed, onOpenSubmitNeed }) {
             </p>
           </div>
 
-          <button 
-            onClick={onOpenSubmitNeed}
-            className="btn btn-outline text-sm px-5 py-3 whitespace-nowrap self-start md:self-auto"
-          >
-            <Building2 className="w-4 h-4 text-forest-700" />
-            Are You an Agency? Submit a Need
-          </button>
+          <div className="flex flex-wrap items-center gap-3">
+            <button
+              onClick={loadFeed}
+              disabled={isLoading}
+              className="btn btn-outline text-xs px-3.5 py-2.5 flex items-center gap-1.5"
+              title="Refresh CarePortal Feed"
+            >
+              <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? 'animate-spin' : ''}`} />
+              {isLoading ? 'Syncing...' : 'Sync Feed'}
+            </button>
+
+            <button 
+              onClick={onOpenSubmitNeed}
+              className="btn btn-outline text-sm px-5 py-3 whitespace-nowrap self-start md:self-auto"
+            >
+              <Building2 className="w-4 h-4 text-forest-700" />
+              Are You an Agency? Submit a Need
+            </button>
+          </div>
         </div>
 
         {/* Filters Bar */}
@@ -233,8 +295,19 @@ export default function CarePortalBoard({ onSelectNeed, onOpenSubmitNeed }) {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-lg font-serif font-bold text-slate-900 leading-snug mb-2">
-                    {need.title}
+                  <h3 className="text-lg font-serif font-bold text-slate-900 leading-snug mb-2 flex items-start justify-between gap-2">
+                    <span>{need.title}</span>
+                    {need.carePortalLink && (
+                      <a 
+                        href={need.carePortalLink} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="text-slate-400 hover:text-forest-700 p-1 flex-shrink-0"
+                        title="View on CarePortal.org"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    )}
                   </h3>
 
                   {/* Description */}
@@ -264,7 +337,7 @@ export default function CarePortalBoard({ onSelectNeed, onOpenSubmitNeed }) {
                   <div className="flex items-center justify-between text-xs">
                     <span className="text-slate-600 font-medium flex items-center gap-1">
                       <ShieldCheck className="w-3.5 h-3.5 text-forest-700" />
-                      Vetted Request
+                      {need.vettedBy}
                     </span>
                     <span className="text-slate-500 font-medium">{need.timeAgo}</span>
                   </div>
@@ -283,14 +356,26 @@ export default function CarePortalBoard({ onSelectNeed, onOpenSubmitNeed }) {
                     </div>
                   </div>
 
-                  {/* Action Button */}
-                  <button 
-                    onClick={() => onSelectNeed(need)}
-                    className="btn btn-primary w-full py-2.5 text-sm font-bold justify-center"
-                  >
-                    <Heart className="w-4 h-4" />
-                    I Can Help With This Need
-                  </button>
+                  {/* Action Buttons: 1 for Volunteer/Respond, 1 for GiveWise */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                    <button 
+                      onClick={() => onSelectNeed(need)}
+                      className="btn btn-primary w-full py-2.5 text-xs font-bold justify-center"
+                      title="Provide physical items or volunteer"
+                    >
+                      <Heart className="w-3.5 h-3.5" />
+                      Provide Items
+                    </button>
+
+                    <button 
+                      onClick={() => onOpenGiveNeed && onOpenGiveNeed(need)}
+                      className="btn bg-amber-600 hover:bg-amber-700 text-white w-full py-2.5 text-xs font-bold justify-center rounded-xl transition"
+                      title="Give financial support via GiveWise"
+                    >
+                      <Gift className="w-3.5 h-3.5" />
+                      Give (GiveWise)
+                    </button>
+                  </div>
 
                 </div>
 
