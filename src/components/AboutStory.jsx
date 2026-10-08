@@ -54,7 +54,7 @@ export default function AboutStory() {
         </div>
 
         {/* Story & Foundation Grid */}
-        <div className="grid lg:grid-cols-12 gap-8 items-stretch mb-16">
+        <div className="grid lg:grid-cols-12 gap-8 items-stretch mb-10">
           
           <div className="lg:col-span-6 bg-[#FAF8F5] border-2 border-[#E5DEC9] rounded-2xl p-8 md:p-10 flex flex-col justify-between shadow-sm">
             <div className="space-y-4">
@@ -67,16 +67,6 @@ export default function AboutStory() {
               <p className="text-slate-700 text-base leading-relaxed">
                 In June 2025, we launched the <strong>Abbotsford Table Society</strong> to bring this vision to life — fostering holistic care and relational wholeness through connected partnerships. Together, we’re uniting our community in hope and transformation.
               </p>
-            </div>
-
-            <div className="pt-6 border-t border-[#E5DEC9] mt-6">
-              <a 
-                href="/how-it-works"
-                className="inline-flex items-center gap-2 text-sm font-bold text-forest-700 hover:text-forest-800 transition"
-              >
-                <span>Read More About Our Mission & Three Pillars</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
             </div>
           </div>
 
@@ -109,6 +99,25 @@ export default function AboutStory() {
             </div>
           </div>
 
+        </div>
+
+        {/* Wide Callout Banner: Read More About Our Mission & Three Pillars */}
+        <div className="bg-forest-900 border-2 border-forest-800 rounded-2xl p-6 md:p-8 text-white shadow-md flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="space-y-1 text-center md:text-left">
+            <h4 className="text-xl font-serif font-bold text-white">
+              Explore Our Mission & Three Pillars of Care
+            </h4>
+            <p className="text-sm text-forest-100 max-w-2xl">
+              Learn more about how we connect caseworkers, local churches, and neighborhood volunteers for long-term community transformation.
+            </p>
+          </div>
+          <a 
+            href="/how-it-works"
+            className="btn btn-gold px-6 py-3 text-sm font-bold shrink-0 inline-flex items-center gap-2 shadow hover:scale-[1.02] transition"
+          >
+            <span>Read More About Our Mission</span>
+            <ArrowRight className="w-4 h-4" />
+          </a>
         </div>
 
       </div>
