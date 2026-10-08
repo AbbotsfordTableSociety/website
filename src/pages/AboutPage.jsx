@@ -31,7 +31,7 @@ export default function AboutPage({ onNavigate }) {
       </div>
 
       {/* Story & Objectives Component */}
-      <AboutStory />
+      <AboutStory onNavigate={onNavigate} />
 
       {/* Call to Action Bar */}
       <div className="bg-[#FCFBF8] border-t border-[#E5DEC9] py-16">

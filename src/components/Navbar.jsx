@@ -56,7 +56,7 @@ export default function Navbar({ onOpenRespond, onOpenChurchEnroll, currentPath,
           <a 
             href="/how-it-works" 
             onClick={(e) => handleNavClick(e, '/how-it-works')}
-            className={`transition-colors whitespace-nowrap ${currentPath === '/how-it-works' ? 'text-forest-700 font-extrabold border-b-2 border-forest-700 pb-0.5' : 'hover:text-forest-700'}`}
+            className={`transition-colors whitespace-nowrap ${(currentPath === '/how-it-works' || currentPath === '/our-mission') ? 'text-forest-700 font-extrabold border-b-2 border-forest-700 pb-0.5' : 'hover:text-forest-700'}`}
           >
             How CarePortal Works
           </a>

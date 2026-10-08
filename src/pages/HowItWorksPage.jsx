@@ -21,11 +21,11 @@ export default function HowItWorksPage({ onOpenChurchEnroll, onOpenSubmitNeed })
           </span>
 
           <h1 className="text-4xl md:text-6xl font-serif font-extrabold text-slate-900 tracking-tight">
-            How CarePortal Works in Abbotsford
+            Our Mission & Three Pillars of Care
           </h1>
 
           <p className="text-slate-700 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-            CarePortal is a technology platform that connects real-time casework requests directly with local church care teams across our community.
+            Abbotsford Table Society exists to connect verified agency caseworkers, local churches, and neighborhood volunteers through CarePortal’s three core pillars of community care.
           </p>
         </div>
       </div>

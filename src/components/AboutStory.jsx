@@ -1,8 +1,15 @@
 import React from 'react';
 import { Heart, Sparkles, Target, ArrowRight } from 'lucide-react';
 
-export default function AboutStory() {
+export default function AboutStory({ onNavigate }) {
   const givewiseUrl = "https://fund.givewise.ca/gift/charity/NQD00331";
+
+  const handleMissionClick = (e) => {
+    if (onNavigate) {
+      e.preventDefault();
+      onNavigate('/our-mission');
+    }
+  };
 
   return (
     <section id="about" className="py-24 bg-[#FCFBF8] text-slate-900 border-t border-[#E5DEC9] relative">
@@ -112,8 +119,9 @@ export default function AboutStory() {
             </p>
           </div>
           <a 
-            href="/how-it-works"
-            className="btn btn-gold px-6 py-3 text-sm font-bold shrink-0 inline-flex items-center gap-2 shadow hover:scale-[1.02] transition"
+            href="/our-mission"
+            onClick={handleMissionClick}
+            className="btn btn-gold px-6 py-3 text-sm font-bold shrink-0 inline-flex items-center gap-2 shadow hover:scale-[1.02] transition text-decoration-none"
           >
             <span>Read More About Our Mission</span>
             <ArrowRight className="w-4 h-4" />

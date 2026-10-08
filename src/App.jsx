@@ -64,7 +64,7 @@ export default function App() {
       <main className="flex-grow">
         {currentPath === '/about' ? (
           <AboutPage onNavigate={handleNavigate} />
-        ) : currentPath === '/how-it-works' ? (
+        ) : (currentPath === '/how-it-works' || currentPath === '/our-mission') ? (
           <HowItWorksPage 
             onOpenChurchEnroll={() => setActiveModal('church')}
             onOpenSubmitNeed={() => setActiveModal('submit')}
