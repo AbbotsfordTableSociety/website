@@ -65,18 +65,12 @@ export default function Hero({ onOpenRespond, onOpenSubmitNeed, onOpenChurchEnro
 
           {/* Right Column: Full-Height Featured Photography Card */}
           <div className="lg:col-span-5 h-full">
-            <div className="relative rounded-2xl overflow-hidden shadow-lg border-2 border-[#E5DEC9] group h-full min-h-[380px] lg:min-h-[460px] flex flex-col justify-end">
+            <div className="relative rounded-2xl overflow-hidden shadow-lg border-2 border-[#E5DEC9] group h-full min-h-[380px] lg:min-h-[460px]">
               <img 
                 src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=1000&q=80" 
                 alt="Abbotsford Community Gathering around Table" 
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500"
               />
-              <div className="relative z-10 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent p-6 sm:p-8 pt-20">
-                <span className="text-xs font-bold uppercase tracking-widest text-gold-300">A Shared Dream for Abbotsford</span>
-                <p className="text-base sm:text-lg font-serif italic text-white mt-2 leading-relaxed">
-                  "Where the vulnerable are seen, and hope flows through Jesus."
-                </p>
-              </div>
             </div>
           </div>
 
