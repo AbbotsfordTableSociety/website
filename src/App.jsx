@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import ImpactStats from './components/ImpactStats';
+import AboutStory from './components/AboutStory';
 import CarePortalBoard from './components/CarePortalBoard';
 import ThreePillars from './components/ThreePillars';
 import MissionGovernance from './components/MissionGovernance';
@@ -38,7 +39,6 @@ export default function App() {
       {/* Sticky Glass Navbar */}
       <Navbar 
         onOpenRespond={() => handleOpenRespond(null)}
-        onOpenGive={() => handleOpenGive(null)}
         onOpenChurchEnroll={() => setActiveModal('church')}
       />
 
@@ -55,6 +55,9 @@ export default function App() {
         {/* Live Impact Ticker */}
         <ImpactStats />
 
+        {/* About & Story Section (A Shared Dream for Abbotsford) */}
+        <AboutStory />
+
         {/* Core CarePortal Live Needs Feed */}
         <CarePortalBoard 
           onSelectNeed={(need) => handleOpenRespond(need)}
@@ -66,13 +69,10 @@ export default function App() {
         <ThreePillars 
           onOpenChurchEnroll={() => setActiveModal('church')}
           onOpenSubmitNeed={() => setActiveModal('submit')}
-          onOpenGive={() => handleOpenGive(null)}
         />
 
         {/* Mission & Governance */}
-        <MissionGovernance 
-          onOpenGive={() => handleOpenGive(null)}
-        />
+        <MissionGovernance />
 
         {/* Testimonials */}
         <Testimonials />
@@ -81,7 +81,6 @@ export default function App() {
 
       {/* Footer */}
       <Footer 
-        onOpenGive={() => handleOpenGive(null)}
         onOpenRespond={() => handleOpenRespond(null)}
         onOpenSubmitNeed={() => setActiveModal('submit')}
         onOpenChurchEnroll={() => setActiveModal('church')}
