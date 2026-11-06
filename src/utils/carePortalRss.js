@@ -102,25 +102,8 @@ async function fetchRssXml(feedUrl) {
  */
 export async function fetchCarePortalNeeds(feedUrl = DEFAULT_RSS_URL) {
   try {
-    // 1. Fetch the primary RSS feed URL (https://system.careportal.org/rss?status%5B0%5D=Open)
-    const xmlText = await fetchRssXml(feedUrl);
-    if (xmlText) {
-      const { abbotsfordNeeds, canadaNeeds } = parseCarePortalXml(xmlText);
-
-      // Tier 1: Local Abbotsford / BC needs found in primary feed
-      if (abbotsfordNeeds.length > 0) {
-        return { needs: abbotsfordNeeds, scope: "abbotsford" };
-      }
-
-      // Tier 2: Other Canadian needs found in primary feed
-      if (canadaNeeds.length > 0) {
-        return { needs: canadaNeeds, scope: "canada" };
-      }
-    }
-
-    // 2. Because the general CarePortal feed (status[0]=Open) returns only the latest 100 items
-    // (dominated by high-volume US requests), query CarePortal's `county=` filter for Abbotsford first,
-    // then Canadian cities (including Winnipeg) so live Canadian requests are always surfaced.
+    // 1. Always query CarePortal's `county=` filter for Abbotsford / Fraser Valley FIRST
+    // so local Abbotsford needs are always prioritized even when older than the latest 100 global items.
     const abbyQueries = [
       `${feedUrl}&county=Abbotsford`,
       `${feedUrl}&county=Fraser+Valley`,
@@ -139,6 +122,23 @@ export async function fetchCarePortalNeeds(feedUrl = DEFAULT_RSS_URL) {
       }
     }
 
+    // 2. Check the primary open RSS feed for any Abbotsford/BC or Canadian needs
+    const xmlText = await fetchRssXml(feedUrl);
+    if (xmlText) {
+      const { abbotsfordNeeds, canadaNeeds } = parseCarePortalXml(xmlText);
+
+      // Tier 1: Local Abbotsford / BC needs found in primary feed
+      if (abbotsfordNeeds.length > 0) {
+        return { needs: abbotsfordNeeds, scope: "abbotsford" };
+      }
+
+      // Tier 2: Other Canadian needs found in primary feed
+      if (canadaNeeds.length > 0) {
+        return { needs: canadaNeeds, scope: "canada" };
+      }
+    }
+
+    // 3. Fallback: Query active Canadian CarePortal county feed (Winnipeg, MB)
     const canadaQueries = [
       `${feedUrl}&county=Winnipeg`,
     ];
@@ -156,7 +156,7 @@ export async function fetchCarePortalNeeds(feedUrl = DEFAULT_RSS_URL) {
       }
     }
 
-    // Tier 3: Return null to trigger Abbotsford sample fallback data
+    // Tier 3: Return null to trigger fallback data
     return null;
   } catch (err) {
     console.error("Failed to fetch/parse CarePortal RSS feed:", err);
