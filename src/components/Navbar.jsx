@@ -48,7 +48,7 @@ export default function Navbar({ onOpenRespond, onOpenChurchEnroll, onOpenContac
   const isAboutActive = currentPath === '/about' || currentPath === '/our-mission' || currentPath === '/our-story' || currentPath === '/our-team' || currentPath === '/governance';
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/85 backdrop-blur-md border-b-2 border-[#d8cba9] ${scrolled ? 'shadow-md py-2' : 'shadow-sm py-3.5'}`}>
+    <header className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/85 backdrop-blur-md border-b-2 border-[#d8cba9] ${scrolled ? 'shadow-md py-2' : 'shadow-sm py-3.5'}`}>
       <div className="container max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between gap-4">
         
         {/* Prominent Logo & Organization Title */}

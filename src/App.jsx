@@ -66,7 +66,7 @@ export default function App() {
       />
 
       {/* Multi-Page Route Renderer */}
-      <main className="flex-grow pt-28 md:pt-36">
+      <main className="flex-grow">
         {currentPath === '/about' || currentPath === '/our-story' ? (
           <AboutPage onNavigate={handleNavigate} onOpenContact={() => setActiveModal('contact')} />
         ) : currentPath === '/our-mission' ? (

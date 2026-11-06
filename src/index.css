@@ -44,7 +44,7 @@ html {
 }
 
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
   background-color: #FAF9F5;
 }
 
@@ -53,7 +53,6 @@ h1, h2, h3, h4, h5, h6, .font-heading {
   font-family: var(--font-heading);
   font-weight: 700 !important;
   letter-spacing: -0.015em;
-  color: #1f2410;
 }
 
 .font-serif {
