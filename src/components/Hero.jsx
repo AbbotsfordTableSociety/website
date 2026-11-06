@@ -23,11 +23,6 @@ export default function Hero({ onOpenRespond, onOpenSubmitNeed, onOpenChurchEnro
 
         {/* Hero Content */}
         <div className="relative z-10 container max-w-5xl mx-auto px-6 py-24 text-white space-y-6">
-          
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FAF9F5]/90 text-[#2b3705] border border-[#d8cba9] text-xs font-extrabold uppercase tracking-widest shadow-md backdrop-blur-sm">
-            <Sparkles className="w-3.5 h-3.5 text-[#9f7f29]" />
-            Abbotsford Table Society
-          </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-heading font-extrabold tracking-tight text-white leading-tight">
             Equipping Churches. <br className="hidden sm:inline" />
