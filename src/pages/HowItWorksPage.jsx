@@ -88,7 +88,7 @@ export default function HowItWorksPage({ onOpenChurchEnroll, onOpenSubmitNeed, o
   }, []);
 
   return (
-    <div className="pt-24 bg-[#FAF9F5] min-h-screen">
+    <div className="bg-[#FAF9F5] min-h-screen">
       
       {/* 1. HERO BANNER WITH ADAPTED HEADLINE */}
       <div className="relative w-full bg-[#FAF9F5] border-b border-[#d8cba9] py-16 md:py-20">

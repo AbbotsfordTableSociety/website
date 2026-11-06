@@ -55,51 +55,47 @@ export default function OurTeamPage({ onNavigate, onOpenContact }) {
   }, []);
 
   return (
-    <div className="pt-24 bg-[#FAF9F5] min-h-screen">
+    <div className="bg-[#FAF9F5] min-h-screen">
       
       {/* Header Banner */}
-      <div className="bg-[#FAF9F5] border-b border-[#d8cba9] py-14 md:py-20">
-        <div className="container text-center max-w-4xl mx-auto space-y-4 px-4">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#faf7ef] text-[#2b3705] border border-[#d8cba9] text-xs font-bold uppercase tracking-wider shadow-sm">
-            <Sparkles className="w-3.5 h-3.5 text-[#9f7f29]" />
+      <div className="bg-[#FAF9F5] border-b border-[#d8cba9] py-14">
+        <div className="max-w-4xl mx-auto text-center space-y-4 px-6">
+          <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#faf7ef] text-[#2b3705] border border-[#d8cba9] text-xs font-bold uppercase tracking-wider">
             About / Our Team
           </span>
 
-          <h1 className="text-4xl md:text-6xl font-heading font-extrabold text-[#2b3705] tracking-tight leading-tight">
+          <h1 className="text-4xl md:text-5xl font-heading font-extrabold text-[#2b3705]">
             Our Team & Leadership
           </h1>
 
-          <p className="text-[#1f2410] text-lg md:text-xl max-w-3xl mx-auto leading-relaxed font-sans font-medium">
-            Abbotsford Table Society is led by a dedicated volunteer Board of Directors, church champions, and community responders united to serve vulnerable families.
+          <p className="text-slate-700 text-base md:text-lg max-w-2xl mx-auto">
+            Led by a dedicated volunteer Board of Directors, church champions, and community responders.
           </p>
         </div>
       </div>
 
       {/* Main Team Content */}
       <section className="py-16 bg-[#FAF9F5]">
-        <div className="container max-w-5xl mx-auto px-4 md:px-6 space-y-16">
+        <div className="container max-w-5xl mx-auto px-4 md:px-6 space-y-12">
 
           {/* Board of Directors Grid */}
-          <div className="bg-white border-2 border-[#d8cba9] rounded-3xl p-8 md:p-12 shadow-sm space-y-8">
-            <div className="space-y-2">
-              <span className="text-xs font-bold uppercase tracking-widest text-[#9f7f29] bg-[#faf7ef] px-3.5 py-1 rounded-full border border-[#d8cba9]">
-                Board of Directors
-              </span>
-              <h2 className="text-3xl font-heading font-extrabold text-[#2b3705]">
-                Volunteer Leadership & Governance
+          <div className="bg-white border-2 border-[#d8cba9] rounded-3xl p-8 md:p-10 shadow-sm space-y-6">
+            <div className="space-y-1">
+              <h2 className="text-2xl font-heading font-extrabold text-[#2b3705]">
+                Volunteer Board of Directors
               </h2>
-              <p className="text-slate-700 text-sm md:text-base leading-relaxed">
-                Our volunteer Board of Directors provides strategic oversight, spiritual alignment, financial stewardship, and governance in service of Abbotsford. Click on any board member to read their bio.
+              <p className="text-xs sm:text-sm text-slate-600">
+                Click on any board member to read their short bio.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {boardMembers.map((member, idx) => (
                 <button
                   key={idx}
                   type="button"
                   onClick={() => setSelectedMember(member)}
-                  className="bg-[#FAF9F5] border border-[#d8cba9] rounded-2xl p-6 space-y-4 shadow-sm hover:border-[#2b3705] hover:shadow-md transition flex flex-col items-center text-center group cursor-pointer w-full"
+                  className="p-6 bg-[#FAF9F5] border border-[#d8cba9] rounded-2xl flex flex-col items-center text-center space-y-3 shadow-sm hover:border-[#2b3705] hover:shadow-md transition group cursor-pointer w-full"
                 >
                   {member.image ? (
                     <img
@@ -116,10 +112,10 @@ export default function OurTeamPage({ onNavigate, onOpenContact }) {
                     </div>
                   )}
                   <div>
-                    <h3 className="text-xl font-heading font-bold text-slate-900 group-hover:text-[#2b3705] transition">{member.name}</h3>
-                    <span className="text-xs font-bold text-[#9f7f29] block mt-0.5">{member.role}</span>
+                    <h4 className="font-heading font-bold text-lg text-[#2b3705]">{member.name}</h4>
+                    <span className="text-[11px] font-bold text-[#9f7f29] uppercase tracking-wider">{member.role}</span>
                   </div>
-                  <p className="text-xs text-slate-600 leading-relaxed border-t border-[#d8cba9] pt-3 w-full">
+                  <p className="text-xs text-slate-600 border-t border-[#d8cba9] pt-2.5 w-full">
                     {member.title}
                   </p>
                   <span className="text-[11px] font-bold text-[#2b3705] group-hover:text-[#9f7f29] underline">
@@ -130,81 +126,8 @@ export default function OurTeamPage({ onNavigate, onOpenContact }) {
             </div>
           </div>
 
-          {/* Community Responders & Church Champions */}
-          <div className="grid md:grid-cols-2 gap-8">
-            
-            <div className="bg-white border-2 border-[#d8cba9] rounded-3xl p-8 space-y-4 shadow-sm flex flex-col justify-between">
-              <div className="space-y-4">
-                <div className="w-12 h-12 rounded-xl bg-[#9f7f29] text-white flex items-center justify-center shadow">
-                  <Handshake className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-2xl font-heading font-bold text-slate-900">Church Care Champions</h3>
-                <p className="text-sm text-slate-700 leading-relaxed">
-                  Local pastors and church ministry leaders who mobilize volunteer care teams across Abbotsford neighborhoods to respond to vetted CarePortal requests.
-                </p>
-              </div>
-
-              <div className="pt-4 border-t border-[#d8cba9] text-xs font-bold text-[#2b3705]">
-                Uniting local congregations across denominational lines.
-              </div>
-            </div>
-
-            <div className="bg-white border-2 border-[#d8cba9] rounded-3xl p-8 space-y-4 shadow-sm flex flex-col justify-between">
-              <div className="space-y-4">
-                <div className="w-12 h-12 rounded-xl bg-[#1e2703] text-white flex items-center justify-center shadow">
-                  <Users className="w-6 h-6 text-[#d8cba9]" />
-                </div>
-                <h3 className="text-2xl font-heading font-bold text-slate-900">Partner Agencies</h3>
-                <p className="text-sm text-slate-700 leading-relaxed">
-                  Partner agencies and frontline caseworkers who identify real, immediate needs of vulnerable children and families in crisis.
-                </p>
-              </div>
-
-              <div className="pt-4 border-t border-[#d8cba9] text-xs font-bold text-[#9f7f29]">
-                Ensuring every need is verified and respectfully met.
-              </div>
-            </div>
-
-          </div>
-
-          {/* Join The Team Banner */}
-          <div className="bg-white border-2 border-[#d8cba9] rounded-3xl p-8 md:p-12 text-center space-y-6 shadow-sm">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#2b3705] bg-[#faf7ef] px-3.5 py-1 rounded-full border border-[#d8cba9]">
-              Get Involved
-            </span>
-            <h3 className="text-3xl font-heading font-extrabold text-[#2b3705]">
-              Want to Join the Abbotsford Table Team?
-            </h3>
-            <p className="text-slate-700 text-base max-w-2xl mx-auto leading-relaxed">
-              Whether you want to serve on a local church care team, become a Point of Contact, or support our operations, we welcome your partnership.
-            </p>
-
-            <button
-              type="button"
-              onClick={() => onOpenContact && onOpenContact()}
-              className="inline-flex items-center gap-2 bg-[#FAF9F5] hover:bg-[#d8cba9]/30 border-2 border-[#d8cba9] hover:border-[#2b3705] px-7 py-3.5 rounded-xl text-[#2b3705] font-bold text-sm transition cursor-pointer"
-            >
-              <Mail className="w-4 h-4 text-[#9f7f29]" />
-              <span>Open Contact Form</span>
-            </button>
-          </div>
-
         </div>
       </section>
-
-      {/* Footer Call to Action */}
-      <div className="bg-[#FFFFFF] border-t border-[#d8cba9] py-16 text-center">
-        <div className="container max-w-3xl mx-auto space-y-6 px-4">
-          <a 
-            href={givewiseUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-gold text-sm px-8 py-3.5 text-decoration-none shadow-md"
-          >
-            <Heart className="w-4 h-4 mr-1.5 fill-white" /> DONATE
-          </a>
-        </div>
-      </div>
 
       {/* Board Member Short Bio Modal */}
       {selectedMember && (

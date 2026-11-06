@@ -21,13 +21,15 @@ export default function Footer({ onNavigate }) {
           
           {/* Column 1: Organization Logo & Mission */}
           <div className="space-y-3">
-            <a 
-              href="/" 
-              onClick={(e) => handleNav(e, '/')}
-              className="inline-block"
-            >
-              <AbbyTableLogo isDark={true} className="h-14 md:h-16" />
-            </a>
+            <div className="flex items-center gap-3">
+              <a 
+                href="/" 
+                onClick={(e) => handleNav(e, '/')}
+                className="font-heading font-extrabold text-xl sm:text-2xl tracking-tight uppercase text-white text-decoration-none"
+              >
+                ABBOTSFORD TABLE SOCIETY
+              </a>
+            </div>
 
             <p className="text-xs sm:text-sm text-slate-200 leading-relaxed max-w-md font-sans">
               Abbotsford Table Society exists to unite churches and believers across our city to meet real needs in practical, relational, and collaborative ways — so that our community experiences the love of Christ through the people of God.

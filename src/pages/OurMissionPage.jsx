@@ -9,7 +9,7 @@ export default function OurMissionPage({ onNavigate, onOpenContact }) {
   }, []);
 
   return (
-    <div className="pt-24 bg-[#FAF9F5] min-h-screen">
+    <div className="bg-[#FAF9F5] min-h-screen">
       
       {/* Full-Width Hero Banner with Nature Trail Image */}
       <div className="relative w-full min-h-[360px] md:min-h-[420px] flex items-center justify-center text-center overflow-hidden border-b border-[#d8cba9]">

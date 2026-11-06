@@ -45,7 +45,7 @@ export default function Navbar({ onOpenRespond, onOpenChurchEnroll, onOpenContac
     }
   };
 
-  const isAboutActive = currentPath === '/about' || currentPath === '/our-story' || currentPath === '/our-team' || currentPath === '/governance';
+  const isAboutActive = currentPath === '/about' || currentPath === '/our-mission' || currentPath === '/our-story' || currentPath === '/our-team' || currentPath === '/governance';
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/85 backdrop-blur-md border-b-2 border-[#d8cba9] ${scrolled ? 'shadow-md py-2' : 'shadow-sm py-3.5'}`}>
@@ -89,28 +89,30 @@ export default function Navbar({ onOpenRespond, onOpenChurchEnroll, onOpenContac
 
             {/* Dropdown Menu: Our Mission, Our Team, Governance */}
             {aboutDropdownOpen && (
-              <div className="absolute top-full left-0 mt-1 w-60 bg-[#FFFFFF] border-2 border-[#d8cba9] rounded-xl shadow-xl py-2.5 z-50 animate-fadeIn">
-                <a 
-                  href="/our-mission" 
-                  onClick={(e) => handleNavClick(e, '/our-mission')}
-                  className={`block px-4 py-2.5 text-xs font-bold transition hover:bg-[#faf7ef] hover:text-[#2b3705] ${currentPath === '/our-mission' ? 'text-[#2b3705] bg-[#faf7ef] font-extrabold' : 'text-[#1f2410]'}`}
-                >
-                  Our Mission
-                </a>
-                <a 
-                  href="/our-team" 
-                  onClick={(e) => handleNavClick(e, '/our-team')}
-                  className={`block px-4 py-2.5 text-xs font-bold transition hover:bg-[#faf7ef] hover:text-[#2b3705] ${currentPath === '/our-team' ? 'text-[#2b3705] bg-[#faf7ef] font-extrabold' : 'text-[#1f2410]'}`}
-                >
-                  Our Team
-                </a>
-                <a 
-                  href="/governance" 
-                  onClick={(e) => handleNavClick(e, '/governance')}
-                  className={`block px-4 py-2.5 text-xs font-bold transition hover:bg-[#faf7ef] hover:text-[#2b3705] ${currentPath === '/governance' ? 'text-[#2b3705] bg-[#faf7ef] font-extrabold' : 'text-[#1f2410]'}`}
-                >
-                  Governance
-                </a>
+              <div className="absolute top-full left-0 pt-1 w-60 z-50 animate-fadeIn">
+                <div className="bg-[#FFFFFF] border-2 border-[#d8cba9] rounded-xl shadow-xl py-2.5">
+                  <a 
+                    href="/our-mission" 
+                    onClick={(e) => handleNavClick(e, '/our-mission')}
+                    className={`block px-4 py-2.5 text-xs font-bold transition hover:bg-[#faf7ef] hover:text-[#2b3705] ${currentPath === '/our-mission' ? 'text-[#2b3705] bg-[#faf7ef] font-extrabold' : 'text-[#1f2410]'}`}
+                  >
+                    Our Mission
+                  </a>
+                  <a 
+                    href="/our-team" 
+                    onClick={(e) => handleNavClick(e, '/our-team')}
+                    className={`block px-4 py-2.5 text-xs font-bold transition hover:bg-[#faf7ef] hover:text-[#2b3705] ${currentPath === '/our-team' ? 'text-[#2b3705] bg-[#faf7ef] font-extrabold' : 'text-[#1f2410]'}`}
+                  >
+                    Our Team
+                  </a>
+                  <a 
+                    href="/governance" 
+                    onClick={(e) => handleNavClick(e, '/governance')}
+                    className={`block px-4 py-2.5 text-xs font-bold transition hover:bg-[#faf7ef] hover:text-[#2b3705] ${currentPath === '/governance' ? 'text-[#2b3705] bg-[#faf7ef] font-extrabold' : 'text-[#1f2410]'}`}
+                  >
+                    Governance
+                  </a>
+                </div>
               </div>
             )}
           </div>
@@ -139,35 +141,37 @@ export default function Navbar({ onOpenRespond, onOpenChurchEnroll, onOpenContac
 
             {/* Resources Dropdown */}
             {resourcesDropdownOpen && (
-              <div className="absolute top-full left-0 mt-1 w-64 bg-[#FFFFFF] border-2 border-[#d8cba9] rounded-xl shadow-xl py-2.5 z-50 animate-fadeIn">
-                <a 
-                  href="https://www.careimpact.ca/neighbour-up" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setResourcesDropdownOpen(false)}
-                  className="flex items-center justify-between px-4 py-2.5 text-xs font-bold text-[#1f2410] hover:bg-[#faf7ef] hover:text-[#2b3705] transition text-decoration-none"
-                >
-                  <span>Neighbour Up!</span>
-                  <ExternalLink className="w-3.5 h-3.5 text-[#9f7f29]" />
-                </a>
-                <a 
-                  href="https://www.careimpact.ca/neighbourly" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setResourcesDropdownOpen(false)}
-                  className="flex items-center justify-between px-4 py-2.5 text-xs font-bold text-[#1f2410] hover:bg-[#faf7ef] hover:text-[#2b3705] transition text-decoration-none"
-                >
-                  <span>Neighbourly Podcast</span>
-                  <ExternalLink className="w-3.5 h-3.5 text-[#9f7f29]" />
-                </a>
-                <a 
-                  href="#faqs" 
-                  onClick={(e) => { e.preventDefault(); alert('FAQs section coming soon!'); setResourcesDropdownOpen(false); }}
-                  className="flex items-center justify-between px-4 py-2.5 text-xs font-bold text-[#1f2410] hover:bg-[#faf7ef] hover:text-[#2b3705] transition"
-                >
-                  <span>FAQs</span>
-                  <span className="text-[10px] bg-[#e0dbd7] text-[#1f2410] px-2 py-0.5 rounded font-semibold">Soon</span>
-                </a>
+              <div className="absolute top-full left-0 pt-1 w-64 z-50 animate-fadeIn">
+                <div className="bg-[#FFFFFF] border-2 border-[#d8cba9] rounded-xl shadow-xl py-2.5">
+                  <a 
+                    href="https://www.careimpact.ca/neighbour-up" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setResourcesDropdownOpen(false)}
+                    className="flex items-center justify-between px-4 py-2.5 text-xs font-bold text-[#1f2410] hover:bg-[#faf7ef] hover:text-[#2b3705] transition text-decoration-none"
+                  >
+                    <span>Neighbour Up!</span>
+                    <ExternalLink className="w-3.5 h-3.5 text-[#9f7f29]" />
+                  </a>
+                  <a 
+                    href="https://www.careimpact.ca/neighbourly" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setResourcesDropdownOpen(false)}
+                    className="flex items-center justify-between px-4 py-2.5 text-xs font-bold text-[#1f2410] hover:bg-[#faf7ef] hover:text-[#2b3705] transition text-decoration-none"
+                  >
+                    <span>Neighbourly Podcast</span>
+                    <ExternalLink className="w-3.5 h-3.5 text-[#9f7f29]" />
+                  </a>
+                  <a 
+                    href="#faqs" 
+                    onClick={(e) => { e.preventDefault(); alert('FAQs section coming soon!'); setResourcesDropdownOpen(false); }}
+                    className="flex items-center justify-between px-4 py-2.5 text-xs font-bold text-[#1f2410] hover:bg-[#faf7ef] hover:text-[#2b3705] transition"
+                  >
+                    <span>FAQs</span>
+                    <span className="text-[10px] bg-[#e0dbd7] text-[#1f2410] px-2 py-0.5 rounded font-semibold">Soon</span>
+                  </a>
+                </div>
               </div>
             )}
           </div>

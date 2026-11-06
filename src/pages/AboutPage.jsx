@@ -9,7 +9,7 @@ export default function AboutPage({ onNavigate }) {
   }, []);
 
   return (
-    <div className="pt-24 bg-[#FAF9F5] min-h-screen">
+    <div className="bg-[#FAF9F5] min-h-screen">
       
       {/* Main Full-Width Hero Banner with Mountain Nature Photo */}
       <div className="relative w-full min-h-[380px] md:min-h-[440px] flex items-center justify-center text-center overflow-hidden border-b border-[#d8cba9]">
@@ -135,52 +135,6 @@ export default function AboutPage({ onNavigate }) {
           <div className="w-48 h-0.5 bg-[#2b3705]/40 mx-auto mt-4 rounded-full"></div>
         </div>
       </section>
-
-      {/* Contact Box */}
-      <div id="contact-info" className="bg-[#FFFFFF] border-t border-[#d8cba9] py-16">
-        <div className="container max-w-3xl mx-auto text-center space-y-6 px-4">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#9f7f29] bg-[#faf7ef] px-3.5 py-1 rounded-full border border-[#d8cba9]">
-            Get In Touch
-          </span>
-          <h3 className="text-3xl md:text-4xl font-heading font-extrabold text-[#2b3705]">
-            Contact Us
-          </h3>
-          <p className="text-slate-700 text-base md:text-lg leading-relaxed">
-            Send all inquiries to:
-          </p>
-
-          <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-4 bg-[#FAF9F5] border-2 border-[#d8cba9] p-6 rounded-2xl text-[#2b3705] font-bold text-base shadow-sm">
-            <div className="flex items-center gap-2">
-              <Mail className="w-5 h-5 text-[#9f7f29]" />
-              <a href="mailto:info@abbotsfordtablesociety.ca" className="hover:underline text-[#2b3705]">
-                info@abbotsfordtablesociety.ca
-              </a>
-            </div>
-            <span className="hidden sm:inline text-[#9f7f29]">•</span>
-            <div className="text-[#1f2410] text-sm">
-              www.abbotsfordtablesociety.ca
-            </div>
-          </div>
-
-          <div className="pt-6 flex flex-wrap items-center justify-center gap-4">
-            <button 
-              onClick={() => onNavigate && onNavigate('/how-it-works')}
-              className="btn btn-primary text-sm px-6 py-3"
-            >
-              Explore CarePortal <ArrowRight className="w-4 h-4 ml-1.5" />
-            </button>
-
-            <a 
-              href={givewiseUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-gold text-sm px-6 py-3 text-decoration-none shadow-md"
-            >
-              <Heart className="w-4 h-4 mr-1.5 fill-white" /> DONATE
-            </a>
-          </div>
-        </div>
-      </div>
 
     </div>
   );
