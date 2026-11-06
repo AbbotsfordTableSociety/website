@@ -1,0 +1,1784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abbotsford Table Society — Home Layout</title>
+  
+  <!-- Google Fonts: Montserrat + Bricolage Grotesque -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Familjen+Grotesk:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['"Montserrat"', '"Bricolage Grotesque"', 'sans-serif'],
+            serif: ['"Montserrat"', '"Bricolage Grotesque"', 'sans-serif'],
+            sans: ['"Montserrat"', 'sans-serif'],
+            body: ['"Montserrat"', 'sans-serif'],
+          },
+          colors: {
+            brandGreen: '#2b3705',
+            brandTan: '#d8cba9',
+            darkTan: '#9f7f29',
+            greige: '#e0dbd7',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif !important;
+      font-weight: 400;
+      background-color: #FAF9F5;
+      color: #1f2410;
+    }
+    p {
+      font-family: 'Montserrat', sans-serif !important;
+      font-weight: 400 !important;
+      letter-spacing: 0.005em;
+    }
+    h1, h2, h3, h4, h5, h6, .font-heading {
+      font-family: 'Montserrat', 'Bricolage Grotesque', sans-serif !important;
+      font-weight: 700 !important;
+      letter-spacing: -0.015em;
+    }
+    .font-serif {
+      font-family: 'Montserrat', 'Bricolage Grotesque', sans-serif !important;
+    }
+    .font-sans, .font-body {
+      font-family: 'Montserrat', sans-serif !important;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.4rem;
+      font-family: 'Familjen Grotesk', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      border-radius: 0.85rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .btn-donate, .btn-gold {
+      background-color: #9f7f29;
+      color: white;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border-radius: 0.85rem;
+      border: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(159, 127, 41, 0.25);
+    }
+    .btn-donate:hover, .btn-gold:hover {
+      background-color: #7e6420;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(159, 127, 41, 0.35);
+    }
+    .btn-primary {
+      background-color: #2b3705;
+      color: white;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border-radius: 0.85rem;
+      box-shadow: 0 2px 8px rgba(43, 55, 5, 0.25);
+      transition: all 0.2s ease;
+    }
+    .btn-primary:hover {
+      background-color: #1e2703;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(43, 55, 5, 0.35);
+    }
+    .tab-page {
+      display: none;
+    }
+    .tab-page.active {
+      display: block;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Sticky Site Header -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-white/85 backdrop-blur-md border-b-2 border-[#d8cba9] py-4 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo & Prominent Organization Name -->
+      <a href="javascript:showPage('home')" class="flex items-center gap-4 sm:gap-5 group text-decoration-none py-1">
+        <svg viewBox="0 0 300 300" class="h-20 sm:h-24 md:h-28 w-auto aspect-square flex-shrink-0 drop-shadow-sm" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <path id="topArchPath" d="M 44,150 A 106,106 0 1,1 256,150" fill="none"/>
+            <path id="bottomArchPath" d="M 52,150 A 98,98 0 0,0 248,150" fill="none"/>
+          </defs>
+          <circle cx="150" cy="150" r="145" fill="#FAF9F5" stroke="#2b3705" stroke-width="5" />
+          <circle cx="150" cy="150" r="137" fill="none" stroke="#e0dbd7" stroke-width="12" />
+          <circle cx="150" cy="150" r="143" fill="none" stroke="#9f7f29" stroke-width="2" />
+          <circle cx="150" cy="150" r="131" fill="none" stroke="#2b3705" stroke-width="2.5" />
+          <path d="M 19,150 A 131,131 0 0,0 281,150 Z" fill="#2b3705" />
+          <line x1="19" y1="150" x2="281" y2="150" stroke="#2b3705" stroke-width="3.5" />
+          <circle cx="150" cy="150" r="92" fill="none" stroke="#9f7f29" stroke-width="2" />
+          <text font-family="'Bricolage Grotesque', sans-serif" font-size="21" font-weight="800" fill="#9f7f29" letter-spacing="4">
+            <textPath href="#topArchPath" startOffset="50%" text-anchor="middle">ABBOTSFORD TABLE</textPath>
+          </text>
+          <text font-family="'Bricolage Grotesque', sans-serif" font-size="23" font-weight="800" fill="#FFFFFF" letter-spacing="6">
+            <textPath href="#bottomArchPath" startOffset="50%" text-anchor="middle">SOCIETY</textPath>
+          </text>
+          <circle cx="64" cy="172" r="5" fill="#FAF9F5" stroke="#2b3705" stroke-width="1" />
+          <circle cx="236" cy="172" r="5" fill="#FAF9F5" stroke="#2b3705" stroke-width="1" />
+          <g transform="translate(150, 110)">
+            <path d="M 0,40 Q 2,15 0,-34" fill="none" stroke="#2b3705" stroke-width="2.5" stroke-linecap="round" />
+            <path d="M 0,28 C -13,24 -15,10 -7,4 C -2,10 -2,22 0,28 Z" fill="#9f7f29" />
+            <path d="M 0,22 C 13,18 15,4 7,-2 C 2,4 2,16 0,22 Z" fill="#2b3705" />
+            <path d="M 0,12 C -15,8 -17,-4 -9,-10 C -4,-4 -2,6 0,12 Z" fill="#2b3705" />
+            <path d="M 0,5 C 15,1 17,-11 9,-17 C 4,-11 2,-1 0,5 Z" fill="#9f7f29" />
+            <path d="M 0,-8 C -11,-12 -13,-22 -7,-26 C -2,-22 0,-14 0,-8 Z" fill="#9f7f29" />
+            <path d="M 0,-12 C 11,-16 13,-26 7,-30 C 2,-26 0,-18 0,-12 Z" fill="#2b3705" />
+            <path d="M 0,-28 C -4,-36 0,-42 0,-42 C 0,-42 4,-36 0,-28 Z" fill="#1e2703" />
+          </g>
+          <g transform="translate(150, 150)">
+            <line x1="-38" y1="4" x2="-54" y2="36" stroke="#FFFFFF" stroke-width="5.5" stroke-linecap="round"/>
+            <line x1="-18" y1="4" x2="-26" y2="36" stroke="#FFFFFF" stroke-width="5.5" stroke-linecap="round"/>
+            <line x1="18" y1="4" x2="26" y2="36" stroke="#FFFFFF" stroke-width="5.5" stroke-linecap="round"/>
+            <line x1="38" y1="4" x2="54" y2="36" stroke="#FFFFFF" stroke-width="5.5" stroke-linecap="round"/>
+            <line x1="-38" y1="4" x2="-54" y2="36" stroke="#2b3705" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="-18" y1="4" x2="-26" y2="36" stroke="#2b3705" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="18" y1="4" x2="26" y2="36" stroke="#2b3705" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="38" y1="4" x2="54" y2="36" stroke="#2b3705" stroke-width="1.5" stroke-linecap="round"/>
+            <ellipse cx="0" cy="0" rx="60" ry="11" fill="#FFFFFF" stroke="#2b3705" stroke-width="3" />
+          </g>
+        </svg>
+
+        <div class="flex items-center">
+          <span class="font-heading font-extrabold text-lg sm:text-xl md:text-2xl lg:text-3xl tracking-tight uppercase text-[#2b3705] whitespace-nowrap">
+            ABBOTSFORD TABLE SOCIETY
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Primary Navigation -->
+      <nav class="hidden lg:flex items-center gap-6 xl:gap-8 font-sans font-bold text-sm tracking-wide text-[#1f2410]">
+        <a href="javascript:showPage('home')" class="text-[#2b3705] font-extrabold border-b-2 border-[#2b3705] pb-0.5">Home</a>
+        
+        <!-- About Dropdown: Main About, Our Story, Our Team, Governance -->
+        <div class="relative group py-1">
+          <a href="javascript:showPage('about')" class="flex items-center gap-1.5 hover:text-[#2b3705] transition">
+            <span>About</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-[#9f7f29]"></i>
+          </a>
+          <div class="absolute top-full left-0 mt-1 w-60 bg-white border-2 border-[#d8cba9] rounded-xl shadow-xl py-2 hidden group-hover:block z-50">
+            <a href="javascript:showPage('mission')" class="block px-4 py-2 text-xs font-bold text-[#1f2410] hover:bg-[#faf7ef]">Our Mission</a>
+            <a href="javascript:showPage('team')" class="block px-4 py-2 text-xs font-bold text-[#1f2410] hover:bg-[#faf7ef]">Our Team</a>
+            <a href="javascript:showPage('governance')" class="block px-4 py-2 text-xs font-bold text-[#1f2410] hover:bg-[#faf7ef]">Governance</a>
+          </div>
+        </div>
+
+        <!-- CarePortal -->
+        <a href="javascript:showPage('howitworks')" class="hover:text-[#2b3705] transition">CarePortal</a>
+
+        <!-- Resources Dropdown -->
+        <div class="relative group py-1">
+          <button class="flex items-center gap-1.5 hover:text-[#2b3705] transition">
+            <span>Resources</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-[#9f7f29]"></i>
+          </button>
+          <div class="absolute top-full left-0 mt-1 w-64 bg-white border-2 border-[#d8cba9] rounded-xl shadow-xl py-2.5 hidden group-hover:block z-50">
+            <a href="https://www.careimpact.ca/neighbour-up" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between px-4 py-2.5 text-xs font-bold text-[#1f2410] hover:bg-[#faf7ef] hover:text-[#2b3705] transition">
+              <span>Neighbour Up!</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5 text-[#9f7f29]"></i>
+            </a>
+            <a href="https://www.careimpact.ca/neighbourly" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between px-4 py-2.5 text-xs font-bold text-[#1f2410] hover:bg-[#faf7ef] hover:text-[#2b3705] transition">
+              <span>Neighbourly Podcast</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5 text-[#9f7f29]"></i>
+            </a>
+            <a href="#" class="flex items-center justify-between px-4 py-2 text-xs font-bold text-[#1f2410] hover:bg-[#faf7ef]">
+              <span>FAQs</span>
+              <span class="text-[10px] bg-[#e0dbd7] px-2 py-0.5 rounded font-semibold">Soon</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Contact -->
+        <a href="javascript:openContactModal()" class="hover:text-[#2b3705] transition">Contact</a>
+      </nav>
+
+      <!-- Prominent Donate Button Only -->
+      <div class="hidden md:flex items-center">
+        <a href="https://fund.givewise.ca/gift/charity/NQD00331" target="_blank" rel="noopener noreferrer" class="btn-donate px-6 py-2.5 text-xs xl:text-sm flex items-center gap-2 shadow-md hover:scale-105 transition">
+          <i data-lucide="heart" class="w-4 h-4 fill-white text-white"></i>
+          <span>DONATE</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Main Body Content Container -->
+  <main class="flex-1 pt-28 md:pt-36">
+
+    <!-- PAGE 0: HOME PAGE -->
+    <div id="page-home" class="tab-page active">
+      <div class="w-full">
+        
+        <!-- 1. Full-Width Edge-to-Edge Hero Banner -->
+        <section class="relative w-full min-h-[580px] md:min-h-[640px] flex items-center justify-center text-center overflow-hidden border-b border-[#d8cba9]">
+          <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=2000&q=80" alt="Gathering around Table" class="w-full h-full object-cover object-center" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#1f2410]/95 via-[#2b3705]/75 to-[#1f2410]/70"></div>
+          </div>
+
+          <div class="relative z-10 container max-w-5xl mx-auto px-6 py-24 text-white space-y-6">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FAF9F5]/90 text-[#2b3705] border border-[#d8cba9] text-xs font-extrabold uppercase tracking-widest shadow-md">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#9f7f29]"></i>
+              Abbotsford Table Society
+            </div>
+
+            <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-heading font-extrabold tracking-tight text-white leading-tight">
+              Equipping Churches. <br class="hidden sm:inline" />
+              <span class="text-[#d8cba9]">Transforming Abbotsford.</span>
+            </h1>
+
+            <p class="text-lg sm:text-2xl md:text-3xl text-slate-100 font-sans font-medium leading-relaxed max-w-3xl mx-auto">
+              Uniting churches, agencies, non-profits, and neighbours to respond to crisis with compassion, collaboration, and practical care.
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+              <a href="javascript:showPage('mission')" class="btn bg-[#FAF9F5] hover:bg-white text-[#2b3705] text-base px-8 py-4 rounded-xl shadow-xl font-extrabold border-2 border-[#d8cba9] flex items-center gap-2">
+                <span>OUR MISSION</span>
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+              </a>
+              <a href="https://fund.givewise.ca/gift/charity/NQD00331" target="_blank" rel="noopener noreferrer" class="btn-donate text-base px-8 py-4 rounded-xl text-decoration-none shadow-xl font-extrabold flex items-center gap-2">
+                <i data-lucide="heart" class="w-5 h-5 fill-white text-white"></i>
+                <span>DONATE</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Wide Banner Strip: Our Mission -->
+        <section class="w-full bg-[#FAF9F5] py-20 border-b border-[#d8cba9]">
+          <div class="container max-w-5xl mx-auto px-6">
+            <div class="text-center space-y-6">
+              <span class="inline-block text-xs font-extrabold uppercase tracking-widest text-[#9f7f29] bg-[#faf7ef] px-4 py-1.5 rounded-full border border-[#d8cba9]">Our Mission</span>
+              <h2 class="text-3xl sm:text-5xl font-heading font-extrabold text-[#2b3705] leading-tight max-w-4xl mx-auto">
+                Abbotsford Table Society exists to unite churches and believers across our city to meet real needs in practical, relational, and collaborative ways.
+              </h2>
+              <p class="text-slate-700 text-lg md:text-xl max-w-2xl mx-auto">So that our community experiences the love of Christ through the people of God.</p>
+              <div class="pt-2">
+                <a href="javascript:showPage('mission')" class="inline-flex items-center gap-2 text-base font-extrabold text-[#2b3705] border-b-2 border-[#2b3705] pb-1 hover:text-[#9f7f29] hover:border-[#9f7f29]">
+                  <span>OUR MISSION</span>
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Full-Width Edge-to-Edge Image Banner from Abbotsford Table Society -->
+        <section class="w-full relative overflow-hidden border-y border-[#d8cba9] bg-[#d8cba9]">
+          <div class="w-full h-[360px] sm:h-[480px] md:h-[580px] relative">
+            <img src="public/ats-hero-mother-child.png" onerror="this.src='ats-hero-mother-child.png'" alt="Abbotsford Table Society Family Care" class="w-full h-full object-cover object-center" />
+          </div>
+        </section>
+
+        <!-- 4. Full-Bleed Brand Tan Action Strip: Get Involved -->
+        <section class="w-full bg-[#d8cba9] py-16 text-center border-t border-[#9f7f29]/40">
+          <div class="container max-w-4xl mx-auto px-6 space-y-6">
+            <h3 class="text-3xl sm:text-5xl font-heading font-extrabold text-[#2b3705]">Get Involved with Abbotsford Table Society</h3>
+            <p class="text-base sm:text-lg text-[#2b3705]/90 font-medium max-w-2xl mx-auto">Join us in fostering unity and support in our community through collaborative efforts and local partnerships.</p>
+            <div class="pt-2 flex flex-wrap justify-center gap-4">
+              <a href="https://fund.givewise.ca/gift/charity/NQD00331" target="_blank" rel="noopener noreferrer" class="btn-donate text-sm md:text-base px-8 py-3.5 rounded-xl text-decoration-none shadow-lg font-extrabold flex items-center gap-2">
+                <i data-lucide="heart" class="w-5 h-5 fill-white text-white"></i>
+                <span>DONATE</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- PAGE 1: MAIN ABOUT OVERVIEW -->
+    <div id="page-about" class="tab-page">
+      <!-- Full-Width Edge-to-Edge About Hero Banner with Mountain Nature Photo -->
+      <div class="relative w-full min-h-[380px] md:min-h-[440px] flex items-center justify-center text-center overflow-hidden border-b border-[#d8cba9]">
+        <div class="absolute inset-0 z-0">
+          <img src="public/ats-about-nature-bridge.png" onerror="this.src='ats-about-nature-bridge.png'" alt="A Shared Dream for Abbotsford Nature Trail" class="w-full h-full object-cover object-center" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#1f2410]/95 via-[#2b3705]/80 to-[#1f2410]/75"></div>
+        </div>
+
+        <div class="relative z-10 container max-w-4xl mx-auto px-4 py-16 md:py-24 text-white space-y-4">
+          <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FAF9F5]/90 text-[#2b3705] border border-[#d8cba9] text-xs font-bold uppercase tracking-wider shadow-md">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#9f7f29]"></i>
+            About Abbotsford Table Society
+          </span>
+          <h1 class="text-4xl sm:text-6xl md:text-7xl font-heading font-extrabold text-white tracking-tight leading-tight">A Shared Dream for Abbotsford</h1>
+          <p class="text-slate-100 text-lg md:text-2xl max-w-3xl mx-auto leading-relaxed font-sans font-medium">
+            Abbotsford Table Society exists to unite churches and believers across our city to meet real needs in practical, relational, and collaborative ways — so that our community experiences the love of Christ through the people of God.
+          </p>
+        </div>
+      </div>
+
+      <!-- Main Content Section -->
+      <section class="py-12 md:py-16 bg-[#FAF9F5] overflow-hidden">
+        
+        <!-- 1. Top Section: Left-Justified Text, Right Image -->
+        <div class="container max-w-6xl mx-auto px-4 md:px-6 mb-12">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <!-- Left Column: Text (Left Justified) -->
+            <div class="lg:col-span-7 bg-white border-2 border-[#d8cba9] rounded-3xl p-8 md:p-10 shadow-sm space-y-6 text-left">
+              <div class="text-slate-800 text-base md:text-lg leading-relaxed space-y-3">
+                <p>
+                  In <strong class="text-[#2b3705]">June 2025</strong>, we launched the <strong>Abbotsford Table Society</strong> to bring this vision to life — fostering holistic care and relational wholeness through connected partnerships. Together, we’re uniting our community in hope and transformation.
+                </p>
+              </div>
+
+              <div class="p-6 bg-[#FAF9F5] border-l-4 border-[#9f7f29] rounded-r-2xl space-y-3">
+                <p class="text-lg md:text-xl text-[#2b3705] font-sans leading-relaxed italic">
+                  "For years, God has been stirring in us a vision — one that goes beyond any single church or agency. It’s a dream for a city where the vulnerable are seen, where gaps in care are understood, and where hope and healing flow through the love of Jesus."
+                </p>
+              </div>
+            </div>
+
+            <!-- Right Column: Clean Transparent Circular Logo Emblem -->
+            <div class="lg:col-span-5 h-full flex items-center justify-center p-4">
+              <img src="public/ats-logo-seal.png" onerror="this.src='ats-logo-seal.png'" alt="Abbotsford Table Society Official Seal" class="w-full max-w-[320px] md:max-w-[360px] h-auto object-contain drop-shadow-lg hover:scale-105 transition-transform" />
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 2. Full-Bleed Connected Wide Objectives Block -->
+        <div class="w-full mb-12">
+          <div class="w-full grid grid-cols-1 lg:grid-cols-12 items-stretch border-y-2 border-[#d8cba9] overflow-hidden shadow-sm">
+            
+            <!-- Left Column: Image (Connected to Content Block) -->
+            <div class="lg:col-span-5 h-[340px] sm:h-[420px] lg:h-auto w-full relative overflow-hidden bg-white border-r-2 border-[#d8cba9]">
+              <img src="public/ats-worship-hands.png" onerror="this.src='ats-worship-hands.png'" alt="Uniting Our Community in Hope and Action" class="w-full h-full object-cover object-center" />
+            </div>
+
+            <!-- Right Column: White Content Block (Connected to Image) -->
+            <div class="lg:col-span-7 bg-white p-8 md:p-12 lg:p-16 flex flex-col justify-center space-y-6 text-right">
+              <div class="space-y-2">
+                <span class="text-sm font-extrabold uppercase tracking-widest text-[#9f7f29] block">
+                  Objectives:
+                </span>
+                <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold text-[#2b3705] leading-tight">Uniting Our Community in Hope and Action</h3>
+              </div>
+
+              <p class="text-slate-800 text-base md:text-lg lg:text-xl leading-relaxed font-sans">
+                The Abbotsford Table Society exists to bring our community together — churches, non-profits, government agencies, and local leaders — to support our most vulnerable citizens through strategic partnerships and collaborative solutions. We believe lasting change happens when we <strong>connect</strong>, <strong>collaborate</strong>, and <strong>catalyze</strong>.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Centered Read More About Our Mission Button -->
+        <div class="text-center pt-4">
+          <a href="javascript:showPage('mission')" class="btn-gold px-8 py-4 rounded-xl text-xs sm:text-sm font-extrabold inline-flex items-center gap-2 shadow-lg hover:scale-105 transition text-decoration-none">
+            <span>READ MORE ABOUT OUR MISSION</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+
+      </section>
+
+      <!-- Full-Bleed Tan Gold Quote Banner -->
+      <section class="w-full bg-[#d8cba9] py-14 border-y border-[#9f7f29]/30 text-center shadow-inner">
+        <div class="container max-w-5xl mx-auto px-6 space-y-3">
+          <h3 class="text-xl sm:text-2xl md:text-3xl font-heading font-extrabold text-[#2b3705] leading-snug max-w-4xl mx-auto">
+            When we show up together — listening, serving, building—transformation becomes possible.
+          </h3>
+          <p class="text-lg sm:text-xl md:text-2xl font-sans italic text-[#2b3705] font-semibold">
+            Let’s reimagine what’s possible for Abbotsford.
+          </p>
+          <div class="w-48 h-0.5 bg-[#2b3705]/40 mx-auto mt-4 rounded-full"></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- PAGE 2B: OUR MISSION -->
+    <div id="page-mission" class="tab-page">
+      
+      <!-- Full-Width Hero Banner with Nature Trail Image -->
+      <div class="relative w-full min-h-[360px] md:min-h-[420px] flex items-center justify-center text-center overflow-hidden border-b border-[#d8cba9]">
+        <div class="absolute inset-0 z-0">
+          <img src="public/ats-about-nature-bridge.png" onerror="this.src='ats-about-nature-bridge.png'" alt="Our Mission & Three Pillars" class="w-full h-full object-cover object-center" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#1f2410]/95 via-[#2b3705]/85 to-[#1f2410]/75"></div>
+        </div>
+
+        <div class="relative z-10 container max-w-4xl mx-auto px-4 py-16 md:py-20 text-white space-y-4">
+          <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FAF9F5]/90 text-[#2b3705] border border-[#d8cba9] text-xs font-bold uppercase tracking-wider shadow-md backdrop-blur-sm">
+            <i data-lucide="target" class="w-3.5 h-3.5 text-[#9f7f29]"></i>
+            About / Our Mission
+          </span>
+
+          <h1 class="text-4xl sm:text-5xl md:text-6xl font-heading font-extrabold text-white tracking-tight leading-tight">
+            Our Mission
+          </h1>
+
+          <p class="text-slate-100 text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed font-sans font-medium drop-shadow">
+            Abbotsford Table Society exists to unite churches and believers across our city to meet real needs in practical, relational, and collaborative ways — so that our community experiences the love of Christ through the people of God.
+          </p>
+        </div>
+      </div>
+
+      <!-- Our Three Pillars Section Header -->
+      <div class="py-12 md:py-16 bg-[#FAF9F5] text-center">
+        <div class="max-w-3xl mx-auto px-4 space-y-3">
+          <span class="text-xs font-bold uppercase tracking-widest text-[#9f7f29] bg-[#faf7ef] px-3.5 py-1 rounded-full border border-[#d8cba9]">
+            Strategic Framework
+          </span>
+          <h2 class="text-3xl md:text-5xl font-heading font-extrabold text-[#2b3705] tracking-tight">
+            Our Three Pillars
+          </h2>
+        </div>
+      </div>
+
+      <!-- 100% Full-Width Edge-to-Edge Three Pillars Section -->
+      <div class="w-full">
+        
+        <!-- Pillar 1: Connection (Image Left, Tan Content Right) -->
+        <div class="w-full bg-[#FAF9F5] border-t-2 border-[#2b3705]">
+          <div class="w-full grid grid-cols-1 lg:grid-cols-12 items-stretch">
+            
+            <!-- Left Column: Image (Bleeds Flush to Left Edge) -->
+            <div class="lg:col-span-6 h-[340px] sm:h-[420px] lg:h-auto w-full relative overflow-hidden bg-slate-900">
+              <img src="public/ats-pillar-connection.png" onerror="this.src='ats-pillar-connection.png'" alt="Connection - Puzzle Pieces" class="w-full h-full object-cover object-center" />
+            </div>
+
+            <!-- Right Column: Tan Content Box (Bleeds Flush to Right Edge) -->
+            <div class="lg:col-span-6 bg-[#d8cba9] p-8 md:p-14 lg:p-20 flex flex-col justify-center space-y-6 text-left">
+              <h3 class="text-3xl sm:text-4xl md:text-5xl font-heading font-extrabold text-[#2b3705]">
+                Connection
+              </h3>
+              
+              <p class="text-slate-800 text-base md:text-lg font-sans italic leading-relaxed">
+                We’re building a network of trusted relationships that bridges sectors and strengthens unity:
+              </p>
+
+              <ul class="space-y-4 list-disc pl-6 text-slate-900 text-sm md:text-base font-sans">
+                <li class="pl-1">
+                  <strong class="text-[#2b3705] font-bold">Building Trusted Partnerships</strong>
+                  <div class="font-sans text-slate-800 text-sm mt-0.5">
+                    Fostering strong, mission-aligned relationships across churches, agencies, and community leaders.
+                  </div>
+                </li>
+                <li class="pl-1">
+                  <strong class="text-[#2b3705] font-bold">Mapping Community Assets</strong>
+                  <div class="font-sans text-slate-800 text-sm mt-0.5">
+                    Identifying services, strengths, and gaps within partner organizations to better understand the landscape.
+                  </div>
+                </li>
+                <li class="pl-1">
+                  <strong class="text-[#2b3705] font-bold">Assessing Needs and Gaps</strong>
+                  <div class="font-sans text-slate-800 text-sm mt-0.5">
+                    Conducting regular assessments to inspire meaningful, data-informed responses.
+                  </div>
+                </li>
+                <li class="pl-1">
+                  <strong class="text-[#2b3705] font-bold">Bridging Across Sectors</strong>
+                  <div class="font-sans text-slate-800 text-sm mt-0.5">
+                    Creating safe, neutral spaces for diverse groups to connect, align, and act together.
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Pillar 2: Collaboration (Tan Content Left, Image Right) -->
+        <div class="w-full bg-[#FAF9F5] border-t-2 border-[#2b3705]">
+          <div class="w-full grid grid-cols-1 lg:grid-cols-12 items-stretch">
+            
+            <!-- Left Column: Tan Content Box -->
+            <div class="lg:col-span-6 bg-[#d8cba9] p-8 md:p-14 lg:p-20 flex flex-col justify-center space-y-6 text-left order-2 lg:order-1">
+              <h3 class="text-3xl sm:text-4xl md:text-5xl font-heading font-extrabold text-[#2b3705]">
+                Collaboration
+              </h3>
+              
+              <p class="text-slate-800 text-base md:text-lg font-sans italic leading-relaxed">
+                Working together, we tackle community needs with shared purpose. Key strategies include:
+              </p>
+
+              <ul class="space-y-4 list-disc pl-6 text-slate-900 text-sm md:text-base font-sans">
+                <li class="pl-1">
+                  <strong class="text-[#2b3705] font-bold">Launching Care Portal</strong>
+                  <div class="font-sans text-slate-800 text-sm mt-0.5">
+                    Leading the rollout of CarePortal—an online platform that connects real-time needs with local responders.
+                  </div>
+                </li>
+                <li class="pl-1">
+                  <strong class="text-[#2b3705] font-bold">Mobilizing Local Responders</strong>
+                  <div class="font-sans text-slate-800 text-sm mt-0.5">
+                    Activating churches and volunteers to meet urgent, vetted needs in our community.
+                  </div>
+                </li>
+                <li class="pl-1">
+                  <strong class="text-[#2b3705] font-bold">Hosting Collaborative Gatherings</strong>
+                  <div class="font-sans text-slate-800 text-sm mt-0.5">
+                    Organizing roundtables, workshops, and initiatives that align vision and action across sectors.
+                  </div>
+                </li>
+                <li class="pl-1">
+                  <strong class="text-[#2b3705] font-bold">Tracking Progress and Impact</strong>
+                  <div class="font-sans text-slate-800 text-sm mt-0.5">
+                    Measuring engagement, evaluating outcomes, and reporting back to ensure accountability and learning.
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Right Column: Image -->
+            <div class="lg:col-span-6 h-[340px] sm:h-[420px] lg:h-auto w-full relative overflow-hidden bg-slate-900 order-1 lg:order-2">
+              <img src="public/ats-pillar-collaboration.png" onerror="this.src='ats-pillar-collaboration.png'" alt="Collaboration - Handshake" class="w-full h-full object-cover object-center" />
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Pillar 3: Catalyzing Change (Image Left, Tan Content Right) -->
+        <div class="w-full bg-[#FAF9F5] border-y-2 border-[#2b3705]">
+          <div class="w-full grid grid-cols-1 lg:grid-cols-12 items-stretch">
+            
+            <!-- Left Column: Image -->
+            <div class="lg:col-span-6 h-[340px] sm:h-[420px] lg:h-auto w-full relative overflow-hidden bg-slate-900">
+              <img src="public/ats-pillar-catalyzing.png" onerror="this.src='ats-pillar-catalyzing.png'" alt="Catalyzing Change - Water Drop Ripples" class="w-full h-full object-cover object-center" />
+            </div>
+
+            <!-- Right Column: Tan Content Box -->
+            <div class="lg:col-span-6 bg-[#d8cba9] p-8 md:p-14 lg:p-20 flex flex-col justify-center space-y-6 text-left">
+              <h3 class="text-3xl sm:text-4xl md:text-5xl font-heading font-extrabold text-[#2b3705]">
+                Catalyzing Change
+              </h3>
+              
+              <p class="text-slate-800 text-base md:text-lg font-sans italic leading-relaxed">
+                Supporting long-term solutions through innovation and leadership:
+              </p>
+
+              <ul class="space-y-4 list-disc pl-6 text-slate-900 text-sm md:text-base font-sans">
+                <li class="pl-1">
+                  <span class="text-slate-900 font-medium">Encouraging new, community-led ministries</span>
+                </li>
+                <li class="pl-1">
+                  <span class="text-slate-900 font-medium">Using an asset-based approach</span>
+                </li>
+                <li class="pl-1">
+                  <span class="text-slate-900 font-medium">Piloting & scaling what works</span>
+                </li>
+                <li class="pl-1">
+                  <span class="text-slate-900 font-medium">Developing local leaders for long-term transformation</span>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- Contact Box -->
+      <div id="contact-info" class="bg-[#FFFFFF] border-t border-[#d8cba9] py-16">
+        <div class="container max-w-3xl mx-auto text-center space-y-6 px-4">
+          <span class="text-xs font-bold uppercase tracking-widest text-[#9f7f29] bg-[#faf7ef] px-3.5 py-1 rounded-full border border-[#d8cba9]">
+            Get In Touch
+          </span>
+          <h3 class="text-3xl md:text-4xl font-heading font-extrabold text-[#2b3705]">
+            Contact Us
+          </h3>
+          <p class="text-slate-700 text-base md:text-lg leading-relaxed max-w-xl mx-auto">
+            Have a question or want to get involved with Abbotsford Table Society? Send us a message anytime.
+          </p>
+
+          <div class="pt-2">
+            <button onclick="openContactModal()" class="inline-flex items-center justify-center gap-2.5 bg-[#FAF9F5] hover:bg-[#f3eedf] border-2 border-[#d8cba9] hover:border-[#9f7f29] px-7 py-4 rounded-2xl text-[#2b3705] font-bold text-base shadow-sm transition-all cursor-pointer">
+              <i data-lucide="mail" class="w-5 h-5 text-[#9f7f29]"></i>
+              Open Contact Form
+            </button>
+          </div>
+
+          <div class="pt-6 flex flex-wrap items-center justify-center gap-4">
+            <a href="javascript:showPage('howitworks')" class="btn btn-primary text-sm px-6 py-3 text-decoration-none">
+              Explore CarePortal <i data-lucide="arrow-right" class="w-4 h-4 ml-1.5 inline"></i>
+            </a>
+
+            <a href="https://fund.givewise.ca/gift/charity/NQD00331" target="_blank" rel="noopener noreferrer" class="btn btn-gold text-sm px-6 py-3 text-decoration-none shadow-md">
+              <i data-lucide="heart" class="w-4 h-4 mr-1.5 inline fill-white"></i> DONATE
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PAGE: CAREPORTAL / HOW IT WORKS -->
+    <div id="page-howitworks" class="tab-page">
+      
+      <!-- HERO BANNER WITH ADAPTED HEADLINE -->
+      <div class="relative w-full bg-[#FAF9F5] border-b border-[#d8cba9] py-16 md:py-20">
+        <div class="container max-w-5xl mx-auto px-4 md:px-6 text-center space-y-6">
+          
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#faf7ef] text-[#2b3705] border border-[#d8cba9] text-xs font-bold uppercase tracking-wider shadow-sm">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#9f7f29]"></i>
+            CarePortal Framework in Abbotsford
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-extrabold text-[#2b3705] tracking-tight leading-tight">
+            Loving your neighbour suddenly gets super practical.
+          </h1>
+
+          <p class="text-xl sm:text-2xl md:text-3xl font-heading font-extrabold text-[#9f7f29] max-w-3xl mx-auto">
+            Meet real needs in real time.
+          </p>
+
+          <p class="text-slate-700 text-base md:text-lg max-w-3xl mx-auto leading-relaxed font-sans font-medium">
+            CarePortal connects local caseworkers and partner agencies directly to church care teams across Abbotsford — turning empathy into practical, relational action.
+          </p>
+
+          <!-- Primary Actions / CTAs Bar -->
+          <div class="pt-4 flex flex-wrap items-center justify-center gap-4">
+            <a href="https://fund.givewise.ca/gift/charity/NQD00331" target="_blank" rel="noopener noreferrer" class="btn btn-gold text-sm px-7 py-3.5 text-decoration-none shadow-md hover:scale-105 transition">
+              <i data-lucide="heart" class="w-4 h-4 mr-1.5 inline fill-white"></i> DONATE
+            </a>
+
+            <a href="javascript:openContactModal()" class="px-7 py-3.5 rounded-xl text-sm font-bold bg-[#FAF9F5] text-[#2b3705] border-2 border-[#d8cba9] hover:bg-[#d8cba9]/30 transition text-decoration-none">
+              Contact Us
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 2. SECTION 1: HOW CAREPORTAL WORKS (ILLUSTRATED 4-STEP GRAPHIC WORKFLOW) -->
+      <section class="py-16 md:py-24 bg-[#e0dbd7]/45 border-b border-[#d8cba9]">
+        <div class="container max-w-6xl mx-auto px-4 md:px-6 space-y-12">
+          
+          <!-- Title with Hand-Drawn Style Underline -->
+          <div class="text-center max-w-3xl mx-auto">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-heading font-extrabold tracking-wide text-[#2b3705] uppercase inline-block relative pb-3">
+              HOW CAREPORTAL WORKS
+              <svg class="w-full h-3.5 mt-1 overflow-visible" viewBox="0 0 500 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 10 C 140 5, 360 4, 496 8" stroke="#9f7f29" stroke-width="5.5" stroke-linecap="round" />
+              </svg>
+            </h2>
+          </div>
+
+          <!-- 4-Step Illustrated Visual Flow with Curved Arrows -->
+          <div class="relative pt-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-6 items-start relative">
+
+              <!-- Step 1: Uncovering Needs -->
+              <div class="flex flex-col items-center text-center relative px-2">
+                <!-- Curved Arrow 1 -> 2 (Desktop) -->
+                <div class="hidden lg:block absolute -top-4 -right-10 w-20 h-12 z-10 pointer-events-none">
+                  <svg viewBox="0 0 90 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                    <path d="M6 34 C 24 8, 54 8, 76 28" stroke="#2b3705" stroke-width="6" stroke-linecap="round" fill="none" />
+                    <path d="M66 12 L 80 30 L 56 32" stroke="#2b3705" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                  </svg>
+                </div>
+
+                <!-- Illustration 1: Person next to house with alert pin -->
+                <div class="h-40 flex items-end justify-center mb-4">
+                  <svg viewBox="0 0 180 150" class="w-44 h-36 overflow-visible" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="95" cy="138" rx="68" ry="6" fill="#d8cba9" opacity="0.65" />
+                    <g transform="translate(105, 8)">
+                      <path d="M12 0 C5.4 0 0 5.4 0 12 C0 20 12 31 12 31 C12 31 24 20 24 12 C24 5.4 18.6 0 12 0 Z" fill="#c85a32" />
+                      <rect x="10.5" y="5" width="3" height="10" rx="1.5" fill="#FFFFFF" />
+                      <circle cx="12" cy="18.5" r="1.8" fill="#FFFFFF" />
+                    </g>
+                    <polygon points="82,66 117,38 152,66" fill="#6f9ea6" />
+                    <polyline points="79,67 117,37 155,67" stroke="#4f7b83" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                    <rect x="86" y="66" width="62" height="70" fill="#89b6be" />
+                    <rect x="95" y="76" width="14" height="16" rx="1.5" fill="#4f7b83" />
+                    <rect x="125" y="76" width="14" height="16" rx="1.5" fill="#4f7b83" />
+                    <rect x="95" y="102" width="14" height="16" rx="1.5" fill="#4f7b83" />
+                    <rect x="125" y="102" width="14" height="34" rx="1.5" fill="#4f7b83" />
+                    <rect x="155" y="105" width="5" height="31" rx="2" fill="#9f7f29" />
+                    <circle cx="158" cy="96" r="16" fill="#6f9ea6" />
+                    <circle cx="149" cy="103" r="12" fill="#7daab2" />
+                    <circle cx="165" cy="104" r="11" fill="#5e8c94" />
+                    <circle cx="52" cy="48" r="10" fill="#d99b78" />
+                    <path d="M42 46 C42 36 60 36 60 48 C60 56 56 62 46 62 C42 58 42 52 42 46 Z" fill="#5a3825" />
+                    <path d="M42 62 C42 59 62 59 62 64 L64 92 L40 92 Z" fill="#7c5295" />
+                    <path d="M42 92 L62 92 L60 126 L53 126 L51 102 L49 126 L42 126 Z" fill="#2c3e50" />
+                    <rect x="40" y="126" width="12" height="7" rx="3.5" fill="#c85a32" />
+                    <rect x="52" y="126" width="13" height="7" rx="3.5" fill="#c85a32" />
+                  </svg>
+                </div>
+
+                <span class="text-xl md:text-2xl font-sans font-normal text-[#2b3705]">Step 1</span>
+                <h3 class="text-2xl md:text-3xl font-heading font-extrabold text-[#2b3705] leading-tight mt-0.5 mb-3">
+                  Uncovering<br />Needs
+                </h3>
+                <p class="text-[#1f2410] text-base leading-snug max-w-[230px] font-sans">
+                  A child or family in need requires help from a caseworker
+                </p>
+              </div>
+
+              <!-- Step 2: Submitting Needs -->
+              <div class="flex flex-col items-center text-center relative px-2">
+                <!-- Curved Arrow 2 -> 3 (Desktop) -->
+                <div class="hidden lg:block absolute -top-4 -right-10 w-20 h-12 z-10 pointer-events-none">
+                  <svg viewBox="0 0 90 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                    <path d="M6 34 C 24 8, 54 8, 76 28" stroke="#2b3705" stroke-width="6" stroke-linecap="round" fill="none" />
+                    <path d="M66 12 L 80 30 L 56 32" stroke="#2b3705" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                  </svg>
+                </div>
+
+                <!-- Illustration 2: Caseworker at computer desk -->
+                <div class="h-40 flex items-end justify-center mb-4">
+                  <svg viewBox="0 0 180 150" class="w-44 h-36 overflow-visible" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="95" cy="138" rx="68" ry="6" fill="#d8cba9" opacity="0.65" />
+                    <rect x="78" y="86" width="72" height="5" rx="2" fill="#34495e" />
+                    <line x1="88" y1="91" x2="82" y2="136" stroke="#2c3e50" stroke-width="4" stroke-linecap="round" />
+                    <line x1="140" y1="91" x2="146" y2="136" stroke="#2c3e50" stroke-width="4" stroke-linecap="round" />
+                    <rect x="98" y="42" width="46" height="34" rx="3" fill="#e8eef1" stroke="#cbd5e1" stroke-width="2" />
+                    <rect x="117" y="76" width="8" height="10" fill="#94a3b8" />
+                    <rect x="108" y="83" width="26" height="3" rx="1.5" fill="#64748b" />
+                    <path d="M42 66 L54 66 L54 98 L76 98 L76 105 L42 105 Z" fill="#e0dbd7" />
+                    <line x1="58" y1="105" x2="58" y2="132" stroke="#334155" stroke-width="4" />
+                    <line x1="44" y1="132" x2="72" y2="132" stroke="#334155" stroke-width="4" stroke-linecap="round" />
+                    <circle cx="44" cy="135" r="3" fill="#1e293b" />
+                    <circle cx="58" cy="135" r="3" fill="#1e293b" />
+                    <circle cx="72" cy="135" r="3" fill="#1e293b" />
+                    <circle cx="65" cy="42" r="10" fill="#d99b78" />
+                    <path d="M54 42 C54 30 73 30 73 42 C73 50 66 56 55 56 Z" fill="#6e472b" />
+                    <path d="M54 56 C54 54 74 54 76 62 L88 78 L80 83 L68 72 L68 92 L52 92 Z" fill="#4f9a94" />
+                    <path d="M54 92 L76 92 L92 122 L82 124 L68 99 L54 99 Z" fill="#2b5784" />
+                    <rect x="82" y="123" width="13" height="6" rx="3" fill="#334155" />
+                  </svg>
+                </div>
+
+                <span class="text-xl md:text-2xl font-sans font-normal text-[#2b3705]">Step 2</span>
+                <h3 class="text-2xl md:text-3xl font-heading font-extrabold text-[#2b3705] leading-tight mt-0.5 mb-3">
+                  Submitting<br />Needs
+                </h3>
+                <p class="text-[#1f2410] text-base leading-snug max-w-[230px] font-sans">
+                  The Caseworker types their vetted needs into CarePortal
+                </p>
+              </div>
+
+              <!-- Step 3: Sharing Needs -->
+              <div class="flex flex-col items-center text-center relative px-2">
+                <!-- Curved Arrow 3 -> 4 (Desktop) -->
+                <div class="hidden lg:block absolute -top-4 -right-10 w-20 h-12 z-10 pointer-events-none">
+                  <svg viewBox="0 0 90 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                    <path d="M6 34 C 24 8, 54 8, 76 28" stroke="#2b3705" stroke-width="6" stroke-linecap="round" fill="none" />
+                    <path d="M66 12 L 80 30 L 56 32" stroke="#2b3705" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                  </svg>
+                </div>
+
+                <!-- Illustration 3: Community Buildings & Neighborhood -->
+                <div class="h-40 flex items-end justify-center mb-4">
+                  <svg viewBox="0 0 210 150" class="w-52 h-36 overflow-visible" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="105" cy="138" rx="90" ry="6" fill="#d8cba9" opacity="0.65" />
+                    <polygon points="28,96 48,78 68,96" fill="#9f7f29" />
+                    <rect x="32" y="96" width="32" height="40" fill="#d8cba9" />
+                    <rect x="40" y="104" width="7" height="9" fill="#2b3705" />
+                    <rect x="51" y="104" width="7" height="9" fill="#2b3705" />
+                    <rect x="44" y="119" width="8" height="17" fill="#4f7b83" />
+                    <polygon points="66,68 98,42 130,68" fill="#5e8c94" />
+                    <rect x="70" y="68" width="56" height="68" fill="#89b6be" />
+                    <rect x="78" y="76" width="10" height="12" fill="#4f7b83" />
+                    <rect x="93" y="76" width="10" height="12" fill="#4f7b83" />
+                    <rect x="108" y="76" width="10" height="12" fill="#4f7b83" />
+                    <rect x="78" y="95" width="10" height="12" fill="#4f7b83" />
+                    <rect x="93" y="95" width="10" height="12" fill="#4f7b83" />
+                    <rect x="108" y="95" width="10" height="12" fill="#4f7b83" />
+                    <rect x="92" y="115" width="12" height="21" fill="#4f7b83" />
+                    <rect x="128" y="56" width="42" height="80" fill="#7daab2" />
+                    <rect x="125" y="53" width="48" height="5" fill="#5e8c94" />
+                    <rect x="135" y="66" width="10" height="12" fill="#4f7b83" />
+                    <rect x="152" y="66" width="10" height="12" fill="#4f7b83" />
+                    <rect x="135" y="86" width="10" height="12" fill="#4f7b83" />
+                    <rect x="152" y="86" width="10" height="12" fill="#4f7b83" />
+                    <polygon points="154,98 174,84 194,98" fill="#5e8c94" />
+                    <rect x="156" y="98" width="36" height="38" fill="#d8cba9" />
+                    <rect x="166" y="112" width="14" height="24" fill="#9f7f29" />
+                    <circle cx="20" cy="112" r="11" fill="#6f9ea6" />
+                    <rect x="18.5" y="120" width="3" height="16" fill="#4f7b83" />
+                    <circle cx="68" cy="110" r="12" fill="#2b3705" />
+                    <rect x="66.5" y="118" width="3" height="18" fill="#9f7f29" />
+                    <circle cx="80" cy="121" r="3" fill="#d99b78" />
+                    <rect x="78" y="124" width="4" height="12" rx="1.5" fill="#c85a32" />
+                    <circle cx="184" cy="120" r="3" fill="#d99b78" />
+                    <rect x="182" y="123" width="4" height="13" rx="1.5" fill="#9f7f29" />
+                  </svg>
+                </div>
+
+                <span class="text-xl md:text-2xl font-sans font-normal text-[#2b3705]">Step 3</span>
+                <h3 class="text-2xl md:text-3xl font-heading font-extrabold text-[#2b3705] leading-tight mt-0.5 mb-3">
+                  Sharing<br />Needs
+                </h3>
+                <p class="text-[#1f2410] text-base leading-snug max-w-[230px] font-sans">
+                  CarePortal alerts nearby churches and community members to the family's needs
+                </p>
+              </div>
+
+              <!-- Step 4: Meeting Needs -->
+              <div class="flex flex-col items-center text-center relative px-2">
+                <!-- Illustration 4: Responders delivering care package to family at house -->
+                <div class="h-40 flex items-end justify-center mb-4">
+                  <svg viewBox="0 0 190 150" class="w-48 h-36 overflow-visible" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="100" cy="138" rx="76" ry="6" fill="#d8cba9" opacity="0.65" />
+                    <polygon points="92,66 127,38 162,66" fill="#6f9ea6" />
+                    <polyline points="89,67 127,37 165,67" stroke="#4f7b83" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                    <rect x="96" y="66" width="62" height="70" fill="#89b6be" />
+                    <rect x="105" y="76" width="14" height="16" rx="1.5" fill="#4f7b83" />
+                    <rect x="135" y="76" width="14" height="16" rx="1.5" fill="#4f7b83" />
+                    <rect x="105" y="102" width="14" height="16" rx="1.5" fill="#4f7b83" />
+                    <rect x="135" y="102" width="14" height="34" rx="1.5" fill="#4f7b83" />
+                    <rect x="165" y="105" width="5" height="31" rx="2" fill="#9f7f29" />
+                    <circle cx="168" cy="96" r="16" fill="#6f9ea6" />
+                    <circle cx="159" cy="103" r="12" fill="#7daab2" />
+                    <circle cx="38" cy="46" r="9.5" fill="#d99b78" />
+                    <path d="M29 44 C29 34 46 34 46 46 C46 54 42 60 33 60 Z" fill="#5a3825" />
+                    <path d="M29 60 C29 57 47 57 47 62 L49 90 L27 90 Z" fill="#7c5295" />
+                    <path d="M29 90 L47 90 L45 126 L39 126 L38 102 L36 126 L29 126 Z" fill="#2c3e50" />
+                    <rect x="27" y="126" width="11" height="7" rx="3.5" fill="#c85a32" />
+                    <rect x="39" y="126" width="12" height="7" rx="3.5" fill="#c85a32" />
+                    <circle cx="64" cy="49" r="9" fill="#8d5524" />
+                    <path d="M56 46 C56 38 72 38 72 47 Z" fill="#1e293b" />
+                    <path d="M54 60 C54 57 72 57 74 63 L76 90 L52 90 Z" fill="#d96b43" />
+                    <path d="M54 90 L72 90 L70 126 L64 126 L62 103 L60 126 L54 126 Z" fill="#4b6584" />
+                    <rect x="53" y="126" width="10" height="7" rx="3" fill="#475569" />
+                    <rect x="64" y="126" width="11" height="7" rx="3" fill="#475569" />
+                    <rect x="70" y="60" width="18" height="16" rx="2" fill="#9f7f29" />
+                    <rect x="69" y="58" width="20" height="4" rx="1" fill="#2b3705" />
+                  </svg>
+                </div>
+
+                <span class="text-xl md:text-2xl font-sans font-normal text-[#2b3705]">Step 4</span>
+                <h3 class="text-2xl md:text-3xl font-heading font-extrabold text-[#2b3705] leading-tight mt-0.5 mb-3">
+                  Meeting<br />Needs
+                </h3>
+                <p class="text-[#1f2410] text-base leading-snug max-w-[230px] font-sans">
+                  Church and Community members partner to ensure the child and family is helped.
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 3. SECTION 2: OPEN REQUESTS (LIVE CAREPORTAL RSS FEED WITH ABBOTSFORD -> CANADA -> SAMPLE FALLBACK) -->
+      <section class="py-16 md:py-20 bg-[#FAF9F5] border-b border-[#d8cba9]">
+        <div class="container max-w-5xl mx-auto px-4 md:px-6 space-y-8">
+          
+          <div class="text-center max-w-3xl mx-auto space-y-3">
+            <div class="inline-flex flex-wrap items-center justify-center gap-2">
+              <span class="text-xs font-bold uppercase tracking-widest text-[#9f7f29] bg-[#faf7ef] px-3.5 py-1 rounded-full border border-[#d8cba9]">
+                Real-Time Requests
+              </span>
+              <span id="cp-feed-badge" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#2b3705] text-[#d8cba9] text-xs font-bold border border-[#2b3705]">
+                Live CarePortal Sync • Winnipeg, MB (Canada)
+              </span>
+              <button onclick="loadPreviewCarePortalFeed()" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white border border-[#d8cba9] text-xs font-bold text-[#2b3705] hover:bg-[#faf7ef] transition">
+                <i data-lucide="refresh-cw" class="w-3 h-3"></i>
+                <span>Sync Feed</span>
+              </button>
+            </div>
+            <h2 id="cp-feed-heading" class="text-3xl md:text-5xl font-heading font-extrabold text-[#2b3705] tracking-tight">
+              Open CarePortal Requests
+            </h2>
+            <p id="cp-feed-subtext" class="text-slate-700 text-base md:text-lg">
+              Showing live CarePortal requests in Canada (Winnipeg, MB) while Abbotsford's first local requests are being onboarded.
+            </p>
+          </div>
+
+          <!-- Dynamic Requests Container -->
+          <div id="cp-requests-container" class="space-y-6">
+            <!-- Live CarePortal Request #332755 from Winnipeg, MB -->
+            <div class="bg-white border-2 border-[#d8cba9] rounded-3xl p-6 sm:p-8 md:p-10 shadow-md space-y-6">
+              <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-[#d8cba9]">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="px-3 py-1 rounded-full bg-[#2b3705] text-[#d8cba9] text-xs font-extrabold uppercase tracking-wider">
+                    Help Strengthen a Bio Family
+                  </span>
+                  <span class="px-3 py-1 rounded-full bg-[#FAF9F5] text-[#9f7f29] border border-[#d8cba9] text-xs font-bold flex items-center gap-1">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5 text-[#9f7f29]"></i>
+                    Family Support Centre
+                  </span>
+                </div>
+                <div class="flex items-center gap-3 text-xs font-bold text-slate-600">
+                  <span class="flex items-center gap-1 text-[#9f7f29]">
+                    <i data-lucide="clock" class="w-3.5 h-3.5"></i> Normal: Within 7-10 days
+                  </span>
+                  <span>•</span>
+                  <span class="flex items-center gap-1 text-[#2b3705]">
+                    <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> Winnipeg, Manitoba (R3B 1T4)
+                  </span>
+                </div>
+              </div>
+
+              <div class="space-y-4 text-left">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <h3 class="text-2xl md:text-3xl font-heading font-extrabold text-[#2b3705]">
+                    Travel System (Car Seat &amp; Stroller)
+                  </h3>
+                  <span class="text-xl md:text-2xl font-heading font-extrabold text-[#9f7f29]">
+                    Est. Value: $300.00
+                  </span>
+                </div>
+
+                <p class="text-slate-700 text-base md:text-lg leading-relaxed font-sans">
+                  I have a client who is expecting her third child in November. She has been in the country for 3 years and is married. Her husband lost his job and they are living on his employment insurance. They have not been able to gather funds for a car seat and a stroller. Providing a car seat/stroller combo would give them a good start and peace of mind knowing that they can get the baby home.
+                </p>
+              </div>
+
+              <div class="pt-6 border-t border-[#d8cba9] flex flex-wrap items-center justify-between gap-4">
+                <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                  ID: #332755 • Vetted by partner agencies
+                </span>
+
+                <div class="flex flex-wrap items-center gap-3">
+                  <a href="https://system.careportal.org/requests/332755" target="_blank" rel="noopener noreferrer" class="btn btn-primary text-xs sm:text-sm px-6 py-3 rounded-xl font-bold text-decoration-none">
+                    RESPOND TO THIS NEED
+                  </a>
+
+                  <a href="https://fund.givewise.ca/gift/charity/NQD00331" target="_blank" rel="noopener noreferrer" class="btn btn-gold text-xs sm:text-sm px-6 py-3 text-decoration-none shadow-sm">
+                    <i data-lucide="heart" class="w-4 h-4 fill-white mr-1 inline"></i> GIVE (GIVEWISE)
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-xs text-center text-slate-500 italic">
+            * Live requests are synced automatically from CarePortal as submitted by licensed caseworkers.
+          </p>
+
+        </div>
+      </section>
+
+      <!-- 4. SECTION 3: PARTNER CHURCHES AND AGENCIES -->
+      <section class="py-16 md:py-20 bg-white border-b border-[#d8cba9]">
+        <div class="container max-w-5xl mx-auto px-4 md:px-6 space-y-12">
+          
+          <div class="text-center max-w-3xl mx-auto space-y-3">
+            <span class="text-xs font-bold uppercase tracking-widest text-[#9f7f29] bg-[#faf7ef] px-3.5 py-1 rounded-full border border-[#d8cba9]">
+              Collaborative Network
+            </span>
+            <h2 class="text-3xl md:text-5xl font-heading font-extrabold text-[#2b3705] tracking-tight">
+              Partner Churches & Agencies
+            </h2>
+            <p class="text-slate-700 text-base md:text-lg">
+              Bringing together child welfare leaders and local church care teams under one shared table.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- Agencies Card -->
+            <div class="bg-[#FAF9F5] border-2 border-[#d8cba9] rounded-3xl p-8 space-y-6 shadow-sm flex flex-col justify-between">
+              <div class="space-y-4">
+                <div class="w-12 h-12 rounded-2xl bg-[#9f7f29] text-white flex items-center justify-center font-bold shadow-md">
+                  <i data-lucide="building-2" class="w-6 h-6 text-white"></i>
+                </div>
+                <h3 class="text-2xl font-heading font-extrabold text-[#2b3705]">
+                  For Partner Agencies
+                </h3>
+                <p class="text-slate-700 text-sm md:text-base leading-relaxed">
+                  Verified caseworkers and community partner agencies submit family needs to mobilize immediate neighborhood support.
+                </p>
+                <ul class="space-y-2.5 text-xs md:text-sm font-semibold text-slate-800 pt-2 border-t border-[#d8cba9]">
+                  <li class="flex items-center gap-2">
+                    <i data-lucide="check-circle-2" class="w-4 h-4 text-[#9f7f29]"></i>
+                    <span>Child & Family Support Partner Agencies</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <i data-lucide="check-circle-2" class="w-4 h-4 text-[#9f7f29]"></i>
+                    <span>Community Outreach & Family Resource Agencies</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <i data-lucide="check-circle-2" class="w-4 h-4 text-[#9f7f29]"></i>
+                    <span>Community Family & Housing Support Navigators</span>
+                  </li>
+                </ul>
+              </div>
+
+              <button onclick="openContactModal()" class="btn btn-gold w-full py-3.5 text-xs sm:text-sm font-extrabold justify-center text-center">
+                Submit a Family Need
+              </button>
+            </div>
+
+            <!-- Churches Card -->
+            <div class="bg-[#FAF9F5] border-2 border-[#d8cba9] rounded-3xl p-8 space-y-6 shadow-sm flex flex-col justify-between">
+              <div class="space-y-4">
+                <div class="w-12 h-12 rounded-2xl bg-[#2b3705] text-[#d8cba9] flex items-center justify-center font-bold shadow-md">
+                  <i data-lucide="church" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-2xl font-heading font-extrabold text-[#2b3705]">
+                  For Local Church Care Teams
+                </h3>
+                <p class="text-slate-700 text-sm md:text-base leading-relaxed">
+                  Churches across North, South, East, and West Abbotsford enroll their care teams to receive local request alerts and serve families in their immediate neighborhood.
+                </p>
+                <ul class="space-y-2.5 text-xs md:text-sm font-semibold text-slate-800 pt-2 border-t border-[#d8cba9]">
+                  <li class="flex items-center gap-2">
+                    <i data-lucide="check-circle-2" class="w-4 h-4 text-[#2b3705]"></i>
+                    <span>Zero-cost implementation for local congregations</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <i data-lucide="check-circle-2" class="w-4 h-4 text-[#2b3705]"></i>
+                    <span>Geographic neighborhood matching in Abbotsford</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <i data-lucide="check-circle-2" class="w-4 h-4 text-[#2b3705]"></i>
+                    <span>Dignified relational care beyond one-time handouts</span>
+                  </li>
+                </ul>
+              </div>
+
+              <a href="https://careportal.zendesk.com/hc/en-us/articles/360037975193--How-Does-My-Church-Join-CarePortal" target="_blank" rel="noopener noreferrer" class="btn btn-primary w-full py-3.5 text-xs sm:text-sm font-extrabold justify-center text-center text-decoration-none">
+                Enroll Your Church Team
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 5. SECTION 4: IMPACT STORIES -->
+      <section class="py-16 md:py-20 bg-[#FAF9F5] border-b border-[#d8cba9]">
+        <div class="container max-w-5xl mx-auto px-4 md:px-6 space-y-12">
+          
+          <div class="text-center max-w-3xl mx-auto space-y-3">
+            <span class="text-xs font-bold uppercase tracking-widest text-[#9f7f29] bg-[#faf7ef] px-3.5 py-1 rounded-full border border-[#d8cba9]">
+              Real Transformation
+            </span>
+            <h2 class="text-3xl md:text-5xl font-heading font-extrabold text-[#2b3705] tracking-tight">
+              Stories of Real-Time Care
+            </h2>
+            <p class="text-slate-700 text-base md:text-lg">
+              See how simple, practical acts of care restore hope and strengthen families across Abbotsford.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <div class="bg-white border-2 border-[#d8cba9] rounded-3xl p-8 space-y-5 shadow-sm">
+              <div class="w-10 h-10 rounded-full bg-[#FAF9F5] border border-[#d8cba9] flex items-center justify-center">
+                <i data-lucide="quote" class="w-5 h-5 text-[#9f7f29]"></i>
+              </div>
+              <p class="text-slate-800 text-base font-sans italic leading-relaxed">
+                "When a crib and toddler bed were delivered to our apartment within 24 hours of moving in, it wasn't just furniture — it meant my daughters could stay in my care safely. The team who brought it prayed with me and brought groceries."
+              </p>
+              <div class="pt-4 border-t border-[#d8cba9]">
+                <strong class="text-[#2b3705] font-bold block text-sm">Sarah</strong>
+                <span class="text-xs text-slate-500">Abbotsford Mother • Family Preservation Response</span>
+              </div>
+            </div>
+
+            <div class="bg-white border-2 border-[#d8cba9] rounded-3xl p-8 space-y-5 shadow-sm">
+              <div class="w-10 h-10 rounded-full bg-[#FAF9F5] border border-[#d8cba9] flex items-center justify-center">
+                <i data-lucide="quote" class="w-5 h-5 text-[#9f7f29]"></i>
+              </div>
+              <p class="text-slate-800 text-base font-sans italic leading-relaxed">
+                "CarePortal allows our church care team to respond to exact, verified needs identified by partner agencies. We get to meet neighbors in our own block whom we never would have known otherwise, building real relationships."
+              </p>
+              <div class="pt-4 border-t border-[#d8cba9]">
+                <strong class="text-[#2b3705] font-bold block text-sm">David M.</strong>
+                <span class="text-xs text-slate-500">Local Church Care Team Leader in Abbotsford</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 6. PRIMARY ACTIONS & CONTACT SECTION -->
+      <div id="contact-info" class="bg-white border-t border-[#d8cba9] py-16">
+        <div class="container max-w-3xl mx-auto text-center space-y-6 px-4">
+          <span class="text-xs font-bold uppercase tracking-widest text-[#9f7f29] bg-[#faf7ef] px-3.5 py-1 rounded-full border border-[#d8cba9]">
+            Get In Touch
+          </span>
+          <h3 class="text-3xl md:text-4xl font-heading font-extrabold text-[#2b3705]">
+            Contact Us & Get Involved
+          </h3>
+          <p class="text-slate-700 text-base md:text-lg leading-relaxed max-w-xl mx-auto">
+            Have questions regarding CarePortal, church enrollment, or community partnerships? Send us a message anytime.
+          </p>
+
+          <div class="pt-2">
+            <button onclick="openContactModal()" class="inline-flex items-center justify-center gap-2.5 bg-[#FAF9F5] hover:bg-[#f3eedf] border-2 border-[#d8cba9] hover:border-[#9f7f29] px-7 py-4 rounded-2xl text-[#2b3705] font-bold text-base shadow-sm transition-all cursor-pointer">
+              <i data-lucide="mail" class="w-5 h-5 text-[#9f7f29]"></i>
+              Open Contact Form
+            </button>
+          </div>
+
+          <div class="pt-6 flex flex-wrap items-center justify-center gap-4">
+            <a href="https://fund.givewise.ca/gift/charity/NQD00331" target="_blank" rel="noopener noreferrer" class="btn btn-gold text-sm px-7 py-3.5 text-decoration-none shadow-md">
+              <i data-lucide="heart" class="w-4 h-4 mr-1.5 inline fill-white"></i> DONATE
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PAGE 3: OUR TEAM -->
+    <div id="page-team" class="tab-page">
+      <div class="bg-[#FAF9F5] py-14 border-b border-[#d8cba9]">
+        <div class="max-w-4xl mx-auto text-center space-y-4 px-6">
+          <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#faf7ef] text-[#2b3705] border border-[#d8cba9] text-xs font-bold uppercase tracking-wider">
+            About / Our Team
+          </span>
+          <h1 class="text-4xl md:text-5xl font-heading font-extrabold text-[#2b3705]">Our Team & Leadership</h1>
+          <p class="text-slate-700 text-base md:text-lg max-w-2xl mx-auto">Led by a dedicated volunteer Board of Directors, church champions, and community responders.</p>
+        </div>
+      </div>
+
+      <section class="py-16 bg-[#FAF9F5]">
+        <div class="container max-w-5xl mx-auto px-4 md:px-6 space-y-12">
+          
+          <div class="bg-white border-2 border-[#d8cba9] rounded-3xl p-8 md:p-10 shadow-sm space-y-6">
+            <div class="space-y-1">
+              <h2 class="text-2xl font-heading font-extrabold text-[#2b3705]">Volunteer Board of Directors</h2>
+              <p class="text-xs sm:text-sm text-slate-600">Click on any board member to read their short bio.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              <!-- Warren Janzen -->
+              <button type="button" onclick="openBioModal('warren')" class="p-6 bg-[#FAF9F5] border border-[#d8cba9] rounded-2xl flex flex-col items-center text-center space-y-3 shadow-sm hover:border-[#2b3705] hover:shadow-md transition group cursor-pointer w-full">
+                <img src="public/team-warren-janzen.jpg" onerror="this.src='/team-warren-janzen.jpg'" alt="Warren Janzen" class="w-24 h-24 rounded-full object-cover object-top border-2 border-[#9f7f29] shadow-md bg-white group-hover:scale-105 transition-transform" />
+                <div>
+                  <h4 class="font-heading font-bold text-lg text-[#2b3705]">Warren Janzen</h4>
+                  <span class="text-[11px] font-bold text-[#9f7f29] uppercase tracking-wider">Board Member</span>
+                </div>
+                <p class="text-xs text-slate-600 border-t border-[#d8cba9] pt-2.5 w-full">Strategic Leadership & Stewardship</p>
+                <span class="text-[11px] font-bold text-[#2b3705] group-hover:text-[#9f7f29] underline">Read Short Bio →</span>
+              </button>
+
+              <!-- Tammy Kyte -->
+              <button type="button" onclick="openBioModal('tammy')" class="p-6 bg-[#FAF9F5] border border-[#d8cba9] rounded-2xl flex flex-col items-center text-center space-y-3 shadow-sm hover:border-[#2b3705] hover:shadow-md transition group cursor-pointer w-full">
+                <img src="public/team-tammy-kyte.png" onerror="this.src='/team-tammy-kyte.png'" alt="Tammy Kyte" class="w-24 h-24 rounded-full object-cover object-top border-2 border-[#9f7f29] shadow-md bg-white group-hover:scale-105 transition-transform" />
+                <div>
+                  <h4 class="font-heading font-bold text-lg text-[#2b3705]">Tammy Kyte</h4>
+                  <span class="text-[11px] font-bold text-[#9f7f29] uppercase tracking-wider">Board Member</span>
+                </div>
+                <p class="text-xs text-slate-600 border-t border-[#d8cba9] pt-2.5 w-full">Community Partnerships</p>
+                <span class="text-[11px] font-bold text-[#2b3705] group-hover:text-[#9f7f29] underline">Read Short Bio →</span>
+              </button>
+
+              <!-- Sandy Driediger -->
+              <button type="button" onclick="openBioModal('sandy')" class="p-6 bg-[#FAF9F5] border border-[#d8cba9] rounded-2xl flex flex-col items-center text-center space-y-3 shadow-sm hover:border-[#2b3705] hover:shadow-md transition group cursor-pointer w-full">
+                <img src="public/team-sandy-driediger.png" onerror="this.src='/team-sandy-driediger.png'" alt="Sandy Driediger" class="w-24 h-24 rounded-full object-cover object-top border-2 border-[#9f7f29] shadow-md bg-white group-hover:scale-105 transition-transform" />
+                <div>
+                  <h4 class="font-heading font-bold text-lg text-[#2b3705]">Sandy Driediger</h4>
+                  <span class="text-[11px] font-bold text-[#9f7f29] uppercase tracking-wider">Board Member</span>
+                </div>
+                <p class="text-xs text-slate-600 border-t border-[#d8cba9] pt-2.5 w-full">Governance & Ethics</p>
+                <span class="text-[11px] font-bold text-[#2b3705] group-hover:text-[#9f7f29] underline">Read Short Bio →</span>
+              </button>
+
+              <!-- Cam Broad -->
+              <button type="button" onclick="openBioModal('cam')" class="p-6 bg-[#FAF9F5] border border-[#d8cba9] rounded-2xl flex flex-col items-center text-center space-y-3 shadow-sm hover:border-[#2b3705] hover:shadow-md transition group cursor-pointer w-full">
+                <img src="public/team-cam-broad.webp" onerror="this.src='/team-cam-broad.webp'" alt="Cam Broad" class="w-24 h-24 rounded-full object-cover object-top border-2 border-[#9f7f29] shadow-md bg-white group-hover:scale-105 transition-transform" />
+                <div>
+                  <h4 class="font-heading font-bold text-lg text-[#2b3705]">Cam Broad</h4>
+                  <span class="text-[11px] font-bold text-[#9f7f29] uppercase tracking-wider">Board Member</span>
+                </div>
+                <p class="text-xs text-slate-600 border-t border-[#d8cba9] pt-2.5 w-full">Church Relations</p>
+                <span class="text-[11px] font-bold text-[#2b3705] group-hover:text-[#9f7f29] underline">Read Short Bio →</span>
+              </button>
+
+              <!-- Wes Friesen (Placeholder) -->
+              <button type="button" onclick="openBioModal('wes')" class="p-6 bg-[#FAF9F5] border border-[#d8cba9] rounded-2xl flex flex-col items-center text-center space-y-3 shadow-sm hover:border-[#2b3705] hover:shadow-md transition group cursor-pointer w-full">
+                <div class="w-24 h-24 rounded-full bg-gradient-to-br from-[#2b3705] to-[#1f2410] text-[#d8cba9] border-2 border-[#d8cba9] flex flex-col items-center justify-center shadow-md group-hover:scale-105 transition-transform">
+                  <i data-lucide="user" class="w-9 h-9 text-[#d8cba9]/80 mb-0.5"></i>
+                  <span class="text-[11px] font-heading font-extrabold tracking-widest uppercase">WF</span>
+                </div>
+                <div>
+                  <h4 class="font-heading font-bold text-lg text-[#2b3705]">Wes Friesen</h4>
+                  <span class="text-[11px] font-bold text-[#9f7f29] uppercase tracking-wider">Board Member</span>
+                </div>
+                <p class="text-xs text-slate-600 border-t border-[#d8cba9] pt-2.5 w-full">Operations & Finance</p>
+                <span class="text-[11px] font-bold text-[#2b3705] group-hover:text-[#9f7f29] underline">Read Short Bio →</span>
+              </button>
+
+              <!-- Michelle Stuart (Placeholder) -->
+              <button type="button" onclick="openBioModal('michelle')" class="p-6 bg-[#FAF9F5] border border-[#d8cba9] rounded-2xl flex flex-col items-center text-center space-y-3 shadow-sm hover:border-[#2b3705] hover:shadow-md transition group cursor-pointer w-full">
+                <div class="w-24 h-24 rounded-full bg-gradient-to-br from-[#2b3705] to-[#1f2410] text-[#d8cba9] border-2 border-[#d8cba9] flex flex-col items-center justify-center shadow-md group-hover:scale-105 transition-transform">
+                  <i data-lucide="user" class="w-9 h-9 text-[#d8cba9]/80 mb-0.5"></i>
+                  <span class="text-[11px] font-heading font-extrabold tracking-widest uppercase">MS</span>
+                </div>
+                <div>
+                  <h4 class="font-heading font-bold text-lg text-[#2b3705]">Michelle Stuart</h4>
+                  <span class="text-[11px] font-bold text-[#9f7f29] uppercase tracking-wider">Board Member</span>
+                </div>
+                <p class="text-xs text-slate-600 border-t border-[#d8cba9] pt-2.5 w-full">Community Engagement</p>
+                <span class="text-[11px] font-bold text-[#2b3705] group-hover:text-[#9f7f29] underline">Read Short Bio →</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+
+    <!-- PAGE 4: GOVERNANCE -->
+    <div id="page-governance" class="tab-page">
+      <div class="bg-[#FAF9F5] py-14 border-b border-[#d8cba9]">
+        <div class="max-w-4xl mx-auto text-center space-y-4 px-6">
+          <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#faf7ef] text-[#2b3705] border border-[#d8cba9] text-xs font-bold uppercase tracking-wider">
+            <i data-lucide="shield-check" class="w-3.5 h-3.5 text-[#9f7f29]"></i>
+            About / Governance & Accountability
+          </span>
+          <h1 class="text-4xl md:text-5xl font-heading font-extrabold text-[#2b3705]">Governance & Accountability</h1>
+          <p class="text-slate-700 text-base md:text-lg max-w-3xl mx-auto font-sans">
+            Abbotsford Table Society is committed to transparency, accountability, and responsible stewardship. We believe churches, donors, volunteers, and community partners should have clear access to information about our organization, governance, and the responsible management of the resources entrusted to us.
+          </p>
+        </div>
+      </div>
+
+      <section class="py-16 bg-[#FAF9F5]">
+        <div class="container max-w-5xl mx-auto px-4 md:px-6 space-y-12">
+          
+          <!-- Legal & Organizational Information -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white border-2 border-[#d8cba9] rounded-2xl p-6 space-y-3 shadow-sm">
+              <div class="w-10 h-10 rounded-xl bg-[#faf7ef] text-[#2b3705] flex items-center justify-center font-bold border border-[#d8cba9] mb-2">
+                <i data-lucide="file-text" class="w-5 h-5 text-[#2b3705]"></i>
+              </div>
+              <h4 class="text-lg font-heading font-bold text-slate-900">BC Incorporated Society</h4>
+              <p class="text-xs text-slate-600 leading-relaxed font-sans">
+                Officially incorporated non-profit society under the British Columbia Societies Act.
+              </p>
+              <div class="pt-2 border-t border-[#d8cba9] text-xs font-bold text-slate-800 space-y-1">
+                <div>BC Society Incorporation #: <span class="font-mono text-[#2b3705]">S0082710</span></div>
+              </div>
+            </div>
+
+            <div class="bg-white border-2 border-[#d8cba9] rounded-2xl p-6 space-y-3 shadow-sm">
+              <div class="w-10 h-10 rounded-xl bg-[#faf7ef] text-[#9f7f29] flex items-center justify-center font-bold border border-[#d8cba9] mb-2">
+                <i data-lucide="award" class="w-5 h-5 text-[#9f7f29]"></i>
+              </div>
+              <h4 class="text-lg font-heading font-bold text-slate-900">Business Registration</h4>
+              <p class="text-xs text-slate-600 leading-relaxed font-sans">
+                Registered corporate entity for official Canadian operations and community oversight.
+              </p>
+              <div class="pt-2 border-t border-[#d8cba9] text-xs font-bold text-slate-800 space-y-1">
+                <div>Business Number:</div>
+                <div class="font-mono text-[#9f7f29]">76018 8169 BC0001</div>
+              </div>
+            </div>
+
+            <div class="bg-white border-2 border-[#d8cba9] rounded-2xl p-6 space-y-3 shadow-sm">
+              <div class="w-10 h-10 rounded-xl bg-[#faf7ef] text-[#2b3705] flex items-center justify-center font-bold border border-[#d8cba9] mb-2">
+                <i data-lucide="heart" class="w-5 h-5 text-[#2b3705]"></i>
+              </div>
+              <h4 class="text-lg font-heading font-bold text-slate-900">Charitable Giving</h4>
+              <p class="text-xs text-slate-600 leading-relaxed font-sans">
+                Abbotsford Table Society partners with GiveWise to process charitable donations. Eligible donations receive official tax receipts issued through GiveWise.
+              </p>
+              <div class="pt-2 border-t border-[#d8cba9]">
+                <a href="https://fund.givewise.ca/gift/charity/NQD00331" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-[#9f7f29] hover:underline flex items-center gap-1">
+                  <span>GiveWise Charity Profile</span>
+                  <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Annual Reports Card -->
+          <div class="bg-white border-2 border-[#d8cba9] rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-xl bg-[#faf7ef] text-[#2b3705] flex items-center justify-center flex-shrink-0 border border-[#d8cba9]">
+                <i data-lucide="file-spreadsheet" class="w-6 h-6 text-[#2b3705]"></i>
+              </div>
+              <div>
+                <h4 class="text-lg font-heading font-bold text-slate-900">Annual Reports & Stewardship</h4>
+                <p class="text-xs text-slate-600 max-w-xl font-sans">
+                  Abbotsford Table Society publishes annual reports to share our activities, partnerships, organizational progress, and stewardship with our community. Our Inaugural Report will be published here soon.
+                </p>
+              </div>
+            </div>
+
+            <a href="https://fund.givewise.ca/gift/charity/NQD00331" target="_blank" rel="noopener noreferrer" class="btn btn-gold text-xs px-6 py-3 whitespace-nowrap text-decoration-none shadow">
+              DONATE
+            </a>
+          </div>
+
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <!-- Dark Green Site Footer (#2b3705) -->
+  <footer id="contact" class="w-full bg-[#2b3705] text-white pt-10 pb-8 border-t border-[#d8cba9]">
+    <div class="container max-w-6xl mx-auto px-6 space-y-6">
+      
+      <!-- Top Section: Inquiries & Information -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start pb-6 border-b border-[#FAF9F5]/20">
+        
+        <div class="space-y-3">
+          <div class="flex items-center gap-3">
+            <span class="font-heading font-extrabold text-xl sm:text-2xl tracking-tight uppercase text-white">
+              ABBOTSFORD TABLE SOCIETY
+            </span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-200 leading-relaxed max-w-md font-sans">
+            Abbotsford Table Society exists to unite churches and believers across our city to meet real needs in practical, relational, and collaborative ways — so that our community experiences the love of Christ through the people of God.
+          </p>
+          <div>
+            <a href="https://fund.givewise.ca/gift/charity/NQD00331" target="_blank" rel="noopener noreferrer" class="btn-donate px-5 py-2 rounded-lg text-xs font-extrabold inline-flex items-center gap-2">
+              <i data-lucide="heart" class="w-4 h-4 fill-white text-white"></i>
+              <span>DONATE</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="space-y-3 text-left md:text-right">
+          <h4 class="text-xs sm:text-sm font-heading font-extrabold uppercase tracking-wider text-[#d8cba9]">
+            Send all inquiries to:
+          </h4>
+          <div class="space-y-1 text-sm md:text-base font-sans">
+            <div>
+              <a href="mailto:info@abbotsfordtablesociety.ca" class="text-white hover:text-[#d8cba9] underline font-bold transition">
+                info@abbotsfordtablesociety.ca
+              </a>
+            </div>
+            <div>
+              <a href="https://www.abbotsfordtablesociety.ca" target="_blank" rel="noopener noreferrer" class="text-slate-200 hover:text-[#d8cba9] underline font-medium transition text-xs md:text-sm">
+                www.abbotsfordtablesociety.ca
+              </a>
+            </div>
+          </div>
+          <div class="pt-1 text-[11px] text-slate-300 space-y-0.5">
+            <div>BC Society Reg #: <span class="font-mono text-[#d8cba9]">S0082710</span></div>
+            <div>Business Number: <span class="font-mono text-[#d8cba9]">76018 8169 BC0001</span></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Copyright Strip -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-300 font-sans">
+        <p>© 2026 by Abbotsford Table Society. All Rights Reserved.</p>
+        <div class="flex items-center gap-4 text-[11px] text-slate-400">
+          <span>Incorporated in British Columbia</span>
+          <span>•</span>
+          <span>GiveWise Donation Partner</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Contact Inquiry Modal -->
+  <div id="contact-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4" onclick="closeContactModal()">
+    <div class="bg-[#FAF9F5] border-2 border-[#d8cba9] rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl" onclick="event.stopPropagation()">
+      <!-- Header -->
+      <div class="bg-[#2b3705] text-white p-6 flex items-center justify-between border-b-2 border-[#d8cba9]">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-[#9f7f29] flex items-center justify-center text-white font-bold shadow">
+            <i data-lucide="mail" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-lg font-heading font-bold text-white">Contact Abbotsford Table Society</h3>
+            <p class="text-xs text-[#d8cba9]">General Inquiry • info@abbotsfordtablesociety.ca</p>
+          </div>
+        </div>
+        <button onclick="closeContactModal()" class="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-[#1f2410] transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Success State -->
+      <div id="contact-form-success" class="hidden p-8 text-center space-y-4">
+        <div class="w-16 h-16 rounded-full bg-emerald-100 text-[#2b3705] flex items-center justify-center mx-auto border border-[#d8cba9]">
+          <i data-lucide="check-circle-2" class="w-10 h-10 text-[#2b3705]"></i>
+        </div>
+        <h4 class="text-2xl font-heading font-bold text-[#2b3705]">Thank You for Reaching Out!</h4>
+        <p class="text-slate-700 text-sm max-w-md mx-auto leading-relaxed">
+          Your inquiry has been prepared for <a href="mailto:info@abbotsfordtablesociety.ca" class="font-bold text-[#9f7f29] underline">info@abbotsfordtablesociety.ca</a>. A member of our team will get back to you soon.
+        </p>
+        <div class="pt-4">
+          <button onclick="closeContactModal()" class="btn btn-primary px-6 py-2.5 rounded-xl font-bold text-sm">
+            Done & Close
+          </button>
+        </div>
+      </div>
+
+      <!-- Inquiry Form -->
+      <form id="contact-inquiry-form" name="contact-inquiry" method="POST" data-netlify="true" onsubmit="submitContactForm(event)" class="p-6 space-y-4 text-slate-800">
+        <input type="hidden" name="form-name" value="contact-inquiry" />
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="text-xs font-bold text-[#2b3705] mb-1 block">Your Name *</label>
+            <input type="text" id="cf-name" name="name" required placeholder="Jane Doe" class="w-full p-2.5 rounded-xl border border-[#d8cba9] bg-white text-sm focus:ring-2 focus:ring-[#2b3705] outline-none" />
+          </div>
+          <div>
+            <label class="text-xs font-bold text-[#2b3705] mb-1 block">Email Address *</label>
+            <input type="email" id="cf-email" name="email" required placeholder="you@example.com" class="w-full p-2.5 rounded-xl border border-[#d8cba9] bg-white text-sm focus:ring-2 focus:ring-[#2b3705] outline-none" />
+          </div>
+        </div>
+
+        <div>
+          <label class="text-xs font-bold text-[#2b3705] mb-1 block">Phone Number (Optional)</label>
+          <input type="tel" id="cf-phone" name="phone" placeholder="(604) 555-0123" class="w-full p-2.5 rounded-xl border border-[#d8cba9] bg-white text-sm focus:ring-2 focus:ring-[#2b3705] outline-none" />
+        </div>
+
+        <div>
+          <label class="text-xs font-bold text-[#2b3705] mb-1 block">Message / Inquiry *</label>
+          <textarea id="cf-message" name="message" rows="4" required placeholder="How can we help or connect with you?" class="w-full p-2.5 rounded-xl border border-[#d8cba9] bg-white text-sm focus:ring-2 focus:ring-[#2b3705] outline-none"></textarea>
+        </div>
+
+        <div class="pt-3 flex items-center justify-between gap-3 border-t border-[#d8cba9]">
+          <span class="text-[11px] text-slate-600">
+            Sent directly to <strong>info@abbotsfordtablesociety.ca</strong>
+          </span>
+          <div class="flex items-center gap-2">
+            <button type="button" onclick="closeContactModal()" class="px-4 py-2 rounded-xl border border-[#d8cba9] bg-white text-xs font-bold text-slate-700 hover:bg-slate-50">
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary px-6 py-2.5 rounded-xl font-bold text-xs inline-flex items-center gap-1.5">
+              <i data-lucide="send" class="w-3.5 h-3.5"></i>
+              <span>Send Inquiry</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Board Member Short Bio Modal -->
+  <div id="bio-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4" onclick="closeBioModal()">
+    <div class="bg-[#FAF9F5] border-2 border-[#d8cba9] rounded-3xl max-w-md w-full overflow-hidden shadow-2xl" onclick="event.stopPropagation()">
+      <div class="bg-[#2b3705] text-white p-6 flex items-center justify-between border-b-2 border-[#d8cba9]">
+        <div>
+          <span id="bio-modal-role" class="text-[11px] font-bold uppercase tracking-widest text-[#d8cba9] block">Board Member</span>
+          <h3 id="bio-modal-name" class="text-xl font-heading font-extrabold text-white mt-0.5">Board Member</h3>
+        </div>
+        <button onclick="closeBioModal()" class="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-[#1f2410] transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="p-6 sm:p-8 space-y-5 text-center">
+        <div id="bio-modal-avatar"></div>
+        <p id="bio-modal-text" class="text-slate-800 text-sm sm:text-base leading-relaxed font-sans text-left bg-white p-5 rounded-2xl border border-[#d8cba9] shadow-sm"></p>
+        <div class="pt-1 flex justify-end">
+          <button onclick="closeBioModal()" class="btn btn-primary text-xs px-5 py-2.5 rounded-xl font-bold">
+            Close Bio
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    const BOARD_BIOS = {
+      warren: {
+        name: "Warren Janzen",
+        role: "Board Member • Strategic Leadership & Stewardship",
+        image: "public/team-warren-janzen.jpg",
+        initials: "WJ",
+        bio: "Warren brings over three decades of global non-profit and ministry leadership experience, including serving as International Director of SEND International and founding WJJ Consulting. Holding a Master’s in Christian Leadership from Trinity Western University, he is passionate about equipping leaders and uniting local churches for community transformation in Abbotsford."
+      },
+      tammy: {
+        name: "Tammy Kyte",
+        role: "Board Member • Community Partnerships",
+        image: "public/team-tammy-kyte.png",
+        initials: "TK",
+        bio: "Tammy is the Co-Founder and Executive Director of GiveWise Foundation Canada, based in Abbotsford. After 15 years running a local home-building business with her husband Dan, she transitioned full-time into tech-driven philanthropy and collaborative community initiatives that empower generosity and care for vulnerable neighbours."
+      },
+      sandy: {
+        name: "Sandy Driediger",
+        role: "Board Member • Governance & Ethics",
+        image: "public/team-sandy-driediger.png",
+        initials: "SD",
+        bio: "Deeply rooted in the Abbotsford agricultural and faith community, Sandy brings a heart for faithful stewardship, family restoration, and collaborative service. Alongside her family’s multi-generation farming heritage in Abbotsford, she is dedicated to building bridges of practical care across local churches and agencies."
+      },
+      cam: {
+        name: "Cam Broad",
+        role: "Board Member • Church Relations",
+        image: "public/team-cam-broad.webp",
+        initials: "CB",
+        bio: "Cam is a Registered Clinical Counsellor (RCC), life coach with Doing Family Right in Abbotsford, and credentialed minister with over 20 years of pastoral ministry experience. He is deeply committed to family wholeness, relational healing, and mobilizing local congregations to walk alongside families in crisis."
+      },
+      wes: {
+        name: "Wes Friesen",
+        role: "Board Member • Operations & Finance",
+        image: null,
+        initials: "WF",
+        bio: "Wes is a longtime Abbotsford business and community leader with deep experience in organizational operations, financial stewardship, and servant leadership. He helps guide the operational foundation and accountability of the Abbotsford Table Society as it serves children and families across our city."
+      },
+      michelle: {
+        name: "Michelle Stuart",
+        role: "Board Member • Community Engagement",
+        image: null,
+        initials: "MS",
+        bio: "Michelle is passionate about grass-roots community engagement, advocating for vulnerable families, and connecting compassionate neighbours with practical opportunities to serve. As a Board Member, she helps foster collaborative relationships between local volunteers, churches, and frontline community partners."
+      }
+    };
+
+    function openBioModal(key) {
+      const m = BOARD_BIOS[key];
+      if (!m) return;
+      document.getElementById('bio-modal-name').textContent = m.name;
+      document.getElementById('bio-modal-role').textContent = m.role;
+      document.getElementById('bio-modal-text').textContent = m.bio;
+      const avatarEl = document.getElementById('bio-modal-avatar');
+      if (m.image) {
+        avatarEl.innerHTML = `<img src="${m.image}" alt="${m.name}" class="w-28 h-28 rounded-full object-cover object-top border-2 border-[#9f7f29] shadow-lg mx-auto bg-white" />`;
+      } else {
+        avatarEl.innerHTML = `<div class="w-28 h-28 rounded-full bg-gradient-to-br from-[#2b3705] to-[#1f2410] text-[#d8cba9] border-2 border-[#d8cba9] flex flex-col items-center justify-center shadow-lg mx-auto"><i data-lucide="user" class="w-10 h-10 text-[#d8cba9]/80 mb-0.5"></i><span class="text-xs font-heading font-extrabold tracking-widest uppercase">${m.initials}</span></div>`;
+      }
+      const modal = document.getElementById('bio-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      lucide.createIcons();
+    }
+
+    function closeBioModal() {
+      const modal = document.getElementById('bio-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+
+    function openContactModal() {
+      const modal = document.getElementById('contact-modal');
+      const form = document.getElementById('contact-inquiry-form');
+      const success = document.getElementById('contact-form-success');
+      if (form) form.classList.remove('hidden');
+      if (success) success.classList.add('hidden');
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+      lucide.createIcons();
+    }
+
+    function closeContactModal() {
+      const modal = document.getElementById('contact-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+
+    async function submitContactForm(e) {
+      e.preventDefault();
+      const name = document.getElementById('cf-name').value;
+      const email = document.getElementById('cf-email').value;
+      const phone = document.getElementById('cf-phone').value;
+      const message = document.getElementById('cf-message').value;
+
+      try {
+        const payload = new URLSearchParams({
+          'form-name': 'contact-inquiry',
+          name, email, phone, message
+        });
+        await fetch('/__forms.html', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: payload.toString()
+        });
+      } catch (_) {}
+
+      const subject = encodeURIComponent(`[ATS Website] Contact Inquiry from ${name}`);
+      const bodyLines = [
+        `Name: ${name}`,
+        `Email: ${email}`,
+        phone ? `Phone: ${phone}` : null,
+        '',
+        'Message:',
+        message
+      ].filter(Boolean).join('\n');
+
+      window.location.href = `mailto:info@abbotsfordtablesociety.ca?subject=${subject}&body=${encodeURIComponent(bodyLines)}`;
+
+      document.getElementById('contact-inquiry-form').classList.add('hidden');
+      document.getElementById('contact-form-success').classList.remove('hidden');
+    }
+
+    function showPage(pageId) {
+      if (pageId === 'contact') {
+        openContactModal();
+        return;
+      }
+      if (pageId === 'story') pageId = 'about';
+      document.querySelectorAll('.tab-page').forEach(el => el.classList.remove('active'));
+      const target = document.getElementById('page-' + pageId);
+      if (target) {
+        target.classList.add('active');
+        window.scrollTo(0, 0);
+      }
+    }
+
+    const CAREPORTAL_RSS_URL = "https://system.careportal.org/rss?status%5B0%5D=Open";
+    const GIVEWISE_URL = "https://fund.givewise.ca/gift/charity/NQD00331";
+    const CANADIAN_PROVINCES = ["british columbia","bc","alberta","ab","saskatchewan","sk","manitoba","mb","ontario","on","quebec","qc","québec","new brunswick","nb","nova scotia","ns","prince edward island","pei","pe","newfoundland","labrador","nl","yukon","yt","northwest territories","nt","nunavut","nu","canada"];
+    const CANADIAN_POSTAL_REGEX = /\b[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ](\s?\d[ABCEGHJKLMNPRSTVWXYZ]\d)?\b/i;
+
+    async function loadPreviewCarePortalFeed() {
+      const badgeEl = document.getElementById('cp-feed-badge');
+      const headingEl = document.getElementById('cp-feed-heading');
+      const subtextEl = document.getElementById('cp-feed-subtext');
+      const containerEl = document.getElementById('cp-requests-container');
+      if (!containerEl) return;
+
+      if (badgeEl) badgeEl.textContent = "Syncing CarePortal Feed...";
+
+      let xmlText = null;
+      const feedUrls = [
+        CAREPORTAL_RSS_URL + "&county=Abbotsford",
+        CAREPORTAL_RSS_URL + "&county=Winnipeg"
+      ];
+
+      for (const baseFeed of feedUrls) {
+        const urlsToTry = [
+          baseFeed,
+          "https://api.allorigins.win/raw?url=" + encodeURIComponent(baseFeed),
+          "https://corsproxy.io/?" + encodeURIComponent(baseFeed)
+        ];
+        for (const u of urlsToTry) {
+          try {
+            const resp = await fetch(u);
+            if (resp.ok) {
+              const txt = await resp.text();
+              if (txt && txt.includes("<item>")) {
+                xmlText = txt;
+                break;
+              }
+            }
+          } catch (_) {}
+        }
+        if (xmlText) break;
+      }
+
+      if (xmlText) {
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+        const items = xmlDoc.querySelectorAll("item");
+        const abbyNeeds = [];
+        const canadaNeeds = [];
+
+        items.forEach((item, idx) => {
+          const getTag = (t) => item.getElementsByTagName(t)[0]?.textContent?.trim() || "";
+          const getCpTag = (t) => (item.getElementsByTagName("careportal:" + t)[0] || item.getElementsByTagName(t)[0])?.textContent?.trim() || "";
+
+          const id = getCpTag("id") || getTag("guid") || ("CP-" + (idx + 100));
+          const rawTitle = getTag("title");
+          const title = rawTitle.replace(/^#\d+\s*/, "").split(" - ")[0] || rawTitle;
+          const link = getTag("link") || ("https://system.careportal.org/requests/" + id);
+          const description = getTag("description");
+          const category = getTag("category") || "Care Need";
+          const urgency = (getCpTag("urgency_as_string") || "Open").split(":")[0];
+          const amount = parseFloat(getCpTag("amount")) || 0;
+          const state = getCpTag("state");
+          const county = getCpTag("county");
+          const city = getCpTag("city");
+          const country = getCpTag("country");
+          const zip = getCpTag("zip_code") || getCpTag("postal_code");
+          const agency = getCpTag("agency_name") || "Verified Caseworker Agency";
+
+          const isAbby =
+            state.toLowerCase().includes("british columbia") ||
+            state.toLowerCase() === "bc" ||
+            county.toLowerCase().includes("abbotsford") ||
+            city.toLowerCase().includes("abbotsford") ||
+            rawTitle.toLowerCase().includes("abbotsford") ||
+            description.toLowerCase().includes("abbotsford") ||
+            zip.toUpperCase().startsWith("V2S") ||
+            zip.toUpperCase().startsWith("V2T") ||
+            (zip.toUpperCase().startsWith("V") && CANADIAN_POSTAL_REGEX.test(zip));
+
+          const isCan =
+            isAbby ||
+            country.toLowerCase().includes("canada") ||
+            country.toLowerCase() === "ca" ||
+            CANADIAN_PROVINCES.includes(state.toLowerCase()) ||
+            CANADIAN_POSTAL_REGEX.test(zip) ||
+            CANADIAN_POSTAL_REGEX.test(rawTitle);
+
+          const loc = [city || county, state].filter(Boolean).join(", ") || "Abbotsford";
+          const obj = { id: "NEED-" + id, title, link, description, category, urgency, amount, location: zip ? `${loc} (${zip})` : loc, agency };
+          if (isAbby) abbyNeeds.push(obj);
+          if (isCan) canadaNeeds.push(obj);
+        });
+
+        const chosen = abbyNeeds.length > 0 ? abbyNeeds : (canadaNeeds.length > 0 ? canadaNeeds : null);
+        const scope = abbyNeeds.length > 0 ? "abbotsford" : (canadaNeeds.length > 0 ? "canada" : "sample");
+
+        if (chosen && chosen.length > 0) {
+          if (badgeEl) badgeEl.textContent = scope === "abbotsford" ? "Live CarePortal Sync • Abbotsford, BC" : "Live CarePortal Sync • Canada";
+          if (headingEl) headingEl.textContent = scope === "abbotsford" ? "Open Requests in Abbotsford" : "Open CarePortal Requests Across Canada";
+          if (subtextEl) subtextEl.textContent = scope === "abbotsford"
+            ? "Active requests submitted by vetted partner caseworkers in Abbotsford."
+            : "No open requests in Abbotsford at this moment — displaying live CarePortal requests across Canada.";
+
+          containerEl.innerHTML = chosen.map(n => `
+            <div class="bg-white border-2 border-[#d8cba9] rounded-3xl p-6 sm:p-8 md:p-10 shadow-md space-y-6">
+              <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-[#d8cba9]">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="px-3 py-1 rounded-full bg-[#2b3705] text-[#d8cba9] text-xs font-extrabold uppercase tracking-wider">${n.category}</span>
+                  <span class="px-3 py-1 rounded-full bg-[#FAF9F5] text-[#9f7f29] border border-[#d8cba9] text-xs font-bold">${n.agency}</span>
+                </div>
+                <div class="flex items-center gap-3 text-xs font-bold text-slate-600">
+                  <span class="text-[#9f7f29]">${n.urgency}</span>
+                  <span>•</span>
+                  <span class="text-[#2b3705]">${n.location}</span>
+                </div>
+              </div>
+              <div class="space-y-4 text-left">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <h3 class="text-2xl md:text-3xl font-heading font-extrabold text-[#2b3705]">${n.title}</h3>
+                  ${n.amount > 0 ? `<span class="text-xl md:text-2xl font-heading font-extrabold text-[#9f7f29]">Est. Value: $${n.amount.toFixed(2)}</span>` : ''}
+                </div>
+                <p class="text-slate-700 text-base md:text-lg leading-relaxed font-sans">${n.description}</p>
+              </div>
+              <div class="pt-6 border-t border-[#d8cba9] flex flex-wrap items-center justify-between gap-4">
+                <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">ID: ${n.id} • Vetted by partner agencies</span>
+                <div class="flex flex-wrap items-center gap-3">
+                  <a href="${n.link}" target="_blank" rel="noopener noreferrer" class="btn btn-primary text-xs sm:text-sm px-6 py-3 rounded-xl font-bold text-decoration-none">RESPOND TO THIS NEED</a>
+                  <a href="${GIVEWISE_URL}" target="_blank" rel="noopener noreferrer" class="btn btn-gold text-xs sm:text-sm px-6 py-3 text-decoration-none shadow-sm"><i data-lucide="heart" class="w-4 h-4 fill-white mr-1 inline"></i> GIVE (GIVEWISE)</a>
+                </div>
+              </div>
+            </div>
+          `).join("");
+          lucide.createIcons();
+          return;
+        }
+      }
+
+      if (badgeEl) badgeEl.textContent = "Live CarePortal Sync • Winnipeg, MB (Canada)";
+    }
+
+    loadPreviewCarePortalFeed();
+  </script>
+</body>
+</html>

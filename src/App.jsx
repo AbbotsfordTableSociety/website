@@ -6,6 +6,8 @@ import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import OurMissionPage from './pages/OurMissionPage';
+import OurStoryPage from './pages/OurStoryPage';
+import OurTeamPage from './pages/OurTeamPage';
 import HowItWorksPage from './pages/HowItWorksPage';
 import GovernancePage from './pages/GovernancePage';
 
@@ -14,6 +16,7 @@ import RespondModal from './components/RespondModal';
 import SubmitNeedModal from './components/SubmitNeedModal';
 import ChurchEnrollModal from './components/ChurchEnrollModal';
 import GiveModal from './components/GiveModal';
+import ContactModal from './components/ContactModal';
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
@@ -51,7 +54,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col font-sans selection:bg-teal-500 selection:text-white">
+    <div className="min-h-screen bg-[#FAF9F5] flex flex-col font-sans selection:bg-[#2b3705] selection:text-white">
       
       {/* Sticky Glass Navbar */}
       <Navbar 
@@ -59,18 +62,22 @@ export default function App() {
         onNavigate={handleNavigate}
         onOpenRespond={() => handleOpenRespond(null)}
         onOpenChurchEnroll={() => setActiveModal('church')}
+        onOpenContact={() => setActiveModal('contact')}
       />
 
       {/* Multi-Page Route Renderer */}
-      <main className="flex-grow">
-        {currentPath === '/about' ? (
-          <AboutPage onNavigate={handleNavigate} />
+      <main className="flex-grow pt-8">
+        {currentPath === '/about' || currentPath === '/our-story' ? (
+          <AboutPage onNavigate={handleNavigate} onOpenContact={() => setActiveModal('contact')} />
         ) : currentPath === '/our-mission' ? (
-          <OurMissionPage onNavigate={handleNavigate} />
+          <OurMissionPage onNavigate={handleNavigate} onOpenContact={() => setActiveModal('contact')} />
+        ) : currentPath === '/our-team' ? (
+          <OurTeamPage onNavigate={handleNavigate} onOpenContact={() => setActiveModal('contact')} />
         ) : currentPath === '/how-it-works' ? (
           <HowItWorksPage 
             onOpenChurchEnroll={() => setActiveModal('church')}
             onOpenSubmitNeed={() => setActiveModal('submit')}
+            onOpenContact={() => setActiveModal('contact')}
           />
         ) : currentPath === '/governance' ? (
           <GovernancePage />
@@ -116,6 +123,12 @@ export default function App() {
       {activeModal === 'give' && (
         <GiveModal 
           need={selectedNeed}
+          onClose={handleCloseModal} 
+        />
+      )}
+
+      {activeModal === 'contact' && (
+        <ContactModal 
           onClose={handleCloseModal} 
         />
       )}

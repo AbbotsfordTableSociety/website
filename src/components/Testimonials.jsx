@@ -7,7 +7,7 @@ export default function Testimonials() {
       id: 1,
       quote: "CarePortal has fundamentally transformed how our agency supports families in crisis across Abbotsford. Within 45 minutes of posting a request for a crib and car seat, a local church Care Team stepped up to deliver brand-new items directly to the mother. That speed prevented foster care placement.",
       author: "Sarah M.",
-      role: "Child Welfare Social Worker",
+      role: "Partner Agency Caseworker",
       org: "Abbotsford Family Services",
       location: "Clearbrook, Abbotsford"
     },
@@ -49,7 +49,7 @@ export default function Testimonials() {
           <span className="text-xs font-bold uppercase tracking-widest text-gold-700 bg-gold-50 px-3.5 py-1 rounded border border-gold-200">
             Abbotsford Transformation Stories
           </span>
-          <h2 className="text-3xl font-serif font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-3xl font-heading font-extrabold text-slate-900 tracking-tight">
             Lives Changed Through Citywide Unity
           </h2>
         </div>
@@ -64,7 +64,7 @@ export default function Testimonials() {
               ))}
             </div>
 
-            <p className="text-lg md:text-xl text-slate-800 font-serif leading-relaxed italic">
+            <p className="text-lg md:text-xl text-slate-800 font-sans leading-relaxed italic">
               "{current.quote}"
             </p>
 

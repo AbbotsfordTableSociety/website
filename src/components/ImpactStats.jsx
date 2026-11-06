@@ -38,7 +38,7 @@ export default function ImpactStats() {
       icon: DollarSign,
       value: "$185,000+",
       label: "Community Care Value",
-      desc: "Direct practical aid delivered to neighbors",
+      desc: "Direct practical aid delivered to neighbours",
       bgColor: "bg-forest-50",
       iconColor: "text-forest-700",
       borderColor: "border-forest-100"
@@ -53,7 +53,7 @@ export default function ImpactStats() {
           <span className="text-xs font-bold uppercase tracking-widest text-forest-700 bg-forest-50 px-3.5 py-1 rounded border border-forest-100">
             Real-Time Community Impact
           </span>
-          <h2 className="text-2xl md:text-3xl font-serif font-bold tracking-tight text-slate-900">
+          <h2 className="text-2xl md:text-3xl font-heading font-bold tracking-tight text-slate-900">
             Connecting Compassion with Measurable Local Action
           </h2>
         </div>
@@ -74,7 +74,7 @@ export default function ImpactStats() {
                     Abbotsford, BC
                   </span>
                 </div>
-                <div className="text-3xl md:text-4xl font-serif font-extrabold text-forest-700 mb-1 tracking-tight">
+                <div className="text-3xl md:text-4xl font-heading font-extrabold text-forest-700 mb-1 tracking-tight">
                   {item.value}
                 </div>
                 <div className="text-base font-bold text-slate-900">

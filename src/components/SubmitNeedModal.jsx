@@ -61,16 +61,16 @@ export default function SubmitNeedModal({ onClose }) {
             
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-800 flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-amber-600 flex-shrink-0" />
-              <span>For verified caseworkers, school liaisons, and social service representatives in Abbotsford.</span>
+              <span>For verified caseworkers and partner agencies in Abbotsford.</span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="text-xs font-bold text-slate-700 mb-1 block">Agency / Organization *</label>
+                <label className="text-xs font-bold text-slate-700 mb-1 block">Partner Agency / Organization *</label>
                 <input 
                   type="text" 
                   required
-                  placeholder="e.g. MCFD Abbotsford / SD #34"
+                  placeholder="e.g. Partner Agency Name"
                   value={formData.agencyName}
                   onChange={(e) => setFormData({...formData, agencyName: e.target.value})}
                   className="w-full p-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-amber-500 outline-none"

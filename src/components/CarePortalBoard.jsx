@@ -11,7 +11,7 @@ export default function CarePortalBoard({ onSelectNeed, onOpenSubmitNeed }) {
   const [rssUrl, setRssUrl] = useState(DEFAULT_RSS_URL);
   const [needs, setNeeds] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isLiveFeed, setIsLiveFeed] = useState(false);
+  const [feedScope, setFeedScope] = useState('sample'); // 'abbotsford' | 'canada' | 'sample'
 
   // Base GiveWise Charity URL
   const givewiseBaseUrl = "https://fund.givewise.ca/gift/charity/NQD00331";
@@ -63,8 +63,8 @@ export default function CarePortalBoard({ onSelectNeed, onOpenSubmitNeed }) {
       urgency: "Urgent",
       urgencyBadge: "badge-urgent",
       timeAgo: "3 hours ago",
-      vettedBy: "Abbotsford School District #34 Community Liaison",
-      agencyType: "School District",
+      vettedBy: "Abbotsford Community Partner Agency",
+      agencyType: "Partner Agency",
       description: "Family of 4 faced temporary income loss due to layoff. Electric utility disconnection notice served for Friday. Urgent relief needed to keep power and heating on.",
       itemsNeeded: ["Emergency Utility Support ($240)"],
       valueEst: 240,
@@ -113,13 +113,13 @@ export default function CarePortalBoard({ onSelectNeed, onOpenSubmitNeed }) {
   // Load feed on mount or URL change
   const loadFeed = async () => {
     setIsLoading(true);
-    const liveData = await fetchCarePortalNeeds(rssUrl);
-    if (liveData && liveData.length > 0) {
-      setNeeds(liveData);
-      setIsLiveFeed(true);
+    const result = await fetchCarePortalNeeds(rssUrl);
+    if (result && result.needs && result.needs.length > 0) {
+      setNeeds(result.needs);
+      setFeedScope(result.scope || 'abbotsford');
     } else {
       setNeeds(fallbackNeedsData);
-      setIsLiveFeed(false);
+      setFeedScope('sample');
     }
     setIsLoading(false);
   };
@@ -152,23 +152,32 @@ export default function CarePortalBoard({ onSelectNeed, onOpenSubmitNeed }) {
                 CarePortal Live Needs Feed • Abbotsford, BC
               </span>
 
-              {isLiveFeed ? (
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold border border-emerald-200">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                  Live CarePortal Sync
+              {feedScope === 'abbotsford' ? (
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#2b3705] text-[#d8cba9] text-xs font-bold border border-[#2b3705]">
+                  <span className="w-2 h-2 rounded-full bg-[#d8cba9] animate-pulse"></span>
+                  Live CarePortal Sync • Abbotsford
+                </span>
+              ) : feedScope === 'canada' ? (
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#2b3705] text-[#d8cba9] text-xs font-bold border border-[#2b3705]">
+                  <span className="w-2 h-2 rounded-full bg-[#d8cba9] animate-pulse"></span>
+                  Live CarePortal Sync • Canada
                 </span>
               ) : (
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gold-100 text-gold-800 text-xs font-bold border border-gold-200">
-                  Abbotsford Curated Feed
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#faf7ef] text-[#9f7f29] text-xs font-bold border border-[#d8cba9]">
+                  Abbotsford Sample Preview
                 </span>
               )}
             </div>
 
-            <h2 className="text-3xl md:text-4xl font-serif font-extrabold text-slate-900 tracking-tight">
-              Real-Time Needs from Abbotsford Caseworkers
+            <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-slate-900 tracking-tight">
+              {feedScope === 'canada'
+                ? 'Active CarePortal Needs Across Canada'
+                : 'Real-Time Needs from Abbotsford Caseworkers'}
             </h2>
             <p className="text-slate-700 text-base leading-relaxed">
-              Every need below is 100% verified by local government agencies, public schools, or non-profit case managers working directly with families in crisis. You have the ability to provide items directly, or give financially through GiveWise.
+              {feedScope === 'canada'
+                ? 'There are currently no open requests posted in Abbotsford — showing live vetted requests across Canada. Once local Abbotsford requests are posted in CarePortal, they will appear here automatically.'
+                : 'Every need below is vetted by partner agencies working directly with families in crisis. You have the ability to provide items directly, or give financially through GiveWise.'}
             </p>
           </div>
 
@@ -264,7 +273,7 @@ export default function CarePortalBoard({ onSelectNeed, onOpenSubmitNeed }) {
         {filteredNeeds.length === 0 ? (
           <div className="bg-[#FCFBF8] rounded-xl p-12 text-center border border-[#E5DEC9]">
             <AlertTriangle className="w-12 h-12 text-gold-700 mx-auto mb-3" />
-            <h3 className="text-xl font-serif font-bold text-slate-900 mb-1">No Matching Needs Found</h3>
+            <h3 className="text-xl font-heading font-bold text-slate-900 mb-1">No Matching Needs Found</h3>
             <p className="text-slate-600 text-sm max-w-md mx-auto mb-6">
               Try adjusting your filter settings or search terms to view active requests across Abbotsford.
             </p>
@@ -298,7 +307,7 @@ export default function CarePortalBoard({ onSelectNeed, onOpenSubmitNeed }) {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-lg font-serif font-bold text-slate-900 leading-snug mb-2 flex items-start justify-between gap-2">
+                  <h3 className="text-lg font-heading font-bold text-slate-900 leading-snug mb-2 flex items-start justify-between gap-2">
                     <span>{need.title}</span>
                     {need.carePortalLink && (
                       <a 
@@ -372,7 +381,7 @@ export default function CarePortalBoard({ onSelectNeed, onOpenSubmitNeed }) {
 
                     {/* Direct link to GiveWise charity page */}
                     <a 
-                      href={`${givewiseBaseUrl}?memo=${encodeURIComponent(`CarePortal Need: ${need.title} (${need.id})`)}`}
+                      href={givewiseBaseUrl}
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="btn bg-gold-700 hover:bg-gold-800 text-white w-full py-2.5 text-xs font-bold justify-center rounded-xl shadow-sm transition gap-1.5 whitespace-nowrap text-decoration-none"

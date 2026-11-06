@@ -18,16 +18,16 @@ export default function ThreePillars({ onOpenChurchEnroll, onOpenSubmitNeed }) {
         "100% free for local Abbotsford churches to join"
       ],
       ctaText: "Enroll Your Church Team",
-      ctaAction: onOpenChurchEnroll,
-      isLink: false,
+      isLink: true,
+      linkUrl: "https://careportal.zendesk.com/hc/en-us/articles/360037975193--How-Does-My-Church-Join-CarePortal",
       badgeColor: "bg-forest-50 text-forest-700 border-forest-100",
       btnClass: "btn-primary"
     },
     {
       id: "agencies",
       icon: Building2,
-      badge: "For Social Workers & Schools",
-      title: "Child Welfare & Agencies",
+      badge: "For Partner Agencies",
+      title: "Partner Agencies",
       subtitle: "Connect families in crisis with community support in minutes.",
       points: [
         "Submit vetted needs directly from your caseworker portal",
@@ -70,7 +70,7 @@ export default function ThreePillars({ onOpenChurchEnroll, onOpenSubmitNeed }) {
           <span className="text-xs font-bold uppercase tracking-widest text-forest-700 bg-forest-50 px-3.5 py-1 rounded border border-forest-100">
             How CarePortal Works in Abbotsford
           </span>
-          <h2 className="text-3xl md:text-5xl font-serif font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-3xl md:text-5xl font-heading font-extrabold text-slate-900 tracking-tight">
             Connecting Three Pillars of Community Care
           </h2>
           <p className="text-slate-700 text-lg leading-relaxed font-normal">
@@ -99,7 +99,7 @@ export default function ThreePillars({ onOpenChurchEnroll, onOpenSubmitNeed }) {
                       <Icon className="w-7 h-7 text-gold-200" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-serif font-bold text-slate-900">
+                      <h3 className="text-2xl font-heading font-bold text-slate-900">
                         {pillar.title}
                       </h3>
                     </div>

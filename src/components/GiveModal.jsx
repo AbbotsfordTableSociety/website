@@ -3,12 +3,7 @@ import { X, ExternalLink, ShieldCheck, Lock, Gift, Heart } from 'lucide-react';
 
 export default function GiveModal({ need, onClose }) {
   // Base GiveWise organization URL
-  const baseGivewiseUrl = "https://fund.givewise.ca/gift/charity/NQD00331";
-
-  // If a specific need is provided, construct direct memo link for GiveWise
-  const givewiseUrl = need 
-    ? `${baseGivewiseUrl}?memo=${encodeURIComponent(`CarePortal Need: ${need.title} (${need.id})`)}`
-    : baseGivewiseUrl;
+  const givewiseUrl = "https://fund.givewise.ca/gift/charity/NQD00331";
 
   return (
     <div className="modal-overlay">
@@ -21,7 +16,7 @@ export default function GiveModal({ need, onClose }) {
               <Gift className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-lg font-serif font-bold text-white">
+              <h3 className="text-lg font-heading font-bold text-white">
                 {need ? `Give Toward Need: ${need.id}` : "Partner & Give Online"}
               </h3>
               <p className="text-xs text-gold-200">Abbotsford Table Society Charitable Support via GiveWise</p>
@@ -41,7 +36,7 @@ export default function GiveModal({ need, onClose }) {
                 <span>CarePortal Need Reference</span>
                 <span>Est. ${need.valueEst || need.amountRemaining}</span>
               </div>
-              <h4 className="text-base font-serif font-bold text-slate-900 leading-snug">
+              <h4 className="text-base font-heading font-bold text-slate-900 leading-snug">
                 {need.title}
               </h4>
               <p className="text-xs text-slate-700 leading-relaxed line-clamp-2">

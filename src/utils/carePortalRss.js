@@ -3,48 +3,164 @@
  * 
  * Fetches and parses real-time CarePortal RSS XML feed into structured JS objects
  * for the CarePortalBoard component.
+ * 
+ * Fallback Hierarchy:
+ * 1. Local Abbotsford / BC needs from CarePortal RSS
+ * 2. Other Canadian needs from CarePortal RSS (if none currently open in Abbotsford)
+ * 3. Sample Abbotsford needs (handled by CarePortalBoard if no Canadian needs found)
  */
 
-// Default feed URL provided by CarePortal (can be customized via VITE_CAREPORTAL_RSS_URL env or props)
-export const DEFAULT_RSS_URL = "https://system.careportal.org/rss?status%5B0%5D=Open";
+// Primary RSS feed URL (can be customized via VITE_CAREPORTAL_RSS_URL or updated directly here)
+export const DEFAULT_RSS_URL = import.meta.env.VITE_CAREPORTAL_RSS_URL || "https://system.careportal.org/rss?status%5B0%5D=Open";
+
+// Canadian provinces, territories, and common identifiers
+const CANADIAN_PROVINCES = [
+  "british columbia", "bc",
+  "alberta", "ab",
+  "saskatchewan", "sk",
+  "manitoba", "mb",
+  "ontario", "on",
+  "quebec", "qc", "québec",
+  "new brunswick", "nb",
+  "nova scotia", "ns",
+  "prince edward island", "pei", "pe",
+  "newfoundland", "labrador", "nl",
+  "yukon", "yt",
+  "northwest territories", "nt",
+  "nunavut", "nu",
+  "canada"
+];
+
+// Canadian postal code pattern (e.g., V2S, V2T, K1A, M5V, T2P, etc.)
+const CANADIAN_POSTAL_REGEX = /\b[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ](\s?\d[ABCEGHJKLMNPRSTVWXYZ]\d)?\b/i;
 
 /**
- * Fetch and parse CarePortal RSS XML
+ * Fetch raw XML from a CarePortal RSS URL using Netlify proxy first, then direct fetch, then CORS proxy
+ */
+async function fetchRssXml(feedUrl) {
+  // 1. If pointing to system.careportal.org, try same-origin Netlify proxy first (avoids CORS in production)
+  if (feedUrl.includes("system.careportal.org/")) {
+    try {
+      const relativePath = feedUrl.split("system.careportal.org/")[1];
+      const netlifyProxyUrl = `/api/careportal-rss/${relativePath}`;
+      const resp = await fetch(netlifyProxyUrl);
+      if (resp.ok) {
+        const text = await resp.text();
+        if (text && (text.includes("<rss") || text.includes("<channel") || text.includes("<item"))) {
+          return text;
+        }
+      }
+    } catch (_) {
+      // Ignore and try direct/CORS proxy
+    }
+  }
+
+  // 2. Try direct fetch
+  try {
+    const response = await fetch(feedUrl);
+    if (response.ok) {
+      const text = await response.text();
+      if (text && (text.includes("<rss") || text.includes("<channel") || text.includes("<item"))) {
+        return text;
+      }
+    }
+  } catch (_) {
+    // Ignore and try CORS proxy
+  }
+
+  // 3. Try CORS proxies for local development or cross-origin feeds
+  const corsProxies = [
+    (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+    (url) => `https://corsproxy.io/?${encodeURIComponent(url)}`
+  ];
+
+  for (const buildProxyUrl of corsProxies) {
+    try {
+      const proxyResp = await fetch(buildProxyUrl(feedUrl));
+      if (proxyResp.ok) {
+        const text = await proxyResp.text();
+        if (text && (text.includes("<rss") || text.includes("<channel") || text.includes("<item"))) {
+          return text;
+        }
+      }
+    } catch (_) {
+      // Continue to next proxy
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Fetch and parse CarePortal RSS XML with 3-tier priority:
+ * 1. Abbotsford / BC needs
+ * 2. Other Canadian needs
+ * 3. null (triggers Sample Abbotsford fallback in UI)
+ * 
  * @param {string} feedUrl - Optional custom RSS URL from CarePortal
- * @returns {Promise<Array>} List of parsed need objects
+ * @returns {Promise<{needs: Array, scope: 'abbotsford' | 'canada'} | null>}
  */
 export async function fetchCarePortalNeeds(feedUrl = DEFAULT_RSS_URL) {
   try {
-    const response = await fetch(feedUrl);
-    if (!response.ok) {
-      throw new Error(`HTTP error ${response.status} fetching CarePortal RSS`);
-    }
-    const xmlText = await response.text();
-    const needs = parseCarePortalXml(xmlText);
-    
-    // If national feed returns no Abbotsford/BC items yet, return null to trigger Abbotsford fallback data
-    if (!needs || needs.length === 0) {
-      return null;
-    }
-    return needs;
-  } catch (err) {
-    console.warn("Direct CarePortal RSS fetch failed (may be CORS/network), trying CORS proxy:", err);
-    
-    // Try reliable CORS proxy if direct fetch hits CORS policy in browser
-    try {
-      const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(feedUrl)}`;
-      const proxyResp = await fetch(proxyUrl);
-      if (proxyResp.ok) {
-        const xmlText = await proxyResp.text();
-        const needs = parseCarePortalXml(xmlText);
-        if (!needs || needs.length === 0) return null;
-        return needs;
+    // 1. Fetch the primary RSS feed URL (https://system.careportal.org/rss?status%5B0%5D=Open)
+    const xmlText = await fetchRssXml(feedUrl);
+    if (xmlText) {
+      const { abbotsfordNeeds, canadaNeeds } = parseCarePortalXml(xmlText);
+
+      // Tier 1: Local Abbotsford / BC needs found in primary feed
+      if (abbotsfordNeeds.length > 0) {
+        return { needs: abbotsfordNeeds, scope: "abbotsford" };
       }
-    } catch (proxyErr) {
-      console.error("CORS proxy fetch also failed:", proxyErr);
+
+      // Tier 2: Other Canadian needs found in primary feed
+      if (canadaNeeds.length > 0) {
+        return { needs: canadaNeeds, scope: "canada" };
+      }
     }
-    
-    return null; // Return null so component can fallback gracefully to Abbotsford needs
+
+    // 2. Because the general CarePortal feed (status[0]=Open) returns only the latest 100 items
+    // (dominated by high-volume US requests), query CarePortal's `county=` filter for Abbotsford first,
+    // then Canadian cities (including Winnipeg) so live Canadian requests are always surfaced.
+    const abbyQueries = [
+      `${feedUrl}&county=Abbotsford`,
+      `${feedUrl}&county=Fraser+Valley`,
+    ];
+
+    for (const queryUrl of abbyQueries) {
+      const queryXml = await fetchRssXml(queryUrl);
+      if (queryXml) {
+        const { abbotsfordNeeds, allNeeds } = parseCarePortalXml(queryXml);
+        if (abbotsfordNeeds.length > 0) {
+          return { needs: abbotsfordNeeds, scope: "abbotsford" };
+        }
+        if (allNeeds.length > 0) {
+          return { needs: allNeeds, scope: "abbotsford" };
+        }
+      }
+    }
+
+    const canadaQueries = [
+      `${feedUrl}&county=Winnipeg`,
+    ];
+
+    for (const queryUrl of canadaQueries) {
+      const queryXml = await fetchRssXml(queryUrl);
+      if (queryXml) {
+        const { canadaNeeds, allNeeds } = parseCarePortalXml(queryXml);
+        if (canadaNeeds.length > 0) {
+          return { needs: canadaNeeds, scope: "canada" };
+        }
+        if (allNeeds.length > 0) {
+          return { needs: allNeeds, scope: "canada" };
+        }
+      }
+    }
+
+    // Tier 3: Return null to trigger Abbotsford sample fallback data
+    return null;
+  } catch (err) {
+    console.error("Failed to fetch/parse CarePortal RSS feed:", err);
+    return null;
   }
 }
 
@@ -56,7 +172,9 @@ export function parseCarePortalXml(xmlText) {
   const xmlDoc = parser.parseFromString(xmlText, "text/xml");
   const items = xmlDoc.querySelectorAll("item");
 
-  const parsedNeeds = [];
+  const abbotsfordNeeds = [];
+  const canadaNeeds = [];
+  const allNeeds = [];
 
   items.forEach((item, index) => {
     const getTagText = (tagName) => {
@@ -78,31 +196,50 @@ export function parseCarePortalXml(xmlText) {
     const description = getTagText("description");
     const pubDate = getTagText("pubDate");
     const category = getTagText("category") || "Care Need";
-    
+
     const status = getCarePortalTagText("status") || "Open";
     const urgency = getCarePortalTagText("urgency_as_string") || getTagText("category") || "Normal";
     const amount = parseFloat(getCarePortalTagText("amount")) || 0;
     const amountRemaining = parseFloat(getCarePortalTagText("amountRemaining")) || amount;
     const respondersCount = parseInt(getCarePortalTagText("responseCount")) || 0;
-    
+
     const state = getCarePortalTagText("state") || "";
     const county = getCarePortalTagText("county") || "";
-    const zipCode = getCarePortalTagText("zip_code") || "";
+    const city = getCarePortalTagText("city") || "";
+    const country = getCarePortalTagText("country") || "";
+    const zipCode = getCarePortalTagText("zip_code") || getCarePortalTagText("postal_code") || "";
     const agencyName = getCarePortalTagText("agency_name") || "Verified Caseworker Agency";
 
-    // Strictly filter location to Abbotsford, BC, or Canadian postal codes V2S/V2T/V3G/V4X
-    const isAbbotsfordOrBC = 
-      state.toLowerCase().includes("british columbia") || 
-      state.toLowerCase() === "bc" || 
-      county.toLowerCase().includes("abbotsford") || 
-      rawTitle.toLowerCase().includes("abbotsford") || 
-      description.toLowerCase().includes("abbotsford") || 
-      zipCode.toUpperCase().startsWith("V");
+    const combinedLocationText = `${state} ${county} ${city} ${country} ${zipCode} ${rawTitle} ${description} ${agencyName}`.toLowerCase();
 
-    // If national feed contains non-BC / US items (like Fresno/WA/VA), skip them unless filtered feed URL
-    if (!isAbbotsfordOrBC) {
-      return; // Skip US items
-    }
+    // Check if Abbotsford / Fraser Valley / BC
+    const isAbbotsfordOrBC =
+      state.toLowerCase().includes("british columbia") ||
+      state.toLowerCase() === "bc" ||
+      county.toLowerCase().includes("abbotsford") ||
+      county.toLowerCase().includes("fraser valley") ||
+      city.toLowerCase().includes("abbotsford") ||
+      rawTitle.toLowerCase().includes("abbotsford") ||
+      description.toLowerCase().includes("abbotsford") ||
+      zipCode.toUpperCase().startsWith("V2S") ||
+      zipCode.toUpperCase().startsWith("V2T") ||
+      zipCode.toUpperCase().startsWith("V3G") ||
+      zipCode.toUpperCase().startsWith("V4X") ||
+      (zipCode.toUpperCase().startsWith("V") && CANADIAN_POSTAL_REGEX.test(zipCode));
+
+    // Check if anywhere in Canada
+    const stateLower = state.toLowerCase().trim();
+    const countryLower = country.toLowerCase().trim();
+    const isCanada =
+      isAbbotsfordOrBC ||
+      countryLower === "ca" ||
+      countryLower === "can" ||
+      countryLower.includes("canada") ||
+      CANADIAN_PROVINCES.includes(stateLower) ||
+      CANADIAN_POSTAL_REGEX.test(zipCode) ||
+      CANADIAN_POSTAL_REGEX.test(rawTitle) ||
+      combinedLocationText.includes("careimpact") ||
+      combinedLocationText.includes("canada");
 
     // Extract requested items list if available
     const itemsNeeded = [];
@@ -116,12 +253,13 @@ export function parseCarePortalXml(xmlText) {
       }
     }
 
-    let neighborhood = county || "Abbotsford";
+    const locationParts = [city || county, state].filter(Boolean);
+    let neighborhood = locationParts.length > 0 ? locationParts.join(", ") : "Abbotsford";
     if (zipCode) {
       neighborhood += ` (${zipCode})`;
     }
 
-    const title = rawTitle.replace(/^#\d+\s*/, '').split(' - ')[0] || rawTitle;
+    const title = rawTitle.replace(/^#\d+\s*/, "").split(" - ")[0] || rawTitle;
 
     let pledgedPercent = 0;
     if (amount > 0) {
@@ -129,19 +267,19 @@ export function parseCarePortalXml(xmlText) {
     }
 
     let urgencyBadge = "badge-teal";
-    if (urgency.toLowerCase().includes("urgent")) {
+    if (urgency.toLowerCase().includes("urgent") || urgency.toLowerCase().includes("high")) {
       urgencyBadge = "badge-urgent";
-    } else if (urgency.toLowerCase().includes("priority") || urgency.toLowerCase().includes("high")) {
+    } else if (urgency.toLowerCase().includes("priority") || urgency.toLowerCase().includes("moderate")) {
       urgencyBadge = "badge-amber";
     }
 
-    parsedNeeds.push({
+    const parsedNeed = {
       id: `NEED-${id}`,
       cpId: id,
       title: title || rawTitle,
       neighborhood: neighborhood || "Abbotsford Area",
       category: category,
-      urgency: urgency.split(':')[0] || "Open",
+      urgency: urgency.split(":")[0] || status || "Open",
       urgencyBadge: urgencyBadge,
       timeAgo: formatDateAgo(pubDate),
       vettedBy: agencyName,
@@ -155,11 +293,21 @@ export function parseCarePortalXml(xmlText) {
       carePortalLink: link,
       state: state,
       county: county,
-      zipCode: zipCode
-    });
+      zipCode: zipCode,
+      isAbbotsford: isAbbotsfordOrBC,
+      isCanada: isCanada
+    };
+
+    allNeeds.push(parsedNeed);
+    if (isAbbotsfordOrBC) {
+      abbotsfordNeeds.push(parsedNeed);
+    }
+    if (isCanada) {
+      canadaNeeds.push(parsedNeed);
+    }
   });
 
-  return parsedNeeds;
+  return { abbotsfordNeeds, canadaNeeds, allNeeds };
 }
 
 /**

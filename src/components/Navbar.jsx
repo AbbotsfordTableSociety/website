@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Heart, Menu, X, Shield, Sparkles, ChevronDown } from 'lucide-react';
+import { Heart, Menu, X, Shield, ChevronDown, BookOpen, Users, Sparkles, Phone, Mail, ExternalLink } from 'lucide-react';
 import AbbyTableLogo from './AbbyTableLogo';
 
-export default function Navbar({ onOpenRespond, onOpenChurchEnroll, currentPath, onNavigate }) {
+export default function Navbar({ onOpenRespond, onOpenChurchEnroll, onOpenContact, currentPath, onNavigate }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
+  const [resourcesDropdownOpen, setResourcesDropdownOpen] = useState(false);
+  const [mobileAboutOpen, setMobileAboutOpen] = useState(true);
+  const [mobileResourcesOpen, setMobileResourcesOpen] = useState(false);
 
   const givewiseUrl = "https://fund.givewise.ca/gift/charity/NQD00331";
 
@@ -21,183 +24,308 @@ export default function Navbar({ onOpenRespond, onOpenChurchEnroll, currentPath,
     e.preventDefault();
     setMobileMenuOpen(false);
     setAboutDropdownOpen(false);
-    onNavigate(path);
+    setResourcesDropdownOpen(false);
+    if (onNavigate) {
+      onNavigate(path);
+    }
   };
 
+  const handleContactClick = (e) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+    if (onOpenContact) {
+      onOpenContact();
+      return;
+    }
+    const contactElem = document.getElementById('contact');
+    if (contactElem) {
+      contactElem.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.location.href = "mailto:info@abbotsfordtablesociety.ca";
+    }
+  };
+
+  const isAboutActive = currentPath === '/about' || currentPath === '/our-story' || currentPath === '/our-team' || currentPath === '/governance';
+
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[#FAF8F5] shadow-sm border-b border-[#E5DEC9] py-2' : 'bg-[#FAF8F5]/95 border-b border-[#E5DEC9]/80 py-3 backdrop-blur-md'}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/85 backdrop-blur-md border-b-2 border-[#d8cba9] ${scrolled ? 'shadow-md py-2' : 'shadow-sm py-3.5'}`}>
       <div className="container max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between gap-4">
         
-        {/* Official Brand Logo */}
+        {/* Prominent Logo & Organization Title */}
         <a 
           href="/" 
           onClick={(e) => handleNavClick(e, '/')}
-          className="flex items-center group text-decoration-none py-1 flex-shrink-0 pr-4"
+          className="flex items-center group text-decoration-none py-1 flex-shrink-0 pr-2 sm:pr-4"
         >
-          <AbbyTableLogo isDark={false} className="h-14 md:h-16" />
+          <AbbyTableLogo isDark={false} className="h-20 sm:h-24 md:h-28" />
         </a>
 
-        {/* Desktop Nav Links - Clean & Natural */}
-        <nav className="hidden lg:flex items-center gap-5 xl:gap-7 text-xs xl:text-sm font-bold tracking-wide text-slate-800">
+        {/* Desktop Primary Navigation Links */}
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-8 font-sans font-bold text-sm tracking-wide text-[#1f2410]">
+          
+          {/* 1. Home */}
           <a 
             href="/" 
             onClick={(e) => handleNavClick(e, '/')}
-            className={`transition-colors whitespace-nowrap ${currentPath === '/' ? 'text-forest-700 font-extrabold border-b-2 border-forest-700 pb-0.5' : 'hover:text-forest-700'}`}
+            className={`transition-colors whitespace-nowrap py-1 ${currentPath === '/' ? 'text-[#2b3705] font-extrabold border-b-2 border-[#2b3705] pb-0.5' : 'hover:text-[#2b3705]'}`}
           >
             Home
           </a>
 
-          {/* About Dropdown */}
+          {/* 2. About (Dropdown: Our Story, Our Team, Governance) */}
           <div 
-            className="relative group"
+            className="relative group py-1"
             onMouseEnter={() => setAboutDropdownOpen(true)}
             onMouseLeave={() => setAboutDropdownOpen(false)}
           >
-            <button 
+            <a 
+              href="/about"
               onClick={(e) => handleNavClick(e, '/about')}
-              className={`transition-colors whitespace-nowrap flex items-center gap-1.5 py-1 ${ (currentPath === '/about' || currentPath === '/our-mission') ? 'text-forest-700 font-extrabold border-b-2 border-forest-700 pb-0.5' : 'hover:text-forest-700'}`}
+              className={`transition-colors whitespace-nowrap flex items-center gap-1.5 ${ isAboutActive ? 'text-[#2b3705] font-extrabold border-b-2 border-[#2b3705] pb-0.5' : 'hover:text-[#2b3705]'}`}
             >
               <span>About</span>
-              <ChevronDown className="w-3.5 h-3.5 text-slate-500 group-hover:text-forest-700 transition" />
-            </button>
+              <ChevronDown className="w-4 h-4 text-[#9f7f29] group-hover:text-[#2b3705] transition" />
+            </a>
 
-            {/* Dropdown Menu */}
+            {/* Dropdown Menu: Our Mission, Our Team, Governance */}
             {aboutDropdownOpen && (
-              <div className="absolute top-full left-0 mt-1 w-56 bg-[#FCFBF8] border-2 border-[#E5DEC9] rounded-xl shadow-xl py-2 z-50 animate-fadeIn">
-                <a 
-                  href="/about" 
-                  onClick={(e) => handleNavClick(e, '/about')}
-                  className={`block px-4 py-2.5 text-xs font-bold transition hover:bg-forest-50 hover:text-forest-800 ${currentPath === '/about' ? 'text-forest-700 bg-forest-50 font-extrabold' : 'text-slate-800'}`}
-                >
-                  Our Story & Objectives
-                </a>
+              <div className="absolute top-full left-0 mt-1 w-60 bg-[#FFFFFF] border-2 border-[#d8cba9] rounded-xl shadow-xl py-2.5 z-50 animate-fadeIn">
                 <a 
                   href="/our-mission" 
                   onClick={(e) => handleNavClick(e, '/our-mission')}
-                  className={`block px-4 py-2.5 text-xs font-bold transition hover:bg-forest-50 hover:text-forest-800 ${currentPath === '/our-mission' ? 'text-forest-700 bg-forest-50 font-extrabold' : 'text-slate-800'}`}
+                  className={`block px-4 py-2.5 text-xs font-bold transition hover:bg-[#faf7ef] hover:text-[#2b3705] ${currentPath === '/our-mission' ? 'text-[#2b3705] bg-[#faf7ef] font-extrabold' : 'text-[#1f2410]'}`}
                 >
-                  Our Mission & Three Pillars
+                  Our Mission
+                </a>
+                <a 
+                  href="/our-team" 
+                  onClick={(e) => handleNavClick(e, '/our-team')}
+                  className={`block px-4 py-2.5 text-xs font-bold transition hover:bg-[#faf7ef] hover:text-[#2b3705] ${currentPath === '/our-team' ? 'text-[#2b3705] bg-[#faf7ef] font-extrabold' : 'text-[#1f2410]'}`}
+                >
+                  Our Team
+                </a>
+                <a 
+                  href="/governance" 
+                  onClick={(e) => handleNavClick(e, '/governance')}
+                  className={`block px-4 py-2.5 text-xs font-bold transition hover:bg-[#faf7ef] hover:text-[#2b3705] ${currentPath === '/governance' ? 'text-[#2b3705] bg-[#faf7ef] font-extrabold' : 'text-[#1f2410]'}`}
+                >
+                  Governance
                 </a>
               </div>
             )}
           </div>
 
+          {/* 3. CarePortal */}
           <a 
             href="/how-it-works" 
             onClick={(e) => handleNavClick(e, '/how-it-works')}
-            className={`transition-colors whitespace-nowrap ${currentPath === '/how-it-works' ? 'text-forest-700 font-extrabold border-b-2 border-forest-700 pb-0.5' : 'hover:text-forest-700'}`}
+            className={`transition-colors whitespace-nowrap py-1 ${currentPath === '/how-it-works' ? 'text-[#2b3705] font-extrabold border-b-2 border-[#2b3705] pb-0.5' : 'hover:text-[#2b3705]'}`}
           >
-            How CarePortal Works
+            CarePortal
           </a>
 
-          <a 
-            href="/governance" 
-            onClick={(e) => handleNavClick(e, '/governance')}
-            className={`transition-colors whitespace-nowrap flex items-center gap-1 ${currentPath === '/governance' ? 'text-forest-700 font-extrabold border-b-2 border-forest-700 pb-0.5' : 'hover:text-forest-700'}`}
+          {/* 4. Resources (Dropdown: Neighbour Up, Neighborly Podcast, FAQs) */}
+          <div 
+            className="relative group py-1"
+            onMouseEnter={() => setResourcesDropdownOpen(true)}
+            onMouseLeave={() => setResourcesDropdownOpen(false)}
           >
-            <Shield className="w-3.5 h-3.5 text-gold-700" />
-            Governance
+            <button 
+              className="transition-colors whitespace-nowrap flex items-center gap-1.5 hover:text-[#2b3705]"
+            >
+              <span>Resources</span>
+              <ChevronDown className="w-4 h-4 text-[#9f7f29] group-hover:text-[#2b3705] transition" />
+            </button>
+
+            {/* Resources Dropdown */}
+            {resourcesDropdownOpen && (
+              <div className="absolute top-full left-0 mt-1 w-64 bg-[#FFFFFF] border-2 border-[#d8cba9] rounded-xl shadow-xl py-2.5 z-50 animate-fadeIn">
+                <a 
+                  href="https://www.careimpact.ca/neighbour-up" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setResourcesDropdownOpen(false)}
+                  className="flex items-center justify-between px-4 py-2.5 text-xs font-bold text-[#1f2410] hover:bg-[#faf7ef] hover:text-[#2b3705] transition text-decoration-none"
+                >
+                  <span>Neighbour Up!</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-[#9f7f29]" />
+                </a>
+                <a 
+                  href="https://www.careimpact.ca/neighbourly" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setResourcesDropdownOpen(false)}
+                  className="flex items-center justify-between px-4 py-2.5 text-xs font-bold text-[#1f2410] hover:bg-[#faf7ef] hover:text-[#2b3705] transition text-decoration-none"
+                >
+                  <span>Neighbourly Podcast</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-[#9f7f29]" />
+                </a>
+                <a 
+                  href="#faqs" 
+                  onClick={(e) => { e.preventDefault(); alert('FAQs section coming soon!'); setResourcesDropdownOpen(false); }}
+                  className="flex items-center justify-between px-4 py-2.5 text-xs font-bold text-[#1f2410] hover:bg-[#faf7ef] hover:text-[#2b3705] transition"
+                >
+                  <span>FAQs</span>
+                  <span className="text-[10px] bg-[#e0dbd7] text-[#1f2410] px-2 py-0.5 rounded font-semibold">Soon</span>
+                </a>
+              </div>
+            )}
+          </div>
+
+          {/* 5. Contact */}
+          <a 
+            href="#contact" 
+            onClick={handleContactClick}
+            className="transition-colors whitespace-nowrap py-1 hover:text-[#2b3705]"
+          >
+            Contact
           </a>
+
         </nav>
 
-        {/* Action Buttons */}
-        <div className="hidden md:flex items-center gap-3 flex-shrink-0 pl-4">
-          <button 
-            onClick={onOpenRespond}
-            className="btn btn-primary text-xs xl:text-sm px-3.5 xl:px-4 py-2"
-          >
-            <Sparkles className="w-3.5 h-3.5" />
-            Respond to Need
-          </button>
-          
+        {/* Action Buttons: Prominent Donate CTA Only */}
+        <div className="hidden md:flex items-center flex-shrink-0 pl-2">
+          {/* Prominent Working Donate Button -> GiveWise Destination */}
           <a 
             href={givewiseUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-gold text-xs xl:text-sm px-3.5 xl:px-4 py-2 text-decoration-none"
+            className="btn btn-gold text-xs xl:text-sm px-6 py-2.5 text-decoration-none shadow-md hover:scale-105 transition font-extrabold"
           >
-            <Heart className="w-3.5 h-3.5" />
-            Give Online
+            <Heart className="w-4 h-4 fill-white text-white" />
+            <span>DONATE</span>
           </a>
         </div>
 
         {/* Mobile Toggle Button */}
         <button 
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden p-2 rounded-lg text-slate-700 hover:bg-[#F4EFE4] transition"
+          className="lg:hidden p-2 rounded-lg text-[#2b3705] hover:bg-[#e0dbd7] transition"
+          aria-label="Toggle Navigation Menu"
         >
-          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
         </button>
       </div>
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#FCFBF8] text-slate-800 p-6 border-b border-[#E5DEC9] shadow-xl animate-fadeIn">
-          <div className="flex flex-col gap-4 text-base font-bold">
+        <div className="lg:hidden bg-[#FAF9F5] text-[#1f2410] p-6 border-b-2 border-[#d8cba9] shadow-2xl animate-fadeIn max-h-[85vh] overflow-y-auto">
+          <div className="flex flex-col gap-4 font-sans text-base font-bold">
+            
+            {/* Home */}
             <a 
               href="/" 
               onClick={(e) => handleNavClick(e, '/')}
-              className="py-2 border-b border-[#E5DEC9]"
+              className="py-2 border-b border-[#d8cba9] text-[#2b3705]"
             >
-              Home Page
+              Home
             </a>
-            <a 
-              href="/about" 
-              onClick={(e) => handleNavClick(e, '/about')}
-              className="py-2 border-b border-[#E5DEC9]"
-            >
-              About Us
-            </a>
-            <a 
-              href="/our-mission" 
-              onClick={(e) => handleNavClick(e, '/our-mission')}
-              className="py-2 border-b border-[#E5DEC9]"
-            >
-              Our Mission & Three Pillars
-            </a>
+
+            {/* About Accordion */}
+            <div className="border-b border-[#d8cba9] pb-2">
+              <div className="flex items-center justify-between py-2">
+                <a 
+                  href="/about" 
+                  onClick={(e) => handleNavClick(e, '/about')} 
+                  className="font-bold text-[#2b3705]"
+                >
+                  About (Overview)
+                </a>
+                <button 
+                  onClick={() => setMobileAboutOpen(!mobileAboutOpen)}
+                  className="p-1 text-slate-600"
+                >
+                  <ChevronDown className={`w-5 h-5 transition-transform ${mobileAboutOpen ? 'rotate-180' : ''}`} />
+                </button>
+              </div>
+              
+              {mobileAboutOpen && (
+                <div className="pl-4 pt-2 space-y-2 text-sm font-semibold text-slate-700">
+                  <a href="/our-mission" onClick={(e) => handleNavClick(e, '/our-mission')} className="block py-1 hover:text-[#2b3705]">
+                    Our Mission
+                  </a>
+                  <a href="/our-team" onClick={(e) => handleNavClick(e, '/our-team')} className="block py-1 hover:text-[#2b3705]">
+                    Our Team
+                  </a>
+                  <a href="/governance" onClick={(e) => handleNavClick(e, '/governance')} className="block py-1 hover:text-[#2b3705]">
+                    Governance
+                  </a>
+                </div>
+              )}
+            </div>
+
+            {/* CarePortal */}
             <a 
               href="/how-it-works" 
               onClick={(e) => handleNavClick(e, '/how-it-works')}
-              className="py-2 border-b border-[#E5DEC9]"
+              className="py-2 border-b border-[#d8cba9]"
             >
-              How CarePortal Works
-            </a>
-            <a 
-              href="/governance" 
-              onClick={(e) => handleNavClick(e, '/governance')}
-              className="py-2 border-b border-[#E5DEC9] flex items-center gap-2"
-            >
-              <Shield className="w-4 h-4 text-gold-700" />
-              Governance & Board
+              CarePortal
             </a>
 
-            <div className="flex flex-col gap-3 pt-4">
+            {/* Resources Accordion */}
+            <div className="border-b border-[#d8cba9] pb-2">
               <button 
-                onClick={() => { setMobileMenuOpen(false); onOpenRespond(); }}
-                className="btn btn-primary w-full py-3"
+                onClick={() => setMobileResourcesOpen(!mobileResourcesOpen)}
+                className="w-full py-2 flex items-center justify-between text-left font-bold"
               >
-                <Sparkles className="w-4 h-4" />
-                Respond to Need
+                <span>Resources</span>
+                <ChevronDown className={`w-5 h-5 transition-transform ${mobileResourcesOpen ? 'rotate-180' : ''}`} />
               </button>
               
+              {mobileResourcesOpen && (
+                <div className="pl-4 pt-2 space-y-2 text-sm font-semibold text-slate-700">
+                  <a 
+                    href="https://www.careimpact.ca/neighbour-up"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="py-1 flex items-center justify-between hover:text-[#2b3705] transition text-decoration-none"
+                  >
+                    <span>Neighbour Up!</span>
+                    <ExternalLink className="w-3.5 h-3.5 text-[#9f7f29]" />
+                  </a>
+                  <a 
+                    href="https://www.careimpact.ca/neighbourly"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="py-1 flex items-center justify-between hover:text-[#2b3705] transition text-decoration-none"
+                  >
+                    <span>Neighbourly Podcast</span>
+                    <ExternalLink className="w-3.5 h-3.5 text-[#9f7f29]" />
+                  </a>
+                  <div className="py-1 flex items-center justify-between">
+                    <span>FAQs</span>
+                    <span className="text-[10px] bg-[#e0dbd7] px-2 py-0.5 rounded">Soon</span>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Contact */}
+            <a 
+              href="#contact" 
+              onClick={handleContactClick}
+              className="py-2 border-b border-[#d8cba9]"
+            >
+              Contact
+            </a>
+
+            {/* Mobile Action Buttons */}
+            <div className="flex flex-col gap-3 pt-4">
               <a 
                 href={givewiseUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMobileMenuOpen(false)}
-                className="btn btn-gold w-full py-3 justify-center text-decoration-none"
+                className="btn btn-gold w-full py-3.5 text-base justify-center font-extrabold shadow text-decoration-none"
               >
-                <Heart className="w-4 h-4" />
-                Give Online
+                <Heart className="w-5 h-5 fill-white" />
+                <span>DONATE ONLINE</span>
               </a>
-
-              <button 
-                onClick={() => { setMobileMenuOpen(false); onOpenChurchEnroll(); }}
-                className="btn btn-outline w-full py-3 text-sm"
-              >
-                Enroll Your Church / Team
-              </button>
             </div>
+
           </div>
         </div>
       )}
