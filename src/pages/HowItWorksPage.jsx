@@ -633,12 +633,12 @@ export default function HowItWorksPage({ onOpenChurchEnroll, onOpenSubmitNeed, o
         </div>
       </section>
 
-      {/* 5. SECTION 4: IMPACT STORIES */}
-      <section className="py-16 md:py-20 bg-[#FAF9F5] border-b border-[#d8cba9]">
-        <div className="container max-w-5xl mx-auto px-4 md:px-6 space-y-12">
+      {/* 5. SECTION 4: IMPACT STORIES (OPEN EDITORIAL PULL-QUOTES) */}
+      <section className="py-20 md:py-24 bg-[#d8cba9]/25 border-b border-[#d8cba9]">
+        <div className="container max-w-5xl mx-auto px-6 space-y-14">
           
           <div className="text-center max-w-3xl mx-auto space-y-3">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#9f7f29] bg-[#faf7ef] px-3.5 py-1 rounded-full border border-[#d8cba9]">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-[#9f7f29] block">
               Real Transformation
             </span>
             <h2 className="text-3xl md:text-5xl font-heading font-extrabold text-[#2b3705] tracking-tight">
@@ -647,37 +647,48 @@ export default function HowItWorksPage({ onOpenChurchEnroll, onOpenSubmitNeed, o
             <p className="text-slate-700 text-base md:text-lg">
               See how simple, practical acts of care restore hope and strengthen families across Abbotsford.
             </p>
+            <div className="w-16 h-0.5 bg-[#9f7f29] mx-auto pt-1"></div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-0 md:divide-x md:divide-[#d8cba9]">
             
             {/* Story 1 */}
-            <div className="bg-white border-2 border-[#d8cba9] rounded-3xl p-8 space-y-5 shadow-sm">
-              <div className="w-10 h-10 rounded-full bg-[#FAF9F5] border border-[#d8cba9] flex items-center justify-center">
-                <Quote className="w-5 h-5 text-[#9f7f29]" />
+            <blockquote className="md:pr-12 flex flex-col justify-between space-y-6 text-center md:text-left">
+              <div className="space-y-3">
+                <span className="font-heading text-6xl leading-none text-[#9f7f29]/50 select-none block">
+                  &ldquo;
+                </span>
+                <p className="text-[#1f2410] text-lg md:text-xl font-sans italic leading-relaxed -mt-4">
+                  When a crib and toddler bed were delivered to our apartment within 24 hours of moving in, it wasn't just furniture — it meant my daughters could stay in my care safely. The team who brought it prayed with me and brought groceries.
+                </p>
               </div>
-              <p className="text-slate-800 text-base font-sans italic leading-relaxed">
-                "When a crib and toddler bed were delivered to our apartment within 24 hours of moving in, it wasn't just furniture — it meant my daughters could stay in my care safely. The team who brought it prayed with me and brought groceries."
-              </p>
-              <div className="pt-4 border-t border-[#d8cba9]">
-                <strong className="text-[#2b3705] font-bold block text-sm">Sarah</strong>
-                <span className="text-xs text-slate-500">Abbotsford Mother • Family Preservation Response</span>
-              </div>
-            </div>
+              <footer className="space-y-1.5 pt-2">
+                <div className="w-10 h-0.5 bg-[#9f7f29] mx-auto md:mx-0 mb-3"></div>
+                <strong className="text-[#2b3705] font-heading font-bold block text-base">Sarah</strong>
+                <span className="text-xs uppercase tracking-wider font-semibold text-[#9f7f29] block">
+                  Abbotsford Mother • Family Preservation Response
+                </span>
+              </footer>
+            </blockquote>
 
             {/* Story 2 */}
-            <div className="bg-white border-2 border-[#d8cba9] rounded-3xl p-8 space-y-5 shadow-sm">
-              <div className="w-10 h-10 rounded-full bg-[#FAF9F5] border border-[#d8cba9] flex items-center justify-center">
-                <Quote className="w-5 h-5 text-[#9f7f29]" />
+            <blockquote className="md:pl-12 pt-10 md:pt-0 border-t md:border-t-0 border-[#d8cba9] flex flex-col justify-between space-y-6 text-center md:text-left">
+              <div className="space-y-3">
+                <span className="font-heading text-6xl leading-none text-[#9f7f29]/50 select-none block">
+                  &ldquo;
+                </span>
+                <p className="text-[#1f2410] text-lg md:text-xl font-sans italic leading-relaxed -mt-4">
+                  CarePortal allows our church care team to respond to exact, verified needs identified by partner agencies. We get to meet neighbors in our own block whom we never would have known otherwise, building real relationships.
+                </p>
               </div>
-              <p className="text-slate-800 text-base font-sans italic leading-relaxed">
-                "CarePortal allows our church care team to respond to exact, verified needs identified by partner agencies. We get to meet neighbors in our own block whom we never would have known otherwise, building real relationships."
-              </p>
-              <div className="pt-4 border-t border-[#d8cba9]">
-                <strong className="text-[#2b3705] font-bold block text-sm">David M.</strong>
-                <span className="text-xs text-slate-500">Local Church Care Team Leader in Abbotsford</span>
-              </div>
-            </div>
+              <footer className="space-y-1.5 pt-2">
+                <div className="w-10 h-0.5 bg-[#9f7f29] mx-auto md:mx-0 mb-3"></div>
+                <strong className="text-[#2b3705] font-heading font-bold block text-base">David M.</strong>
+                <span className="text-xs uppercase tracking-wider font-semibold text-[#9f7f29] block">
+                  Local Church Care Team Leader in Abbotsford
+                </span>
+              </footer>
+            </blockquote>
 
           </div>
 
